@@ -1,3 +1,5 @@
+<img src="https://kladde-dev.github.io/static/logo.svg" alt="kladde logo" width="80" align="right">
+
 # kladde-dev.github.io
 
 The published documentation of kladde, at <https://kladde-dev.github.io/>.
