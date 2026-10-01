@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>File format</title><meta charset="utf-8"/><link rel="preload" href="../index-2c86d77d.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="kladde"/><meta property="og:title" content="File format"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="File format"/><meta name="twitter:description" content="The page layer: how a kladde file is divided, what every page carries, how a file is identified, and how versions are negotiated. Status: draft."/><meta property="og:description" content="The page layer: how a kladde file is divided, what every page carries, how a file is identified, and how versions are negotiated. Status: draft."/><meta property="og:image:alt" content="The page layer: how a kladde file is divided, what every page carries, how a file is identified, and how versions are negotiated. Status: draft."/><meta property="twitter:domain" content="kladde-dev.github.io"/><meta property="og:url" content="https://kladde-dev.github.io/spec/file-format"/><meta property="twitter:url" content="https://kladde-dev.github.io/spec/file-format"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="The page layer: how a kladde file is divided, what every page carries, how a file is identified, and how versions are negotiated. Status: draft."/><meta name="generator" content="Quartz"/><link href="../index-2c86d77d.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://kladde-dev.github.io/spec/file-format-og-image.webp"/><meta property="og:image:url" content="https://kladde-dev.github.io/spec/file-format-og-image.webp"/><meta name="twitter:image" content="https://kladde-dev.github.io/spec/file-format-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="spec/file-format" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">kladde</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="Search" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something..." placeholder="Search for something..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="Dark mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="Reader mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-45" aria-label="Explorer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-45" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../spec/">Specification</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>File format</a></div></nav><h1 class="article-title">File format</h1><p show-comma="true" class="content-meta"><time datetime="2026-09-25T00:40:01.000Z">Sep 25, 2026</time><span>14 min read</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p>The page layer: how a kladde file is divided, what every page carries, how a file is identified, and how versions are negotiated.</p>
+<p><strong>Status: draft.</strong> The shape is settled; exact field widths and offsets are TBD.</p>
+<h2 id="integer-encodings-and-crcs">Integer encodings and CRCs<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#integer-encodings-and-crcs" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>All integer fields in kladde files are unsigned.
+For every integer field, the file format specification states either a fixed width (in bytes) or a <code>varint</code> encoding.
+Fixed width integers are encoded in little-endian byte order.
+Varints are encoded as unsigned <a href="https://en.wikipedia.org/wiki/LEB128" class="external external-link">LEB128<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</p>
+<p>CRC calculations use <strong>CRC-32C</strong> (Castagnoli), specified precisely as: reflected polynomial <code>0x82F63B78</code>, initial value <code>0xFFFFFFFF</code>, input and output both reflected, and a final XOR with <code>0xFFFFFFFF</code>.
+This is the variant Btrfs, ext4 metadata, iSCSI and SCTP use, and the one both x86-64 (since SSE4.2) and ARMv8 compute with a single instruction.
+As a check value, the CRC-32C of the nine ASCII bytes <code>123456789</code> is <code>0xE3069283</code>, which a kladde file stores — little-endian, like every other fixed-width field — as the four bytes <code>83 92 06 E3</code>.</p>
+<h2 id="pages">Pages<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pages" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A kladde file is a sequence of fixed-size <strong>pages</strong>.
+The page size is recorded in the file header as a binary logarithm and is uniform throughout a file.
+Currently only 4 KiB is allowed; 8, 16, 32, and 64 KiB are reserved, and the bounds elsewhere are derived from a 64 KiB ceiling so that nothing has to be revisited if a larger page is ever wanted.</p>
+<p><em>Why fixed pages, and why 4 KiB by default.</em>
+The operating system rewrites a whole page even when the application modifies one byte of it, so the page is the honest unit of I/O; accounting in anything smaller measures a cost the file system does not charge.
+4 KiB matches the write-back granularity of common file systems.
+16 KiB may pay on platforms with 16 KiB native pages, which is a measurement question rather than a design one — nothing in this specification depends on the value.</p>
+<p>Outside of journal appends, an implementation <strong>writes whole pages only</strong>, and only to pages that are reusable under the <a href="./durability#the-reuse-rule" class="internal internal-link alias" data-slug="spec/durability">reuse rule</a>.
+A page must also consist of whole blocks of the file system that stores the file, which the reuse rule <a href="./durability#the-reuse-rule" class="internal internal-link alias" data-slug="spec/durability">relies on</a>; 4 KiB pages do on common file systems.</p>
+<h2 id="page-framing">Page framing<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#page-framing" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Every page except the pages that make up the current journal concatenates the following fields, in order, without delimiters:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>field</th><th>width</th><th>meaning</th></tr></thead><tbody><tr><td><code>header</code></td><td>0 unless it is a header page</td><td>only present in <a href="#header-pages" class="internal internal-link alias">header pages</a></td></tr><tr><td><code>kind</code></td><td>1 byte</td><td>one of <code>AddressTable</code> (<code>0x01</code>) or <code>Data</code> (<code>0x02</code>). For header pages: always <code>AddressTable</code> (<code>0x01</code>)</td></tr><tr><td><code>epoch</code></td><td>8 bytes</td><td>the flush counter at the time the page was written</td></tr><tr><td><code>content_size</code></td><td>2 bytes</td><td>the size of <code>content</code> in bytes</td></tr><tr><td><code>content</code></td><td><code>content_size</code> bytes</td><td>the payload of the page, encoded depending on <code>kind</code></td></tr><tr><td><code>crc</code></td><td>4 bytes</td><td>checksum over all preceding bytes of the page except <code>content_size</code> (but including <code>header</code>)</td></tr><tr><td><code>padding</code></td><td>to the page boundary</td><td>arbitrary, excluded from the CRC, <a href="./durability#the-truncation-rule" class="internal internal-link alias" data-slug="spec/durability">present even on the file’s last page</a></td></tr></tbody></table></div>
+<p>A page whose CRC does not validate <strong>must be ignored</strong> during loading.
+This is safe because the durability protocol guarantees that no committed state ever references a page whose write did not complete, so an invalid CRC can only belong to garbage that nothing references.
+The CRC calculation excludes <code>content_size</code> so that a writer may encode a page and calculate its CRC before knowing the page size if this turns out to be easier in a given situation.
+This is safe because <code>content_size</code> tells the reader where to stop decoding <code>content</code> and expect the <code>crc</code>, so if the CRC at that position matches then <code>content_size</code> is correct.
+A reader must nevertheless <strong>bounds-check <code>content_size</code> before using it</strong>, since a corrupted value can point the CRC read past the end of the page; a value that does not leave room for the <code>crc</code> within the page is itself a failed validation.</p>
+<p><code>MAX_PAGE_CONTENT</code> — the largest <code>content</code> a non-header page can hold — is the page size minus the 15 bytes of framing above, i.e. <strong>4081 bytes</strong> for 4 KiB pages.
+A header page holds correspondingly less, by the width of its <code>header</code> field.</p>
+<p>There is deliberately <strong>no <code>Free</code> kind and no free marker</strong>.
+Liveness is not recorded in a page; it is defined by reachability from a committed header.</p>
+<h3 id="how-much-of-the-framing-is-load-bearing">How much of the framing is load-bearing<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#how-much-of-the-framing-is-load-bearing" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Less than it looks, and the distinction matters to anyone reasoning about the crash argument.</p>
+<p>Only two checksums in the file are load-bearing: the <strong>header</strong> CRCs, because a header is written without a covering <code>fsync</code> before it matters, so a torn or missing header write must be detectable; and the <strong>journal</strong>’s per-transaction CRC chain, because journal appends are likewise never fsynced before a power cut can hit them.
+The framing on <code>Data</code> and <code>AddressTable</code> pages is <em>not</em> load-bearing: <a href="./durability#the-two-invariants" class="internal internal-link alias" data-slug="spec/durability">invariant I1</a> guarantees that any page a valid header can reach was fsynced before that header was written, so recovery never meets a referenced page whose write did not complete.</p>
+<p>The framing is required on every page anyway, as defence in depth.
+The <code>crc</code> turns <em>later</em>, silent damage — bit rot, a misdirected write by other software, a bug that writes to a live page — into a detected failure instead of quietly wrong data.
+The <code>epoch</code> is an end-to-end assertion about the <code>fsync</code> contract.
+And <code>kind</code> with <code>content_size</code> keeps every framed page self-describing, which keeps a last-resort scavenger possible and keeps the page writer uniform.
+Journal pages carry no framing, so a scavenger cannot identify them — which costs nothing, since a scavenger’s job is to recover committed state and the journal is by definition what has not been committed.
+The price is 15 bytes in 4096, or 0.37 %.</p>
+<h2 id="header-pages">Header pages<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#header-pages" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Page 0 must always be present and it is always a <strong>header page</strong>, and page 1 must also be a header page if it is present (i.e., if the file is larger than 1 page).
+Page 0 must always have an even <code>epoch</code> field, and if page 1 is present then it must have an odd <code>epoch</code> field.</p>
+<p>Each header page holds a fixed-size <code>header</code> field in the <a href="#page-framing" class="internal internal-link alias">page framing</a>, which concatenates the following fields with no delimiters:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>field</th><th>width</th><th>purpose</th></tr></thead><tbody><tr><td><code>magic</code></td><td>11 bytes</td><td>identifies the file type as kladde and catches accidental opens of unrelated files; present even in page 1 to simplify size calculations. See <a href="#the-magic" class="internal internal-link alias">below</a></td></tr><tr><td><code>log2_page_size</code></td><td>1 byte</td><td>binary logarithm of the page size; currently, the only allowed value is <code>12</code>, indicating a 4 KiB page size, but the spec is designed not to prevent <code>13</code>, <code>14</code>, <code>15</code>, or <code>16</code> (for powers of 2 from 8 KiB through 64 KiB) in the future if measurements deem them useful.</td></tr><tr><td><code>format_version</code></td><td>2 bytes</td><td>the specification version this file was written against; currently only version <code>0</code> is allowed, indicating “pre-stable”.</td></tr><tr><td><code>min_reader_version</code></td><td>2 bytes</td><td>the oldest specification version that can still read this file; currently only version <code>0</code> is allowed</td></tr><tr><td><code>root_allocation</code></td><td>4 bytes</td><td>ID of the <a href="./allocations" class="internal internal-link alias" data-slug="spec/allocations">allocation</a> holding the root value</td></tr><tr><td><code>schema_table</code></td><td>4 bytes</td><td>ID of the allocation holding the <a href="./schema/canonical-encoding#table-encoding" class="internal internal-link alias" data-slug="spec/schema/canonical-encoding">descriptor table</a></td></tr><tr><td><code>consolidator_state</code></td><td>4 bytes</td><td>ID of an allocation in which an implementation keeps state of its own from one session to the next, or <code>0</code> if there is none. See <a href="#the-consolidator-state" class="internal internal-link alias">The consolidator state</a>.</td></tr><tr><td><code>root_fingerprint</code></td><td>16 bytes</td><td>the <a href="./schema/fingerprints" class="internal internal-link alias" data-slug="spec/schema/fingerprints">schema fingerprint</a> of the root type</td></tr><tr><td><code>journal_pointer</code></td><td>4 bytes</td><td>the page number of the page holding the beginning of the journal that will be used after the flush that created this header page. See <a href="#the-journal-pointer" class="internal internal-link alias">The journal pointer</a>.</td></tr></tbody></table></div>
+<p>The header page <strong>is</strong> the root <a href="./address-table" class="internal internal-link alias" data-slug="spec/address-table">address-table</a> page, so the address table is reached without indirection, and the commit that publishes a new header publishes a new root table page in the same write.</p>
+<p>The two header pages are written alternatingly: the flush with epoch <code>E</code> writes header slot <code>E mod 2</code>.
+On open, a reader reads both header pages (if both are present), picks the CRC-valid one with higher epoch, and ignores the other header page.
+A torn header write can only damage the slot being written, which held the older of the two headers, so the previous state remains reachable through the other slot.</p>
+<p><em>Why two alternating slots.</em>
+This is the only fixed-location, overwritten-in-place structure in the file, and it is the minimum needed to publish a new state atomically without an allocation protocol for the root itself.
+It is LMDB’s meta-page scheme.
+Both slots corrupting simultaneously is unrecoverable without a scan, but they are single-sector writes at opposite ends of a two-page span and are never written in the same flush, so that requires two independent failures.</p>
+<p>The <strong>root fingerprint</strong> is in the header rather than only in the schema table so that the common case — an application opening a file it wrote itself, with an unchanged schema — is a single 16-byte comparison with no need to parse the descriptor table at all.
+See <a href="./schema/fingerprints#as-a-fast-path" class="internal internal-link alias" data-slug="spec/schema/fingerprints">Fingerprints</a>.</p>
+<h3 id="the-journal-pointer">The journal pointer<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-journal-pointer" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The <code>journal_pointer</code> field of the header must be <code>≥ 2</code> and either point past the file or reference a page that would not be in either header’s world were it not for this pointer (also not part of the other header slot’s journal).
+If the page exists then a reader will try to decode it as a journal page assuming an epoch that is one higher than the header page’s epoch and consider the largest CRC-valid prefix (which may be empty) as the current journal, following links to subsequent journal pages if present.</p>
+<p>If the <code>journal_pointer</code> points past the end of the file then the journal is considered empty, and the first journal page must be created before recording the first transaction in the journal — as a whole page, since the file <a href="./durability#the-truncation-rule" class="internal internal-link alias" data-slug="spec/durability">always ends at a page boundary</a>.
+Implementations should avoid writing a <code>journal_pointer</code> that points unnecessarily far past the end of the file since this would cause unnecessary file growth once the first transaction is recorded.
+However, readers must not assume that <code>journal_pointer</code> points at most directly after the file since violating this assumption is unavoidable in edge cases: a flush may create a file that ends in a fallback page and set <code>journal_pointer</code> to point to the page immediately past the file.
+Closing and reopening the file introduces another <code>fsync</code>, which transitions the last page from fallback to reusable, at which point the implementation is allowed to truncate the file past it, resulting in a file whose <code>journal_pointer</code> seemingly points unnecessarily far past the end.
+Readers must be able to handle such a file.</p>
+<h3 id="the-consolidator-state">The consolidator state<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-consolidator-state" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong><code>consolidator_state</code> names an allocation in which an implementation may keep whatever it wants to carry from one session to the next, or is <code>0</code> if there is none.</strong>
+Its content is up to the implementation.
+A consolidator’s heuristics, for instance, learn from what happens over many flushes, and a session that could start only from what the file records anyway would forget all of it at every close.
+<a href="../impl/consolidator-state" class="internal internal-link alias" data-slug="impl/consolidator-state">Consolidator state</a> describes what the reference implementation keeps there.</p>
+<p>Four rules govern it:</p>
+<ul>
+<li><strong>Nothing in it affects what the file contains.</strong>
+A reader that ignores the field resolves every allocation to the same content, and nothing reachable from the root names the allocation.</li>
+<li><strong>In every other respect it is an allocation like any other.</strong>
+The field owns it, as <code>schema_table</code> owns the descriptor table, so it stays alive for as long as the field names it; and it never has id <code>0</code>, which the field reserves for “none”.</li>
+<li><strong>Any writer may keep it, replace it, or clear the field.</strong>
+A writer that keeps it keeps its id and content, as it would any allocation’s, whether or not it understands them; a writer that replaces it or clears the field frees the allocation the field named.</li>
+<li><strong>It may be stale, or another implementation’s.</strong>
+Flushes by a writer that kept it without maintaining it, or by its owner if the owner updates it lazily, leave it describing an older state of the file.
+So an implementation must treat a state it does not recognize as its own as absent, and must check what it does recognize against the file before relying on it.</li>
+</ul>
+<h3 id="the-magic">The magic<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-magic" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>8B 4B 4C 41 44 44 45 0D 0A 1A 0A       \x8B K L A D D E \r \n \x1A \n
+</code></pre>
+<p>Eleven bytes, following the pattern PNG established and HDF5 copied, because every byte of it does a job:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>bytes</th><th>purpose</th></tr></thead><tbody><tr><td><code>8B</code></td><td>high bit set, so any tool applying a “does this look like text?” heuristic classifies the file as binary immediately. Not <code>89</code>, which is PNG’s and HDF5’s, so that a partial match cannot be mistaken for either</td></tr><tr><td><code>4B 4C 41 44 44 45</code></td><td><code>KLADDE</code> in ASCII, so a human running <code>xxd | head</code> or <code>strings</code> sees what it is</td></tr><tr><td><code>0D 0A</code></td><td>catches a transfer that mangled CRLF→LF: the pair arrives as a lone <code>0A</code> and the magic fails</td></tr><tr><td><code>1A</code></td><td>DOS end-of-file, so <code>type file</code> on Windows stops here instead of spewing the whole file</td></tr><tr><td><code>0A</code></td><td>catches the reverse mangling, LF→CRLF: this byte arrives as <code>0D 0A</code> and the magic fails</td></tr></tbody></table></div>
+<p><code>file(1)</code> has no entry for it, so a kladde file reports as <code>data</code> — which is the desired outcome, and better than a wrong guess.
+Submitting an entry to the <code>file</code> magic database is worth doing once the format is frozen, not before.</p>
+<h2 id="epochs">Epochs<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#epochs" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The <strong>epoch</strong> is a monotone counter, incremented by one per flush, stored in every page and in each header.</p>
+<p>It serves three purposes:</p>
+<ol>
+<li>It <strong>orders contradicting statements</strong> between address-table pages, which is what makes shadowing work without a rewrite (<a href="./address-table#conflict-resolution-across-epochs" class="internal internal-link alias" data-slug="spec/address-table">Address table</a>).</li>
+<li>It <strong>salts the journal’s CRC chain</strong>, so stale bytes in a reused page can never impersonate valid journal content.</li>
+<li>It is an <strong>end-to-end assertion</strong>: a page reachable from the header of epoch <code>E</code> must carry an epoch <code>≤ E</code>.
+A violation reveals that the platform broke the <code>fsync</code> contract, and the file must be treated as damaged rather than silently misread.</li>
+</ol>
+<p>Epochs are 64-bit.
+At one flush per millisecond that lasts half a billion years, so <strong>wrap-around is not a concern</strong> and no implementation may assume it must handle one.</p>
+<p><em>Why not 32 bits.</em>
+A 32-bit counter would require actively rewriting laggard pages before the counter catches up to them — exactly PostgreSQL’s transaction-id wraparound “freezing”, an operational burden it carries only because its format predates the lesson.
+A new format should pay the four extra bytes per page; they are 0.1 % of a 4 KiB page, and modern systems (ZFS transaction groups, LMDB transaction ids) are all 64-bit.</p>
+<p>Epochs are <strong>replay-stable</strong>: the epoch of a flush is the committed header’s epoch plus one, so a flush re-run during recovery reproduces the same epoch.</p>
+<h2 id="versioning">Versioning<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#versioning" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Two version numbers, because “can I read this?” and “was this written by something I know?” are different questions.</p>
+<ul>
+<li><strong>format version</strong> — what the writer used.
+Informational for a reader; useful for diagnostics and for deciding whether to rewrite the file in a newer form.</li>
+<li><strong>minimum reader version</strong> — the writer’s declaration of the oldest reader that can still make sense of the file.
+A reader whose own version is below this <strong>must</strong> refuse to open the file rather than attempt a partial interpretation.</li>
+</ul>
+<p>A writer raises the minimum reader version only when it uses a feature that older readers would silently misinterpret.
+Adding a new <a href="./schema/type-descriptors#primitive" class="internal internal-link alias" data-slug="spec/schema/type-descriptors">primitive code</a>, for instance, does raise it, because an older reader would not know the width of the new primitive and would compute every subsequent offset wrongly.
+Reordering the descriptor table does not, because references are table-local and any conforming reader follows them.</p>
+<p>This is the same slot a per-file <em>application</em> semantic-versioning scheme would use.
+Whether kladde exposes application versioning through the same mechanism or a separate one is <strong>TBD</strong>; it should be one mechanism, not two parallel ones.</p>
+<h2 id="concurrency">Concurrency<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#concurrency" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The format assumes <strong>a single process with exclusive write access</strong>.
+Multiple concurrent writers, and readers in other processes observing a file being written, are out of scope.</p>
+<p>This is a scoping decision, not a structural one.
+The single-owner pointer discipline and the copy-on-write commit are both compatible with an MVCC-style snapshot-isolation scheme, which is the direction a concurrent version would take.
+<strong>TBD.</strong></p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-39" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#integer-encodings-and-crcs" data-for="integer-encodings-and-crcs">Integer encodings and CRCs</a></li><li class="depth-0"><a href="#pages" data-for="pages">Pages</a></li><li class="depth-0"><a href="#page-framing" data-for="page-framing">Page framing</a></li><li class="depth-1"><a href="#how-much-of-the-framing-is-load-bearing" data-for="how-much-of-the-framing-is-load-bearing">How much of the framing is load-bearing</a></li><li class="depth-0"><a href="#header-pages" data-for="header-pages">Header pages</a></li><li class="depth-1"><a href="#the-journal-pointer" data-for="the-journal-pointer">The journal pointer</a></li><li class="depth-1"><a href="#the-consolidator-state" data-for="the-consolidator-state">The consolidator state</a></li><li class="depth-1"><a href="#the-magic" data-for="the-magic">The magic</a></li><li class="depth-0"><a href="#epochs" data-for="epochs">Epochs</a></li><li class="depth-0"><a href="#versioning" data-for="versioning">Versioning</a></li><li class="depth-0"><a href="#concurrency" data-for="concurrency">Concurrency</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-0" class="overflow"><li><a href="../drafts/open-issues" class="internal">Open issues</a></li><li><a href="../drafts/segments" class="internal">Segments</a></li><li><a href="../impl/consolidation" class="internal">Consolidation</a></li><li><a href="../impl/consolidator-state" class="internal">Consolidator state</a></li><li><a href="../impl/related-work" class="internal">Related work</a></li><li><a href="../rust/store" class="internal">The store</a></li><li><a href="../spec/address-table" class="internal">Address table</a></li><li><a href="../spec/conformance" class="internal">Conformance</a></li><li><a href="../spec/durability" class="internal">Durability</a></li><li><a href="../spec/" class="internal">Specification</a></li><li><a href="../spec/journal" class="internal">Journal</a></li><li><a href="../spec/schema/canonical-encoding" class="internal">Canonical encoding</a></li><li><a href="../spec/schema/evolution" class="internal">Evolution</a></li><li><a href="../spec/schema/fingerprints" class="internal">Fingerprints</a></li><li><a href="../spec/schema/" class="internal">Schema</a></li><li><a href="../spec/tooling" class="internal">Tooling</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/kladde-dev">GitHub</a></li><li><a href="https://kladde-dev.github.io/kladde.pdf">PDF</a></li><li><a href="https://robamler.github.io/">Robert Bamler</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-9114441b.js" type="module" data-persist="true"></script></html>

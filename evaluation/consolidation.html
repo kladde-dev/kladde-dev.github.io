@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>Consolidation under load</title><meta charset="utf-8"/><link rel="preload" href="../index-2c86d77d.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="kladde"/><meta property="og:title" content="Consolidation under load"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Consolidation under load"/><meta name="twitter:description" content="Consolidation keeps a file at 1.5 to 1.7 times its live size under sustained overwrites, where the same file grows to 6 times without it, for about one more byte written per byte the application writes."/><meta property="og:description" content="Consolidation keeps a file at 1.5 to 1.7 times its live size under sustained overwrites, where the same file grows to 6 times without it, for about one more byte written per byte the application writes."/><meta property="og:image:alt" content="Consolidation keeps a file at 1.5 to 1.7 times its live size under sustained overwrites, where the same file grows to 6 times without it, for about one more byte written per byte the application writes."/><meta property="twitter:domain" content="kladde-dev.github.io"/><meta property="og:url" content="https://kladde-dev.github.io/evaluation/consolidation"/><meta property="twitter:url" content="https://kladde-dev.github.io/evaluation/consolidation"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Consolidation keeps a file at 1.5 to 1.7 times its live size under sustained overwrites, where the same file grows to 6 times without it, for about one more byte written per byte the application writes."/><meta name="generator" content="Quartz"/><link href="../index-2c86d77d.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://kladde-dev.github.io/evaluation/consolidation-og-image.webp"/><meta property="og:image:url" content="https://kladde-dev.github.io/evaluation/consolidation-og-image.webp"/><meta name="twitter:image" content="https://kladde-dev.github.io/evaluation/consolidation-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="evaluation/consolidation" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">kladde</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="Search" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something..." placeholder="Search for something..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="Dark mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="Reader mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-8" aria-label="Explorer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-8" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../evaluation/">Evaluation</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Consolidation under load</a></div></nav><h1 class="article-title">Consolidation under load</h1><p show-comma="true" class="content-meta"><time datetime="2026-09-28T17:17:33.000Z">Sep 28, 2026</time><span>14 min read</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p><strong>Consolidation keeps a file at 1.5 to 1.7 times its live size under sustained overwrites, where the same file grows to 6 times without it, for about one more byte written per byte the application writes.</strong>
+After three quarters of a file are freed at once, it gives the space back within 16 flushes.
+Flushes that do this take 6 to 25 ms at the median.</p>
+<p>Two of its constants do less than <a href="../impl/consolidation" class="internal internal-link alias" data-slug="impl/consolidation">the design</a> intends.
+The target fill <code>τ = 0.8</code> is out of reach under the churn floor <code>λ = 1</code>, so the budget sits at its cap and <code>λ</code> alone sets the fill, to within a percent of what a one-line model predicts.
+And description defragmentation’s reserved page per flush merges next to nothing under appends: sixteen pages cut the statements by a third.</p>
+<p>The benchmarks also found four defects, all fixed in the measured commit.</p>
+<h2 id="what-was-measured">What was measured<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-was-measured" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Six workloads, and variants of three of them, ran on real files, each until the application had written eight times the file’s live size, with a flush after every 1000 operations.</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>workload</th><th>live size</th><th>what the application does</th><th>what it exercises</th></tr></thead><tbody><tr><td>uniform</td><td>1, 8 and 64 MiB</td><td>writes of 1 to 511 bytes at random offsets of random 16 KiB allocations</td><td>evacuation and the page rewrite</td></tr><tr><td>skewed</td><td>1, 8 and 64 MiB</td><td>the same, with 90 % of the writes going to 10 % of the allocations</td><td>scoring, with hot and cold content mixed in pages</td></tr><tr><td>append</td><td>16 MiB</td><td>512 logs, appended to in records of 16 to 240 bytes and truncated to nothing once a record would take one past 64 KiB</td><td>description fragmentation, and mass frees when the logs rotate, nearly in step</td></tr><tr><td>churn</td><td>16 MiB</td><td>values of 16 to 128 bytes, or one in five of 1 to 8 KiB, each operation replacing one with a new allocation, rewriting one whole, or patching 1 to 64 bytes of one</td><td>allocation turnover, id recycling, and <code>Inline</code> statements</td></tr><tr><td>shrink</td><td>64 MiB</td><td>allocations of 64 KiB, three quarters of them freed at once, then 400 flushes of 100 patches of 1 to 64 bytes each</td><td>compaction mode and truncation</td></tr><tr><td>typed</td><td>16 MiB</td><td>a <code>Kladde&lt;PersistableHashMap&lt;u64, PersistableString>></code> of strings of 50 to 500 bytes: 40 % of the operations replace a string, 30 % append to one, 20 % insert one, 10 % remove one</td><td>the typed layers</td></tr><tr><td>variants</td><td>8 and 16 MiB</td><td>uniform and skewed at 8 MiB with <code>λ</code> of 0.5 and 2, or <code>τ</code> of 0.6 and 0.5; append with 4 and 16 pages of defragmentation share</td><td>the constants</td></tr></tbody></table></div>
+<p>The <em>live size</em> is the sum of the allocations’ sizes, and every ratio below is taken against it.
+A workload first fills its file, which is not measured, and then records one row per flush: the file’s pages by kind and their coverage, and everything written since the fill.
+The horizontal axis of most figures is the application’s bytes written since the fill, over the live size.
+After the last flush, each run reopens its file and compares every byte with a model of what the application wrote.</p>
+<p>Times include each flush’s <code>fsync</code>.
+Journal appends are not fsynced, as <a href="../spec/journal" class="internal internal-link alias" data-slug="spec/journal">the journal’s specification</a> prescribes: an operation survives a crash of the application once its call returns, and a power cut once the next flush has returned.</p>
+<p>The runs measured <a href="../rust/" class="internal internal-link alias" data-slug="rust/index">kladde-rs</a> at commit <code>cb34576</code>, built with <code>--release</code> by Rust 1.97.1, with the default <a href="../rust/store" class="internal internal-link alias" data-slug="rust/store">options</a> unless a variant says otherwise, on an Intel Core i7-1165G7 with 16 GB of memory under Linux 7.0, in a development container whose files live on an overlay file system.
+Identical configurations differed by up to 20 % in median flush time from one run to the next, so only differences well beyond that are worth reading into the times.</p>
+<h2 id="space">Space<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#space" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Consolidation holds overwritten files at about 1.5 times their live size once they are much larger than what a few flushes write; without it, uniform overwrites grow the file sixfold.</strong></p>
+<p><img src="./figures/consolidation/space-amplification.svg" alt="File size over live size as the overwrites accumulate, with and without consolidation."/></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>file size / live size, at the end</th><th>1 MiB</th><th>8 MiB</th><th>64 MiB</th></tr></thead><tbody><tr><td>uniform, consolidating</td><td>2.75</td><td>1.69</td><td>1.53</td></tr><tr><td>uniform, without consolidation</td><td>6.28</td><td>6.00</td><td>—</td></tr><tr><td>skewed, consolidating</td><td>2.28</td><td>1.67</td><td>1.55</td></tr><tr><td>skewed, without consolidation</td><td>2.85</td><td>2.67</td><td>—</td></tr></tbody></table></div>
+<p>Without consolidation, a data page is reused only once every byte on it has been overwritten.
+Under uniform overwrites that almost never happens, and data pages end up 18 % live; under skewed ones, hot pages do empty by themselves, and the file grows more slowly.</p>
+<p>In the 64 MiB uniform file, data pages take 1.35 times the live size, at 73 % live, address-table pages 0.15 times, at 59 % live, and reusable pages 0.03 times.
+Under uniform overwrites, the data pages settle within half a live size of writes and the table pages within two.
+Under skewed ones, both keep losing fill for most of the run, as they would if pages froze above the churn floor once their hot content had died, which is <a href="../drafts/ripeness#a-mixed-page-drains-then-freezes" class="internal internal-link alias" data-slug="drafts/ripeness">the problem the ripeness draft describes</a>.</p>
+<p><img src="./figures/consolidation/live-fraction.svg" alt="The live fraction of data pages and of address-table pages, in the 64 MiB files."/></p>
+<p><strong>Small files pay for the quarantine: a file keeps three to four flushes’ worth of written pages free, whatever its size.</strong>
+A page that a commit stops referencing can be reused only after the next commit, and the reusable pages that the next flush will write are free as well.
+The 1 MiB uniform file keeps 340 pages free and writes 104 pages per flush, the 8 MiB one 430 and 130, and the 64 MiB one 490 and 138.
+In the 1 MiB file, where one flush writes 40 % of the live size in pages, that is 1.33 times the live size; at 64 MiB it is 3 %.</p>
+<h2 id="the-churn-floor-sets-the-fill-not-the-target">The churn floor sets the fill, not the target<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-churn-floor-sets-the-fill-not-the-target" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>With the default constants, the budget climbs to its cap of 256 pages within 1.3 live sizes of writes and stays there in every overwrite run, but flushes open only 8 to 59 pages of it: the churn floor admits no more victims.</strong></p>
+<p><img src="./figures/consolidation/budget.svg" alt="The budget, in pages per flush, with the default target fill (left) and with lower targets (right)."/></p>
+<p><strong>The fill the file reaches is then the churn floor’s.</strong>
+A victim may be at most <code>1 / (1 + λ)</code> live, so under uniform overwrites every data page is written full, loses its content at a steady rate, and is cleaned once it reaches that fill.
+A page whose live fraction decays exponentially from 1 to <code>1 / (1 + λ)</code> spends its time at an average fill of <code>λ / ((1 + λ) · ln(1 + λ))</code>, which matches the measurements to within about a percent:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>churn floor <code>λ</code></th><th>data-page fill predicted</th><th>measured, uniform</th><th>measured, skewed</th></tr></thead><tbody><tr><td>0.5</td><td>0.822</td><td>0.825</td><td>0.819</td></tr><tr><td>1 (the default)</td><td>0.721</td><td>0.733</td><td>0.707</td></tr><tr><td>2</td><td>0.607</td><td>0.603</td><td>0.615</td></tr></tbody></table></div>
+<p>This is the opposite of the division of labour that <a href="../impl/consolidation#the-churn-floor-is-a-parameter-not-an-identity" class="internal internal-link alias" data-slug="impl/consolidation">the design</a> intends, in which <code>λ</code> stays low enough never to decide the fill and the budget converges the file on <code>τ</code>.
+At <code>λ = 1</code>, the 8 MiB files reach a whole-file fill of 0.63, table pages and free pages included, well short of <code>τ = 0.8</code>.</p>
+<p><strong>The controller does reach targets that the churn floor allows, but by swinging between its bounds rather than settling.</strong>
+With <code>τ = 0.6</code>, the 8 MiB files end at whole-file fills of 0.58 (uniform) and 0.59 (skewed), and with <code>τ = 0.5</code> at 0.53 and 0.51.
+Under uniform overwrites, the budget meanwhile swings between one page and the cap, a swing taking one to two live sizes of writes.
+Multiplying the budget by <code>exp(4 · (τ − fill))</code> after every flush makes the controller an integral one, and the fill it measures, the whole file’s, answers the budget only once new writes reuse the pages cleaning frees, so it overshoots.</p>
+<p><strong>To trade space for writes, <code>λ</code> is the better knob: a lower target moves the file along a worse curve, since its budget swings.</strong></p>
+<p><img src="./figures/consolidation/tradeoff.svg" alt="File size against bytes written in the steady state of the 8 MiB overwrite runs, the second half of each, for three churn floors and two lower targets."/></p>
+<p>The figure compares steady states: the file size averaged over the second half of each run, and the bytes written during that half per byte the application wrote.
+Under uniform overwrites, <code>λ = 2</code> writes about as much as <code>τ = 0.5</code> (2.59 against 2.57 bytes per byte) and leaves a file 7 % smaller (1.96 against 2.11 times its live size).
+Under skewed ones, <code>τ = 0.6</code> leaves a file of 1.77 times its live size for 2.68 bytes per byte, 5 % larger than the churn floor’s curve passes at those writes.
+While the swinging budget is low, the file grows, and what cleaning frees afterwards are holes, which the file keeps until new writes fill them.</p>
+<h2 id="writes">Writes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#writes" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Each byte the application writes costs 2.2 to 3.2 bytes written to the file: one in the journal, one in a data page, and up to one more for consolidation.</strong></p>
+<p><img src="./figures/consolidation/write-breakdown.svg" alt="Where the bytes written to the file went, per byte the application wrote, over each whole run."/></p>
+<p>The journal takes 1.02 to 1.10 bytes per byte for the raw store, more the smaller the writes, since each record carries a header, and 1.12 through the typed layers.
+Consolidation adds 0.9 bytes per byte under uniform overwrites, 0.6 to 0.8 under skewed ones, 0.7 under appends, 0.6 in the typed workload, and 0.1 under churn, whose replaced values free whole allocations.
+Address-table pages add 0.02 to 0.23, headers less than 0.04.
+Without consolidation, the same workloads write 1.5 to 2.2 bytes per byte: the 8 MiB uniform file 2.13, against 3.07 with it.</p>
+<p>The uniform figure is what the churn floor predicts.
+Cleaning a victim at a live fraction <code>u</code> writes <code>u / (1 − u)</code> bytes per byte it frees, 1 at <code>u = 1/2</code>, and under uniform overwrites nearly all garbage is freed that way, since pages seldom empty by themselves.</p>
+<h2 id="mass-frees">Mass frees<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#mass-frees" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>After three quarters of a 64 MiB file are freed at once, compaction mode gives the space back within 16 flushes; without it, the file never shrinks.</strong></p>
+<p><img src="./figures/consolidation/shrink.svg" alt="File size over live size after three quarters of the file were freed."/></p>
+<p>The file went from 4.27 to 1.14 times its live size, moving 3,221 data pages to return about 12,300, in 12 flushes in compaction mode and 12 truncations; over the remaining 385 flushes it grew by 2 %, as the patches added statements.
+Consolidation without compaction mode moves nothing here: after the frees every page is either full or empty, so no page is a victim, and the holes stay holes until the application writes as much again.</p>
+<p><strong>The append workload’s rotations, which free most of the file within a few flushes, are absorbed the same way.</strong>
+Without consolidation, the file peaks at 8.8, 6.2 and 5.5 times its live size as the logs rotate, and it has not shrunk back below 1.3 when the next rotation comes.
+With it, the peaks are 2.9, 2.3 and 2.3, and the file is back below 1.3 within half a live size of appends.</p>
+<p><img src="./figures/consolidation/description.svg" alt="Statements per KiB of live data, and file size over live size, under appends and churn."/></p>
+<h2 id="the-description">The description<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-description" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Description defragmentation’s reserved page per flush is too small to matter under appends; sixteen pages cut the statements by a third, for a sixth more writes.</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>defragmentation share, pages per flush</th><th>statements per KiB of live data</th><th>file size / live size</th><th>bytes written per byte</th></tr></thead><tbody><tr><td>none: consolidation off</td><td>4.06</td><td>2.80</td><td>2.21</td></tr><tr><td>1 (the default)</td><td>4.01</td><td>1.38</td><td>2.93</td></tr><tr><td>4</td><td>3.72</td><td>1.41</td><td>3.06</td></tr><tr><td>16</td><td>2.57</td><td>1.38</td><td>3.43</td></tr></tbody></table></div>
+<p>The statements and the file size are means over the second half of each run, since both swing with the rotations; the bytes written are over the whole run.
+Each flush appends about 125 KiB across 512 logs, two records per log on average, which the flush states as about one statement per log.
+A share of one page rewrites 4 KiB per flush, 3 % of what was appended, and that is what it did.
+What merging buys here is a smaller description, which is what the fragment map in memory holds, and not a smaller file: the share leaves the file’s size where consolidation put it.</p>
+<p><img src="./figures/consolidation/defrag-share.svg" alt="Statements per KiB of live data, and bytes written per byte, for three shares of description defragmentation."/></p>
+<p><strong>Small patches accumulate as statements of their own under every setting measured.</strong>
+In the churn workload, statements grow from 1.2 to 2.7 per KiB of live data, with and without consolidation alike.
+In the shrink workload’s 400 flushes of 100 patches, statements grow from 4,833 to 45,837 and address-table pages from 44 to 439: every patch stays a statement, <code>Inline</code> since it is at most 64 bytes.
+That is the design working as intended for the writes, which cost the patch and not the page it lands in, but the description has no counterweight at this rate.</p>
+<h2 id="time">Time<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#time" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>A flush takes 6 to 25 ms at the median here, roughly in proportion to the pages it writes, and flushes take most of the time: the operations between them cost 1.3 to 3.2 µs each.</strong></p>
+<p><img src="./figures/consolidation/flush-latency.svg" alt="Flush times, including the fsync: median, 90th and 99th percentile."/></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>workload, consolidating</th><th>pages written per flush</th><th>mean flush time</th><th>operations per second, flushes included</th></tr></thead><tbody><tr><td>uniform, 1 MiB</td><td>104</td><td>10.4 ms</td><td>84,000</td></tr><tr><td>uniform, 8 MiB</td><td>130</td><td>14.1 ms</td><td>64,000</td></tr><tr><td>uniform, 64 MiB</td><td>138</td><td>29.6 ms</td><td>32,000</td></tr><tr><td>skewed, 64 MiB</td><td>131</td><td>18.2 ms</td><td>50,000</td></tr><tr><td>append, 16 MiB</td><td>64</td><td>10.1 ms</td><td>87,000</td></tr><tr><td>churn, 16 MiB</td><td>192</td><td>10.3 ms</td><td>110,000</td></tr><tr><td>typed, 16 MiB</td><td>82</td><td>14.5 ms</td><td>57,000</td></tr></tbody></table></div>
+<p>The figures are over the second half of each run.
+The uniform flush doubles its time per page written between 8 and 64 MiB, from 108 to 214 µs, at about the same pages per flush.
+These runs do not say why; the page-table scans a flush makes, over some 25,000 entries, are far too cheap to account for 15 ms.
+The 99th-percentile flush of the 64 MiB uniform file takes 54 ms.</p>
+<p><img src="./figures/consolidation/throughput.svg" alt="Operations per second, flushes included, over the median of 21 flushes."/></p>
+<p>Throughput dips while the append workload’s logs rotate, when consolidation evacuates what the rotation left sparse.</p>
+<h2 id="the-typed-layers">The typed layers<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-typed-layers" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Through the typed layers, a hash map of strings costs what the raw store does per byte: 1.53 times its live size in space, and 2.97 bytes written per byte.</strong>
+Its journal takes 1.12 bytes per byte, the framing of its records included.
+It holds 9.1 statements per KiB of live data, since each of its 137,000 strings is an allocation of its own.
+A flush takes 13 ms at the median, and the map sustains 57,000 operations per second, flushes included.</p>
+<h2 id="defects-the-benchmarks-found">Defects the benchmarks found<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#defects-the-benchmarks-found" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>All four are fixed in the measured commit, and each has a test of its own.</p>
+<ol>
+<li><strong>Recycled ids resurrected old content</strong> (fixed in <code>58dcfa0</code>).
+A tombstone whose own page a flush dropped was released as if it had outlived its purpose, so after a reopen, older statements of a freed and recycled id could show through; the churn workload’s check caught it.</li>
+<li><strong>Storing a new string journaled it byte by byte</strong> (fixed in <code>8a2f7cb</code>), which made the typed workload’s journal 2.8 times as large as its data.</li>
+<li><strong>Compaction mode stalled on a full table page at the end of the file</strong> (fixed in <code>4182b3f</code>).
+The restatements of a table page are estimated at 1.25 times its coverage, so a tail page more than 80 % full failed the churn floor, from which <a href="../impl/consolidation#compaction-mode" class="internal internal-link alias" data-slug="impl/consolidation">the design</a> means the tail to be exempt: in the shrink workload, a page of <code>Inline</code> patches at the end of the file held compaction back for 180 flushes.
+Before the fix, the file was still 3.2 times its live size after 400 flushes.</li>
+<li><strong>Compaction mode ran almost permanently in small files</strong> (fixed in <code>26dcc08</code>), because it counted pages in quarantine as holes, although they are working space that the next flushes reuse by themselves.
+In the 1 MiB uniform file it ran in 30 of 33 flushes, and the file ended 6 % larger than it does with the fix.</li>
+</ol>
+<p><code>implementation-notes.md</code> in kladde-rs records the first, under “Flush”; <a href="../impl/consolidation#compaction-mode" class="internal internal-link alias" data-slug="impl/consolidation">Compaction mode</a> now states the rules the last two fixes follow.</p>
+<h2 id="what-to-change">What to change<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-to-change" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>Make the constants agree.</strong>
+Either lower <code>τ</code> to what <code>λ</code> allows, which for <code>λ = 1</code> is a whole-file fill of about 0.63, or lower <code>λ</code> to what <code>τ</code> needs; or replace both with a threshold per page, as <a href="../drafts/ripeness" class="internal internal-link alias" data-slug="drafts/ripeness">the ripeness draft</a> proposes, which <a href="./ripeness" class="internal internal-link alias" data-slug="evaluation/ripeness">Cleaning by ripeness</a> measures.
+As they stand, the controller only ever raises the budget to its cap, and the cap bounds a flush’s work only because the churn floor runs out of victims first.</li>
+<li><strong>Measure what the controller acts on.</strong>
+<a href="./ripeness" class="internal internal-link alias" data-slug="evaluation/ripeness">Cleaning by ripeness</a> moves a price with the same kind of controller, and its price cycled the same way while it measured the whole file; measured over the data pages and leaves, which answer within the flush, it held within a few percent.
+The budget would likely settle the same way; holes are compaction mode’s to return anyway.</li>
+<li><strong>Scale description defragmentation with the rate at which statements accrue</strong>, rather than reserving one page per flush: appends and patches both outrun it by an order of magnitude.</li>
+<li><strong>Find out why flushes slow down as files grow</strong>, with a profile of the 64 MiB uniform run.</li>
+<li><strong>Measure small files with fewer operations per flush</strong>, since with 1000 their free space is set by the quarantine rather than by consolidation.</li>
+</ul>
+<h2 id="reproducing">Reproducing<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reproducing" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>In kladde-rs, at the measured commit, run every workload and write one table per workload to a directory:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --release</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-bench</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> /tmp/kladde-bench</span></span></code></pre></figure>
+<p>In kladde-docs, keep the tables gzipped next to this page and draw the figures from them, with matplotlib installed:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> f </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">in</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> /tmp/kladde-bench/*.csv</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">do</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">    gzip</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -9</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -n</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -c</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">$f</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> ></span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> content/evaluation/data/consolidation/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">$(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">basename</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">$f</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">)</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">.gz</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">done</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">tools/plot-evaluation.py</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --summary</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --out</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> content/evaluation/figures/consolidation</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="string"> \</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    main=content/evaluation/data/consolidation</span></span></code></pre></figure>
+<p><code>--summary</code> also prints the end state of every run as a table.
+The whole benchmark takes about four minutes here.</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-7" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#what-was-measured" data-for="what-was-measured">What was measured</a></li><li class="depth-0"><a href="#space" data-for="space">Space</a></li><li class="depth-0"><a href="#the-churn-floor-sets-the-fill-not-the-target" data-for="the-churn-floor-sets-the-fill-not-the-target">The churn floor sets the fill, not the target</a></li><li class="depth-0"><a href="#writes" data-for="writes">Writes</a></li><li class="depth-0"><a href="#mass-frees" data-for="mass-frees">Mass frees</a></li><li class="depth-0"><a href="#the-description" data-for="the-description">The description</a></li><li class="depth-0"><a href="#time" data-for="time">Time</a></li><li class="depth-0"><a href="#the-typed-layers" data-for="the-typed-layers">The typed layers</a></li><li class="depth-0"><a href="#defects-the-benchmarks-found" data-for="defects-the-benchmarks-found">Defects the benchmarks found</a></li><li class="depth-0"><a href="#what-to-change" data-for="what-to-change">What to change</a></li><li class="depth-0"><a href="#reproducing" data-for="reproducing">Reproducing</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-0" class="overflow"><li><a href="../evaluation/bayesian-ripeness" class="internal">Bayesian ripeness</a></li><li><a href="../evaluation/" class="internal">Evaluation</a></li><li><a href="../evaluation/ripeness" class="internal">Cleaning by ripeness</a></li><li><a href="../evaluation/ripeness2" class="internal">Ripeness with a static share</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/kladde-dev">GitHub</a></li><li><a href="https://kladde-dev.github.io/kladde.pdf">PDF</a></li><li><a href="https://robamler.github.io/">Robert Bamler</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-9114441b.js" type="module" data-persist="true"></script></html>

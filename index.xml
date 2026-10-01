@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>kladde</title>
+      <link>https://kladde-dev.github.io</link>
+      <description>Last 10 notes on kladde</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>Tag Index</title>
+    <link>https://kladde-dev.github.io/tags/</link>
+    <guid>https://kladde-dev.github.io/tags/</guid>
+    <description><![CDATA[  ]]></description>
+    <pubDate>Thu, 01 Oct 2026 15:35:05 GMT</pubDate>
+  </item><item>
+    <title>kladde</title>
+    <link>https://kladde-dev.github.io/</link>
+    <guid>https://kladde-dev.github.io/</guid>
+    <description><![CDATA[ Durable data structures: mutate in memory, and it’s on disk. ]]></description>
+    <pubDate>Thu, 01 Oct 2026 15:12:07 GMT</pubDate>
+  </item><item>
+    <title>Sorting survivors by temperature</title>
+    <link>https://kladde-dev.github.io/drafts/survivor-classes</link>
+    <guid>https://kladde-dev.github.io/drafts/survivor-classes</guid>
+    <description><![CDATA[ Status: a proposal, not adopted. ]]></description>
+    <pubDate>Thu, 01 Oct 2026 14:33:51 GMT</pubDate>
+  </item><item>
+    <title>Compared to serde</title>
+    <link>https://kladde-dev.github.io/rust/tutorial/comparison-to-serde</link>
+    <guid>https://kladde-dev.github.io/rust/tutorial/comparison-to-serde</guid>
+    <description><![CDATA[ The most common question about kladde is how it relates to serde. ]]></description>
+    <pubDate>Mon, 28 Sep 2026 21:01:45 GMT</pubDate>
+  </item><item>
+    <title>The built-in containers</title>
+    <link>https://kladde-dev.github.io/rust/tutorial/containers</link>
+    <guid>https://kladde-dev.github.io/rust/tutorial/containers</guid>
+    <description><![CDATA[ kladde-types provides four durable containers. ]]></description>
+    <pubDate>Mon, 28 Sep 2026 21:01:45 GMT</pubDate>
+  </item><item>
+    <title>Deriving your own types</title>
+    <link>https://kladde-dev.github.io/rust/tutorial/deriving</link>
+    <guid>https://kladde-dev.github.io/rust/tutorial/deriving</guid>
+    <description><![CDATA[ #[derive(Persistable)] turns your own struct or enum into a durable type, as long as every persisted field is itself Persistable. ]]></description>
+    <pubDate>Mon, 28 Sep 2026 21:01:45 GMT</pubDate>
+  </item><item>
+    <title>Getting started</title>
+    <link>https://kladde-dev.github.io/rust/tutorial/getting-started</link>
+    <guid>https://kladde-dev.github.io/rust/tutorial/getting-started</guid>
+    <description><![CDATA[ The mental model A durable data structure lives in two places at once. ]]></description>
+    <pubDate>Mon, 28 Sep 2026 21:01:45 GMT</pubDate>
+  </item><item>
+    <title>Tutorial</title>
+    <link>https://kladde-dev.github.io/rust/tutorial/</link>
+    <guid>https://kladde-dev.github.io/rust/tutorial/</guid>
+    <description><![CDATA[ For people who want to use kladde in a Rust application. Assumes ordinary Rust knowledge and no prior exposure to kladde. ]]></description>
+    <pubDate>Mon, 28 Sep 2026 21:01:45 GMT</pubDate>
+  </item><item>
+    <title>Writing a custom Persistable</title>
+    <link>https://kladde-dev.github.io/rust/tutorial/custom-persistable</link>
+    <guid>https://kladde-dev.github.io/rust/tutorial/custom-persistable</guid>
+    <description><![CDATA[ Advanced. Most types should be derived or built from the containers. Reach for a hand-written implementation when neither fits. ]]></description>
+    <pubDate>Mon, 28 Sep 2026 21:01:06 GMT</pubDate>
+  </item><item>
+    <title>Durability and flushing</title>
+    <link>https://kladde-dev.github.io/rust/tutorial/durability</link>
+    <guid>https://kladde-dev.github.io/rust/tutorial/durability</guid>
+    <description><![CDATA[ What is guaranteed when, and what a crash actually costs you. The two-stage model A mutation does two things before it returns. ]]></description>
+    <pubDate>Mon, 28 Sep 2026 21:01:06 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>
