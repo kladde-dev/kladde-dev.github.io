@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>kladde</title>
+      <link>https://kladde-dev.github.io</link>
+      <description>Last 10 notes on kladde</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>Tag Index</title>
+    <link>https://kladde-dev.github.io/tags/</link>
+    <guid>https://kladde-dev.github.io/tags/</guid>
+    <description><![CDATA[  ]]></description>
+    <pubDate>Wed, 07 Oct 2026 20:28:08 GMT</pubDate>
+  </item><item>
+    <title>Sparse leaves, and consolidation from the statements up</title>
+    <link>https://kladde-dev.github.io/drafts/consolidation-from-statements</link>
+    <guid>https://kladde-dev.github.io/drafts/consolidation-from-statements</guid>
+    <description><![CDATA[ Status: a finding, half resolved, and a direction for a redesign; high priority. ]]></description>
+    <pubDate>Wed, 07 Oct 2026 20:27:04 GMT</pubDate>
+  </item><item>
+    <title>Drafts</title>
+    <link>https://kladde-dev.github.io/drafts/</link>
+    <guid>https://kladde-dev.github.io/drafts/</guid>
+    <description><![CDATA[ Half-baked ideas in progress. ]]></description>
+    <pubDate>Wed, 07 Oct 2026 20:27:04 GMT</pubDate>
+  </item><item>
+    <title>Implementation notes</title>
+    <link>https://kladde-dev.github.io/impl/implementation-notes</link>
+    <guid>https://kladde-dev.github.io/impl/implementation-notes</guid>
+    <description><![CDATA[ What implementing the design in kladde-rs has shown: where kladde-rs falls short, what needs more thought, where kladde-docs is wrong or could change, and what it leaves open, grouped by what each finding calls for. ]]></description>
+    <pubDate>Wed, 07 Oct 2026 20:10:30 GMT</pubDate>
+  </item><item>
+    <title>The Move operation</title>
+    <link>https://kladde-dev.github.io/drafts/move-op</link>
+    <guid>https://kladde-dev.github.io/drafts/move-op</guid>
+    <description><![CDATA[ Status: the record is specified; how a flush states it is a sketch. ]]></description>
+    <pubDate>Wed, 07 Oct 2026 18:14:05 GMT</pubDate>
+  </item><item>
+    <title>Open issues</title>
+    <link>https://kladde-dev.github.io/drafts/open-issues</link>
+    <guid>https://kladde-dev.github.io/drafts/open-issues</guid>
+    <description><![CDATA[ Two lists, both maintained by audit rather than by memory: where the documents outside Superseded disagree with each other, and what has to be settled before a first Rust prototype can be built. ]]></description>
+    <pubDate>Wed, 07 Oct 2026 18:14:05 GMT</pubDate>
+  </item><item>
+    <title>Address-table operations</title>
+    <link>https://kladde-dev.github.io/impl/address-table-operations</link>
+    <guid>https://kladde-dev.github.io/impl/address-table-operations</guid>
+    <description><![CDATA[ Pseudocode for every operation on the in-memory state. Two levels are in play and it is worth separating them before reading any of this. ]]></description>
+    <pubDate>Wed, 07 Oct 2026 18:14:05 GMT</pubDate>
+  </item><item>
+    <title>Consolidation</title>
+    <link>https://kladde-dev.github.io/impl/consolidation</link>
+    <guid>https://kladde-dev.github.io/impl/consolidation</guid>
+    <description><![CDATA[ Reclaiming garbage: which pages to rewrite, in what order, and how much per flush. ]]></description>
+    <pubDate>Wed, 07 Oct 2026 18:14:05 GMT</pubDate>
+  </item><item>
+    <title>Consolidator state</title>
+    <link>https://kladde-dev.github.io/impl/consolidator-state</link>
+    <guid>https://kladde-dev.github.io/impl/consolidator-state</guid>
+    <description><![CDATA[ What the reference implementation keeps in the consolidator state, how it keeps writing it cheap, and how it tells whether what it finds there is still current. ]]></description>
+    <pubDate>Wed, 07 Oct 2026 18:14:05 GMT</pubDate>
+  </item><item>
+    <title>The flush</title>
+    <link>https://kladde-dev.github.io/impl/flush</link>
+    <guid>https://kladde-dev.github.io/impl/flush</guid>
+    <description><![CDATA[ How the journal becomes pages: what to write, where to put it, and in what order. ]]></description>
+    <pubDate>Wed, 07 Oct 2026 18:14:05 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>Transactions and batches</title><meta charset="utf-8"/><link rel="preload" href="../index-2c86d77d.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="kladde"/><meta property="og:title" content="Transactions and batches"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Transactions and batches"/><meta name="twitter:description" content="How application operations are grouped into the transactions the journal records."/><meta property="og:description" content="How application operations are grouped into the transactions the journal records."/><meta property="og:image:alt" content="How application operations are grouped into the transactions the journal records."/><meta property="twitter:domain" content="kladde-dev.github.io"/><meta property="og:url" content="https://kladde-dev.github.io/impl/transactions-and-batches"/><meta property="twitter:url" content="https://kladde-dev.github.io/impl/transactions-and-batches"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="How application operations are grouped into the transactions the journal records."/><meta name="generator" content="Quartz"/><link href="../index-2c86d77d.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://kladde-dev.github.io/impl/transactions-and-batches-og-image.webp"/><meta property="og:image:url" content="https://kladde-dev.github.io/impl/transactions-and-batches-og-image.webp"/><meta name="twitter:image" content="https://kladde-dev.github.io/impl/transactions-and-batches-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="impl/transactions-and-batches" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">kladde</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="Search" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something..." placeholder="Search for something..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="Dark mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="Reader mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-24" aria-label="Explorer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-24" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../impl/">Implementation</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Transactions and batches</a></div></nav><h1 class="article-title">Transactions and batches</h1><p show-comma="true" class="content-meta"><time datetime="2026-09-25T00:11:35.000Z">Sep 25, 2026</time><span>9 min read</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p>How application operations are grouped into the <a href="../spec/journal#transactions" class="internal internal-link alias" data-slug="spec/journal">transactions</a> the journal records.</p>
+<p><strong>Status:</strong> not implemented; the design is settled apart from the explicitly stated open questions.</p>
+<p>Transactions are normative — they are the unit of atomicity an application builds on.
+<strong>Batches are not</strong>: they are an implementation’s mechanism for turning a long run of operations into reasonably sized transactions, and an implementation is free to offer something else or nothing at all.
+Both exist only to affect how mutations are <em>persisted</em>; the accompanying in-memory mutations are always immediate.</p>
+<h2 id="three-mechanisms-over-one-journal">Three mechanisms over one journal<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#three-mechanisms-over-one-journal" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>mechanism</th><th>effect on the journal</th><th>what it is for</th><th>when to use</th></tr></thead><tbody><tr><td><strong>transaction</strong></td><td>wraps a sequence of operations in a single journal transaction, appended atomically when the caller commits</td><td><strong>correctness</strong>: either all or none of the operations are persisted, so a crash can’t expose an invalid intermediate state</td><td>whenever intermediate state would be invalid</td></tr><tr><td><strong>batch</strong></td><td>cuts a long sequence of operations into reasonably sized subsequences, respecting nested transactions, and wraps each in a transaction</td><td><strong>optimization</strong>: fewer I/O operations, while still bounding the journal’s size and any individual write</td><td>when many operations happen at once with valid intermediate states — a large import, a paste</td></tr><tr><td><strong>bare operation</strong></td><td>recorded as its own transaction</td><td><strong>simplicity</strong>: changes persist immediately</td><td>single mutations, prototyping</td></tr></tbody></table></div>
+<p><strong>Transactions enforce correctness.</strong>
+In complex data types, one semantic operation often produces several journal records — appending to a vector grows it and then writes the element — and interrupting between them leaves an invalid state: uninitialized data, or a leak.
+The same happens in application code, where a transition between two valid states sometimes passes through invalid ones.</p>
+<p><strong>Batches are an optimization, and a necessary one.</strong>
+Kladde’s promise to persist every mutation immediately carries a small unavoidable per-transaction overhead.
+That is usually worth it, but it adds up when an action triggers a large or unbounded burst — and for such bursts, per-operation durability buys little anyway.
+It is tempting to wrap the burst in a transaction instead, but <strong>very large transactions perform poorly</strong>, because the whole transaction is held in memory until it ends, and the journal, and therefore the file, must then temporarily grow in proportion to the number and size of the operations.
+A batch is the middle ground: the backend decides how to divide the sequence, respecting any explicit transaction inside it.</p>
+<h3 id="recommendations">Recommendations<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#recommendations" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>For most application code, reach for a <strong>batch or a bare operation</strong>.
+Batches are cheaper for multiple operations, have no I/O overhead over a bare operation even for one, and cost a handful of instructions and no allocation.
+But remember that <strong>batches delay persistence</strong>: they are only guaranteed committed when ended, so holding one open for a long time defeats the point of immediate persistence.</li>
+<li>Use <strong>transactions</strong> when application logic requires atomicity, and keep them short.
+Needing a very long transaction almost always means either that the application’s state transitions pass through too many invalid intermediate states, or that the wrong data type was chosen — a vector where a rope or an ordered tree belongs.
+When atomicity is genuinely required for a large mutation, it can usually be imposed at the application level instead: import into a structure that is not yet user-facing, then publish a pointer to it in one operation.</li>
+<li>For a long sequence where <em>some parts</em> need atomicity, use a <strong>batch with a few smaller transactions inside</strong>.
+This is the pattern the design is arranged around.</li>
+</ul>
+<h2 id="nesting">Nesting<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#nesting" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Transactions and batches nest arbitrarily, so that a container’s <code>push</code> can open a transaction without caring whether its caller already did.
+The backend flattens the nesting, because the journal only deals with a flat sequence of transactions.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>↓ outer; inner →</th><th>transaction in a …</th><th>batch in a …</th></tr></thead><tbody><tr><td><strong>… transaction</strong></td><td>only outer transaction survives</td><td>only the transaction survives <em>(shouldn’t usually occur)</em></td></tr><tr><td><strong>… batch</strong></td><td>both survive</td><td>only outer batch survives</td></tr></tbody></table></div>
+<ul>
+<li><strong>Transaction in a transaction ⇒ outer.</strong> The inner one is meaningless; its atomicity is already enforced. Expected often in composable code.</li>
+<li><strong>Transaction in a batch ⇒ both.</strong> The inner transaction enforces atomicity, so no cutting point may lie inside it. Expected often.</li>
+<li><strong>Batch in a batch ⇒ outer.</strong> The inner one is meaningless; deferral is already in effect. Fine, but not useful.</li>
+<li><strong>Batch in a transaction ⇒ the transaction.</strong> The inner batch is meaningless, since the transaction already forces the operations to commit as one group.
+A potential code smell: batches are for large or unbounded sequences, transactions should be short, so this combination implies a long chain of state transitions with only invalid intermediate states.</li>
+</ul>
+<h2 id="the-buffering-state-machine">The buffering state machine<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-buffering-state-machine" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The backend keeps an in-memory buffer <code>ops</code> of serialized operations, not all of which are necessarily in the file yet, and a state:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="github-light github-dark"><code data-language="rust" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">enum</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> TransactionState</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> {</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property">    Immediate</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property">    InBatch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">              { batch_depth</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> NonZero</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, committed_cursor</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> usize</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> },</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property">    InTransaction</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        { transaction_depth</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> NonZero</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, batch_depth</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> u32</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">                           committed_cursor</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> usize</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> },</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property">    InTransactionInBatch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { transaction_depth</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> NonZero</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, batch_depth</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> NonZero</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">                           committed_cursor</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> usize</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, ready_cursor</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> usize</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><code>transaction_depth</code> and <code>batch_depth</code> count begins minus ends, with an implied zero in any variant where they are absent.
+Two cursors, <code>committed_cursor &lt;= ready_cursor &lt;= ops.len()</code>, divide the operations since the last flush into three spans:</p>
+<ul>
+<li><code>committed := ops[..committed_cursor]</code> — written to the on-storage journal;</li>
+<li><code>ready := ops[committed_cursor..ready_cursor]</code> — pending operations of the current batch, ready to be appended;</li>
+<li><code>transaction := ops[ready_cursor..]</code> — pending operations of an ongoing transaction.</li>
+</ul>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;stateDiagram-v2\n    [*] --> Immediate\n    Immediate --> InBatch: begin_batch\n    Immediate --> InTransaction: begin_transaction\n    InBatch --> Immediate: end_batch when&lt;br> batch_depth == 1\n    InBatch --> InTransactionInBatch: begin_transaction\n    InTransaction --> Immediate: end_transaction when&lt;br> transaction_depth == 1\n    InTransactionInBatch --> InBatch: end_transaction when&lt;br> transaction_depth == 1&quot;">stateDiagram-v2
+    [*] --> Immediate
+    Immediate --> InBatch: begin_batch
+    Immediate --> InTransaction: begin_transaction
+    InBatch --> Immediate: end_batch when&lt;br> batch_depth == 1
+    InBatch --> InTransactionInBatch: begin_transaction
+    InTransaction --> Immediate: end_transaction when&lt;br> transaction_depth == 1
+    InTransactionInBatch --> InBatch: end_transaction when&lt;br> transaction_depth == 1
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p><strong>Why four states and not three.</strong>
+<code>InTransaction</code> carries a <code>batch_depth</code> that may be positive, so it overlaps with <code>InTransactionInBatch</code> in depth alone.
+What distinguishes them is <strong>which scope was opened first</strong>.
+<code>InTransactionInBatch</code> is <em>batch outside, transaction inside</em> — the useful nesting, where ending the transaction returns to <code>InBatch</code> and persistence stays deferred.
+<code>InTransaction { batch_depth > 0 }</code> is <em>transaction outside, batch inside</em> — the code-smell nesting, where the batch is subsumed and its depth is tracked only so that its end can be matched.</p>
+<h3 id="transitions-in-detail">Transitions in detail<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#transitions-in-detail" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The <code>error</code> cells are all the same mistake: ending one scope while a scope nested inside it is still open — <em>interleaving</em> rather than nesting.
+An implementation should make that unrepresentable at the API level rather than checking for it.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th></th><th><code>Immediate</code></th><th><code>InBatch</code></th><th><code>InTransaction</code></th><th><code>InTransactionInBatch</code></th></tr></thead><tbody><tr><td><strong><code>transaction_depth</code></strong></td><td><code>0</code> (implicit)</td><td><code>0</code> (implicit)</td><td><code>> 0</code></td><td><code>> 0</code></td></tr><tr><td><strong><code>batch_depth</code></strong></td><td><code>0</code> (implicit)</td><td><code>> 0</code></td><td>any</td><td><code>> 0</code></td></tr><tr><td><strong><code>committed_cursor</code></strong></td><td><code>ops.len()</code> (implicit)</td><td>explicit</td><td>explicit</td><td>explicit</td></tr><tr><td><strong><code>ready_cursor</code></strong></td><td><code>ops.len()</code> (implicit)</td><td><code>ops.len()</code> (implicit)</td><td><code>committed_cursor</code> (implicit)</td><td>explicit</td></tr><tr><td><strong><code>begin_transaction()</code></strong></td><td><code>InTransaction { t: 1, b: 0 }</code></td><td><code>InTransactionInBatch { t: 1, .. }</code></td><td><code>transaction_depth += 1</code></td><td><code>transaction_depth += 1</code></td></tr><tr><td><strong><code>end_transaction()</code></strong></td><td>error</td><td>error</td><td><code>−1</code>; at <code>0</code>: <code>Immediate</code> if <code>batch_depth == 0</code>, else error</td><td><code>−1</code>; at <code>0</code>: <code>InBatch</code></td></tr><tr><td><strong><code>begin_batch()</code></strong></td><td><code>InBatch { b: 1 }</code></td><td><code>batch_depth += 1</code></td><td><code>batch_depth += 1</code></td><td><code>batch_depth += 1</code></td></tr><tr><td><strong><code>end_batch()</code></strong></td><td>error</td><td><code>−1</code>; at <code>0</code>: <code>Immediate</code></td><td><code>batch_depth -= 1</code></td><td><code>−1</code>; at <code>0</code>: error</td></tr></tbody></table></div>
+<h2 id="flush-triggers">Flush triggers<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#flush-triggers" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p><strong>Append whole transactions, and flush once the journal segment has outgrown its page budget.</strong></p>
+</blockquote>
+<p>The budget is a trigger, not a capacity.
+The journal is a <a href="../spec/journal#pages" class="internal internal-link alias" data-slug="spec/journal">chain of pages</a>, so a transaction larger than what is left of the budget — or larger than the whole budget — needs no special case: it is appended whole, spanning as many pages as it needs, and the flush that follows folds it.</p>
+<p>The rules, all applied at operation boundaries:</p>
+<ul>
+<li><strong>Recording an operation in <code>Immediate</code></strong>, and <strong><code>InTransaction</code> → <code>Immediate</code>:</strong> append the operation, or <code>transaction</code>, to the journal as one transaction; then flush if the segment is over budget.</li>
+<li><strong>Recording an operation in <code>InBatch</code>:</strong> add it to <code>ready</code>; if <code>ready</code> has reached the batch size, append <code>ready</code> as one transaction, then flush if the segment is over budget.</li>
+<li><strong><code>InTransactionInBatch</code> → <code>InBatch</code>:</strong> <code>transaction</code> joins <code>ready</code>, and the same check follows as when recording an operation in <code>InBatch</code> — which is why a batch is never cut inside a transaction.</li>
+<li><strong><code>InBatch</code> → <code>Immediate</code>:</strong> append <code>ready</code> as one transaction, then flush if the segment is over budget.</li>
+<li><strong>An explicit <code>flush()</code>:</strong> append <code>ready</code>, which lies outside any open transaction, then flush.</li>
+<li><strong>Opening a file whose recovered journal is non-empty:</strong> flush before the first append, as <a href="../spec/journal#the-start-of-a-session" class="internal internal-link alias" data-slug="spec/journal">the journal requires</a>.</li>
+</ul>
+<p>The batch size decides how much a batch may hold back from the journal, trading the per-transaction overhead against what an application crash can lose; it is independent of the segment budget.</p>
+<p><strong>The budget bounds the file, not memory.</strong>
+An open transaction is held in memory in full, whatever the budget, because nothing can <a href="../spec/journal#checkpoint-versus-commit" class="internal internal-link alias" data-slug="spec/journal">fold an unfinished transaction</a>; a huge transaction costs memory in proportion to its size, and journal pages in proportion too once it is appended.</p>
+<h3 id="consequence-for-write-phase-geometry">Consequence for write-phase geometry<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#consequence-for-write-phase-geometry" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Every automatic flush runs right after an append, with <code>ready</code> and <code>transaction</code> empty, so it folds exactly the operations the write-phase geometry has seen, and the geometry can simply be cleared.</p>
+<p>An explicit <code>flush()</code> inside a transaction is the exception.
+The open transaction’s operations stay buffered past <code>committed_cursor</code>, so the geometry no longer describes the same point in the sequence as the fold, and it must be <strong>repopulated</strong> from those operations after the flush rather than cleared.</p>
+<h2 id="checkpoint-versus-commit">Checkpoint versus commit<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#checkpoint-versus-commit" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Decided: a checkpoint never splits a commit</strong> — see <a href="../spec/journal#checkpoint-versus-commit" class="internal internal-link alias" data-slug="spec/journal">the journal</a>.</p>
+<p>A <em>checkpoint</em> is a flush triggered by resource pressure, and a <em>commit</em> is a transaction boundary the recovered state may snap to.
+The open question was whether a checkpoint could fold part of an unfinished transaction, to bound the memory the transaction holds.
+It cannot: the header it committed would describe a state inside the transaction, and undoing that part on recovery would need a mechanism the format does not have.
+So every flush folds complete transactions only, and the memory an open transaction holds is bounded only by <a href="#recommendations" class="internal internal-link alias">keeping transactions short</a>.</p>
+<p>What remains is that application authors need never call <code>flush()</code>: the operation that pushes the journal over its budget flushes automatically.
+Two consequences follow:</p>
+<p><strong>Flush needs only shared access to the backend.</strong>
+The auto-checkpoint fires from inside a mutating call, which holds no exclusive reference to the whole structure.
+This is safe — callers hold ids and offsets, never addresses, and writes resolve locations at write time, so relocation under a live mutation is transparent.
+Note that it is a <em>reentrant</em> call, so no write path may hold an interior borrow across a callback.</p>
+<p><strong>The trigger belongs at operation boundaries</strong>, not at append time.
+A check on append can fire between two records of one logical mutation.
+An operation is the natural atomic unit, being the smallest thing an application author perceives as one change.</p>
+<h2 id="open-questions">Open questions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#open-questions" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>The segment’s page budget and the batch size: whether each is fixed or scales with the file, and whether either should adapt to an application whose transactions routinely exceed it.</li>
+</ul></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-20" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#three-mechanisms-over-one-journal" data-for="three-mechanisms-over-one-journal">Three mechanisms over one journal</a></li><li class="depth-1"><a href="#recommendations" data-for="recommendations">Recommendations</a></li><li class="depth-0"><a href="#nesting" data-for="nesting">Nesting</a></li><li class="depth-0"><a href="#the-buffering-state-machine" data-for="the-buffering-state-machine">The buffering state machine</a></li><li class="depth-1"><a href="#transitions-in-detail" data-for="transitions-in-detail">Transitions in detail</a></li><li class="depth-0"><a href="#flush-triggers" data-for="flush-triggers">Flush triggers</a></li><li class="depth-1"><a href="#consequence-for-write-phase-geometry" data-for="consequence-for-write-phase-geometry">Consequence for write-phase geometry</a></li><li class="depth-0"><a href="#checkpoint-versus-commit" data-for="checkpoint-versus-commit">Checkpoint versus commit</a></li><li class="depth-0"><a href="#open-questions" data-for="open-questions">Open questions</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-0" class="overflow"><li><a href="../drafts/open-issues" class="internal">Open issues</a></li><li><a href="../impl/" class="internal">Implementation</a></li><li><a href="../impl/write-phase-state" class="internal">Write-phase state</a></li><li><a href="../rust/persistable-and-guards" class="internal">Persistable and guards</a></li><li><a href="../rust/store" class="internal">The store</a></li><li><a href="../rust/transactions" class="internal">Transactions</a></li><li><a href="../spec/journal" class="internal">Journal</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/kladde-dev">GitHub</a></li><li><a href="https://kladde-dev.github.io/kladde.pdf">PDF</a></li><li><a href="https://robamler.github.io/">Robert Bamler</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-9114441b.js" type="module" data-persist="true"></script></html>

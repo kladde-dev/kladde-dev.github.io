@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>Sparse leaves, and consolidation from the statements up</title><meta charset="utf-8"/><link rel="preload" href="../index-2c86d77d.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="kladde"/><meta property="og:title" content="Sparse leaves, and consolidation from the statements up"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Sparse leaves, and consolidation from the statements up"/><meta name="twitter:description" content="Status: a finding, half resolved, and a direction for a redesign; high priority."/><meta property="og:description" content="Status: a finding, half resolved, and a direction for a redesign; high priority."/><meta property="og:image:alt" content="Status: a finding, half resolved, and a direction for a redesign; high priority."/><meta property="twitter:domain" content="kladde-dev.github.io"/><meta property="og:url" content="https://kladde-dev.github.io/drafts/consolidation-from-statements"/><meta property="twitter:url" content="https://kladde-dev.github.io/drafts/consolidation-from-statements"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Status: a finding, half resolved, and a direction for a redesign; high priority."/><meta name="generator" content="Quartz"/><link href="../index-2c86d77d.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://kladde-dev.github.io/drafts/consolidation-from-statements-og-image.webp"/><meta property="og:image:url" content="https://kladde-dev.github.io/drafts/consolidation-from-statements-og-image.webp"/><meta name="twitter:image" content="https://kladde-dev.github.io/drafts/consolidation-from-statements-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="drafts/consolidation-from-statements" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">kladde</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="Search" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something..." placeholder="Search for something..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="Dark mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="Reader mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-1" aria-label="Explorer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-1" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../drafts/">Drafts</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Sparse leaves, and consolidation from the statements up</a></div></nav><h1 class="article-title">Sparse leaves, and consolidation from the statements up</h1><p show-comma="true" class="content-meta"><time datetime="2026-10-07T20:27:04.000Z">Oct 07, 2026</time><span>25 min read</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p><strong>Status: a finding, half resolved, and a direction for a redesign; high priority.</strong>
+The consolidation policy of <a href="../impl/consolidation" class="internal internal-link alias" data-slug="impl/consolidation">Consolidation</a>, as kladde-rs implements it, keeps address-table leaves far emptier than data pages, so that 2 to 15 % of a file’s live pages are leaves it would not need if they were as full as its data pages.
+Until <a href="../spec/address-table#conflict-resolution-across-epochs" class="internal internal-link alias" data-slug="spec/address-table">the newest size won</a>, it was 4 to 33 %, since leaves that held almost nothing stayed in the file for dozens of flushes; the new size rule ended that, by letting the statements that kept them alive die, and by removing the reason the cut refused them.
+The cause of what remains is not a tuning constant but the way the policy interleaves three decisions, which page to retire, which statements to write, and where to put them, so that each constrains the others: the new size rule removed two of those constraints, and the third, a fill floor on retiring leaves, keeps them half empty.
+The second half of this draft starts over from <a href="../spec/address-table#logical-level" class="internal internal-link alias" data-slug="spec/address-table">the logical level of the address table</a> and keeps the three apart.</p>
+<h2 id="the-finding">The finding<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-finding" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Leaves stay far emptier than data pages, and most of them sit between a fifth and a half full: the cut’s fillers take the sparsest into the room left in its last page, and the budget loop, which holds the rest to a fill floor, takes few of them.</strong>
+On kladde-svg’s drawings, with svg-bench’s edits keeping to one part of the drawing at a time, a journal of 4 pages, and main’s consolidation at its default churn floor, at kladde-rs <code>e88fd47</code> on its branch <code>defrag-shifts</code>, the address-table pages average 44 to 60 % full, against 73 to 82 % for the data pages, and 40 to 67 % of them are less than half full at any time:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>drawing</th><th>layout</th><th>table pages</th><th>pages needed</th><th>fill</th><th>leaves under half full</th><th>under a tenth full</th><th>data pages under half full</th><th>share of live pages</th></tr></thead><tbody><tr><td>tiger</td><td>base</td><td>13.4</td><td>7.2</td><td>54 %</td><td>51 %</td><td>0 %</td><td>4.3 %</td><td>34 %</td></tr><tr><td>tiger</td><td>packed</td><td>6.3</td><td>3.8</td><td>60 %</td><td>40 %</td><td>1 %</td><td>7.1 %</td><td>31 %</td></tr><tr><td>tiger</td><td>small</td><td>0.8</td><td>0.2</td><td>21 %</td><td>88 %</td><td>44 %</td><td>5.0 %</td><td>5 %</td></tr><tr><td>coat of arms</td><td>base</td><td>30.5</td><td>15.9</td><td>52 %</td><td>53 %</td><td>0 %</td><td>1.9 %</td><td>31 %</td></tr><tr><td>coat of arms</td><td>packed</td><td>17.0</td><td>9.3</td><td>55 %</td><td>48 %</td><td>0 %</td><td>3.3 %</td><td>32 %</td></tr><tr><td>coat of arms</td><td>small</td><td>3.4</td><td>1.6</td><td>48 %</td><td>66 %</td><td>4 %</td><td>1.8 %</td><td>7 %</td></tr><tr><td>world map</td><td>base</td><td>183.8</td><td>81.4</td><td>44 %</td><td>67 %</td><td>0 %</td><td>0.3 %</td><td>34 %</td></tr><tr><td>world map</td><td>packed</td><td>103.0</td><td>50.6</td><td>49 %</td><td>58 %</td><td>0 %</td><td>0.4 %</td><td>28 %</td></tr><tr><td>world map</td><td>small</td><td>18.3</td><td>8.7</td><td>48 %</td><td>65 %</td><td>0 %</td><td>0.3 %</td><td>6 %</td></tr></tbody></table></div>
+<p>“Table pages” is their mean count, “pages needed” what their live statements would fill, “fill” the ratio of the two, and the last column the table pages’ share of the live pages.
+The means are over the rows svg-bench records every 1000 edits, and the shares over histograms of every live page’s fill taken at the same flushes, by scratch instrumentation that did not change what was written.
+Were the table pages as full as each run’s own data pages, the files would carry 2 to 15 % fewer live pages, and 8 to 15 % fewer on the coat of arms and the world map in their base and packed layouts.
+The small tiger is the exception to the ranges above: its statements need a fifth of a page, which the header mostly holds, and it has one leaf at a time, or none.</p>
+<p><strong>Nearly empty leaves no longer stay: on every run but the small tiger, at most 4 % of the leaves are under a tenth full, and in the base and packed layouts at most 3 % are under a fifth.</strong>
+What stays is the band between a fifth and a half full, which holds 38 to 65 % of the leaves in the base and packed layouts.
+The world map in those layouts shows that part alone: its leaves were never nearly empty, and the new size rule raised their fill by 1 and 3 points only.</p>
+<h3 id="before-the-newest-size-won">Before the newest size won<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#before-the-newest-size-won" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>At kladde-rs <code>795b3b9</code>, the same branch before it moved to the newest size rule, nearly empty leaves piled up: on the tiger and the coat of arms, 5 to 92 % of the leaves were under a tenth full, and leaves as full as the data pages would have saved 4 to 33 % of the live pages.</strong>
+The same runs, then and now:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>drawing</th><th>layout</th><th>table pages, then</th><th>fill, then</th><th>under a tenth full, then</th><th>live pages since</th></tr></thead><tbody><tr><td>tiger</td><td>base</td><td>15.8</td><td>48 %</td><td>12 %</td><td>−6 %</td></tr><tr><td>tiger</td><td>packed</td><td>13.1</td><td>32 %</td><td>40 %</td><td>−25 %</td></tr><tr><td>tiger</td><td>small</td><td>8.8</td><td>3 %</td><td>92 %</td><td>−32 %</td></tr><tr><td>coat of arms</td><td>base</td><td>37.2</td><td>46 %</td><td>5 %</td><td>−6 %</td></tr><tr><td>coat of arms</td><td>packed</td><td>24.8</td><td>42 %</td><td>10 %</td><td>−12 %</td></tr><tr><td>coat of arms</td><td>small</td><td>9.1</td><td>19 %</td><td>62 %</td><td>−11 %</td></tr><tr><td>world map</td><td>base</td><td>203.6</td><td>43 %</td><td>0 %</td><td>−4 %</td></tr><tr><td>world map</td><td>packed</td><td>122.4</td><td>46 %</td><td>1 %</td><td>−5 %</td></tr><tr><td>world map</td><td>small</td><td>24.0</td><td>38 %</td><td>16 %</td><td>−2 %</td></tr></tbody></table></div>
+<p>The data pages were as full then as now, so the live pages saved are the leaves’.
+The edited tiger that the variable-size evaluation, on the kladde-docs branch <code>defrag-shifts</code>, reports closing with 41 table pages for 2,265 statements likely showed the same effect.</p>
+<p><strong>On the small tiger, the leaves piled up for a dozen flushes and then vanished at once.</strong>
+Its table pages climbed to 11 to 19 at the peaks of the cycle, holding between 100 and 2,800 bytes of live statements in all; almost no table page was rewritten until compaction mode turned on, and that mode then rewrote 11 to 18 of them within one or two flushes, after which the count fell to one or two and started climbing again.
+Now it holds at most two leaves at any flush.</p>
+<h2 id="why-leaves-stay-empty">Why leaves stay empty<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#why-leaves-stay-empty" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Three causes kept leaves nearly empty until the newest size won, and one of them, the fill floor, keeps them half empty still.</p>
+<h3 id="the-budget-loop-holds-a-table-offer-to-the-data-pages-fill-floor">The budget loop holds a table offer to the data pages’ fill floor<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-budget-loop-holds-a-table-offer-to-the-data-pages-fill-floor" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong><a href="../impl/consolidation#the-budget-loop" class="internal internal-link alias" data-slug="impl/consolidation">The budget loop</a> takes a page rewrite only when the restatements of its victims would fill a whole leaf to <code>1 − θ</code>, 95 %, as it takes data victims only when their survivors fill a whole data page.</strong>
+kladde-rs’ <code>implementation-notes.md</code> records it: “a budgeted page rewrite opens no page of its own … the budget counts it as a page all the same, and holds it to the fill floor like a data offer.”</p>
+<p>For a data page the floor has a reason: evacuating victims into a page the flush opens for them costs that page, and a page that closes half empty is a page wasted.
+For a table page it has none: a page rewrite opens no page, since what it restates joins the flush’s dirty set and <a href="../impl/consolidation#one-dirty-set-and-why-statements-are-derived-last" class="internal internal-link alias" data-slug="impl/consolidation">the cut</a> lays it out among everything else the flush states.
+Its cost is the restatements’ bytes, which <a href="../impl/consolidation#the-churn-floor-is-a-parameter-not-an-identity" class="internal internal-link alias" data-slug="impl/consolidation">the churn floor</a> already weighs against the page it frees.</p>
+<p>The floor turns the cheapest victims into the hardest to take: an offer is made of whole leaves at most half live, best score first, and needs 95 % of a leaf in restatements.
+A file whose leaves hold less than that in all, such as the small tiger, can never pass it, however empty its leaves are.
+Where the leaves hold more, an offer passes only where whole leaves happen to add up to 95 % of a leaf: a leaf between two-fifths and a half full restates into 50 to 62 % of one, by the estimate of 1.25 times its coverage, so two of them do not fit together, and one alone fails the floor.</p>
+<p><strong>What the floor refuses waits for the cut’s fillers, which take leaves only into the room left in the cut’s last page, sparsest first.</strong>
+That room was 1.6 to 2.3 KB on average in these runs, enough for one leaf up to 31 to 45 % full, so the sparsest leaves go soon, and those fuller than the room allows wait for an offer that passes, which is the band the finding shows.
+The fillers rewrote 52 to 96 % of the leaves rewritten in each run, and the budget loop met a table offer that passed the churn floor but not the fill floor 87 to 1,283 times per run.</p>
+<p><strong>Held to the churn floor alone, leaves come out nearly as full as data pages.</strong>
+A diagnostic run, not a proposal, judged table offers by the churn floor alone, on the same drawings, layouts, and edits.
+On every run but the small tiger, leaves came out 65 to 70 % full, with 14 to 26 % of them under half full, and fuller leaves would have saved only 0 to 5 % of the live pages, down from 2 to 15 %.
+The files carried 1 to 11 % fewer live pages, 11 % on the world map in its base layout, and the flushes wrote 3 to 8 % more bytes per edit, restating leaves that the floor had kept waiting.</p>
+<h3 id="leaves-were-kept-alive-for-the-size-alone">Leaves were kept alive for the size alone<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#leaves-were-kept-alive-for-the-size-alone" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Before the newest size won, much of what kept nearly empty leaves alive was statements that fixed sizes, and those could not die while anything older about their id was physically present.</strong>
+On the tiger and the coat of arms at <code>795b3b9</code>, 37 to 56 % of the live statements in leaves under a tenth full were <code>Shrink</code>s and <code>Tombstone</code>s, and none a <code>Grow</code>; on the small tiger it was 95 %, and 97 % of its nearly empty leaves, counted at every flush, held nothing else live.
+Under the old size rule, a <code>Shrink</code> stayed its id’s anchor, pinned, until a newer <code>Shrink</code> or <code>Tombstone</code> replaced it, since without it the extents of older statements still in leaves would raise the size again; and a re-allocated id’s tombstone stayed the anchor of its new incarnation.</p>
+<p>Under the new rule, the newest statement that states the size wins, so an older one loses its pin as soon as a newer one states the size, and the cut makes every content statement that ends at its id’s size sizing, so that happens whenever the cut states the id’s tail.
+A re-allocated id’s tombstone dies once the cut states the new incarnation’s size.
+A leaf that held only such statements then falls to zero coverage, and the cut unlinks it without rewriting anything.
+That alone, with the fillers’ check below still in place, cut the small tiger’s table pages from 8.8 to 1.9 on average, and the packed tiger’s from 13.1 to 8.5.</p>
+<h3 id="the-cuts-fillers-refused-every-leaf-that-named-an-id-the-flush-touched">The cut’s fillers refused every leaf that named an id the flush touched<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-cuts-fillers-refused-every-leaf-that-named-an-id-the-flush-touched" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>The leaves that the budget loop does not take are meant to go as <a href="../impl/consolidation#the-page-rewrite" class="internal internal-link alias" data-slug="impl/consolidation">fillers</a>: whole table victims that fit the room of the cut’s last page, which costs nothing.</strong>
+That room was ample: in 8000 edits of the small tiger, logged at every flush, it was 800 to 3,500 bytes in nearly every one, and every nearly empty leaf would have fit.
+But kladde-rs took a filler only if the flush touched none of the ids the leaf names, and almost none qualified: on the small tiger, of up to 13 leaves under a quarter full, 0 were eligible in every flush, and on the coat of arms in its base layout, 0 to 2 of 2 to 14.</p>
+<p>The check read a leaf’s ids by decoding every statement still encoded in it, dead ones included.
+So a leaf with 4 to 25 bytes of live statements still named 74 to 251 ids, while each flush of the tiger touches 43 to 48 of its roughly 120 ids, and some named id was always among them.</p>
+<p>Since kladde-rs <code>def217a</code>, the fillers take any leaf the flush has not rewritten already.
+Neither that nor the dying size statements suffices alone: with the new size rule but the check, 3 to 17 % of the leaves of the tiger and the coat of arms in their base and packed layouts were still under a tenth full, and 66 and 47 % in their small layouts.</p>
+<p>The check guarded against stating an id’s size twice in one epoch, which the new size rule lets the cut avoid without it; nor could the dead statements it read ever be part of a conflict.
+The next two sections show both.</p>
+<h3 id="what-the-check-guarded-against">What the check guarded against<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-the-check-guarded-against" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>A filler’s victim can hold the size statement of an id the cut has already laid out statements for, and the cut must then state that id’s size again, while <a href="../spec/address-table#no-conflicts-within-each-epoch" class="internal internal-link alias" data-slug="spec/address-table">one epoch holds at most one size statement per id</a>.</strong>
+Content restatements cannot conflict, since a filler restates only fragments its victim still owns, which the flush has not taken.
+And the size statement need not: the cut decides which of its statements states each id’s size only once the fillers are known, since <a href="../impl/address-table-operations#what-the-cut-states-for-a-touched-id" class="internal internal-link alias" data-slug="impl/address-table-operations">the sizing bit</a> changes no statement’s encoded length, and adds a <code>Size</code> to the last page only for an id none of whose content statements ends at its size.
+So the cut can take any leaf as a filler, and kladde-rs dropped the check in <code>def217a</code>, once it had moved to these rules.
+Under the old size rule, the check had a reason: the statement an id needed depended on which pages survived, a <code>Grow</code> if its anchor stayed and a <code>Shrink</code> to replace the anchor if a filler retired it, and one epoch could not hold both, so a filler chosen after the layout could change a statement laid out already.</p>
+<h3 id="dead-statements-cannot-block-a-rewrite">Dead statements cannot block a rewrite<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#dead-statements-cannot-block-a-rewrite" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Dropping a dead statement never changes what the file resolves to; it only releases pins that newer statements hold on its account.</strong>
+A statement is dead when no fragment resolves through it and it is not its id’s size statement, <a href="../impl/liveness#the-droppability-rule" class="internal internal-link" data-slug="impl/liveness"><code>pins == 0</code></a>, and the droppability rule is exactly that dropping such a statement leaves the resolution unchanged.
+What a dead statement can still do is keep a newer statement alive, as an example shows:</p>
+<ul>
+<li>At epoch 4, allocation 8 holds 40 bytes, stated by <code>Ref*(8, 0, 40, c)</code> in leaf <code>L3</code>.</li>
+<li>At epoch 6, the application freed it: <code>Tombstone(8)</code>, in leaf <code>L4</code>.</li>
+</ul>
+<p><code>Ref*@4</code> is now dead, but physically present, and so it holds the tombstone: <code>mentions(8)</code> counts both statements, and <a href="../impl/liveness#the-last-tombstone" class="internal internal-link alias" data-slug="impl/liveness">a tombstone keeps its pin</a> until <code>mentions</code> falls to 1, since without it <code>Ref*@4</code> would be 8’s newest statement, and 8 would exist again with its old 40 bytes.
+Dropping <code>L3</code> drops <code>Ref*@4</code>, <code>mentions(8)</code> falls to 1, and the tombstone may retire: nothing resurfaces, which is the order the pins enforce, the denied statement first and its denier after.</p>
+<p><strong>Where the flush touched the id, a dead statement can at most make one of the flush’s own statements unnecessary.</strong>
+If the flush frees an id and states its <code>Tombstone</code>, and a filler drops the last older statement naming the id, the new tombstone has nothing left to deny: a redundant statement of a few bytes, which the next rewrite of its page drops, never a wrong one.
+If the flush allocates 8 anew, the new incarnation states its size and every byte below it, and dropping <code>Ref*@4</code> changes nothing the cut has decided.</p>
+<p>So the dead statements a leaf still encodes are no reason to keep it.
+The check read them because it learned a leaf’s ids by decoding the page, which lists dead statements beside live ones, rather than by asking which of the leaf’s statements are live.</p>
+<h3 id="compaction-mode-collected-them-in-bursts">Compaction mode collected them, in bursts<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#compaction-mode-collected-them-in-bursts" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong><a href="../impl/consolidation#compaction-mode" class="internal internal-link alias" data-slug="impl/consolidation">Compaction mode</a> offers the highest live page ahead of every victim, whatever its fill, and an offer holding it passes both floors.</strong>
+Once free pages below the tail pass a quarter of the file, the mode works down the file’s tail, page by page; the nearly empty leaves that the other paths left behind went with it, and once the mode switched off, they piled up again.
+That was the sawtooth on the small tiger, and why its file held 8.8 table pages on average for 0.2 pages’ worth of statements; with no nearly empty leaves left for the mode to collect, it holds 0.8.</p>
+<h3 id="data-pages-are-not-hit-the-same-way">Data pages are not hit the same way<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#data-pages-are-not-hit-the-same-way" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Data pages almost never fall below half full: 0.3 to 7.1 % of them, against 40 to 88 % of the leaves.</strong>
+They escape the fill floor: a data offer that whole victims leave short takes one more victim and <a href="../impl/consolidation#the-budget-loop" class="internal internal-link alias" data-slug="impl/consolidation">cuts its survivors at the page boundary</a>, carrying the rest into the next page, where a table offer can take whole leaves only.
+And <a href="../impl/consolidation#victims-are-pulled-one-at-a-time" class="internal internal-link alias" data-slug="impl/consolidation">free filling</a> takes any whole data victim that fits the room of any data page the flush writes, where the fillers have the room of one leaf.
+Their histogram’s one feature, 14 to 25 % of them between 50 and 60 % full, is the default churn floor’s own threshold, which takes victims at most half live.</p>
+<p>But the same interleaving shapes them: a data victim is taken only if its survivors fit the room of a page being written, or fill a budgeted page to 95 % together with other victims, so which pages are cleaned depends on how their survivors pack, not only on what cleaning them is worth.
+Nothing measured here shows that doing harm on data pages; the redesign below removes it on both sides alike.</p>
+<h2 id="the-underlying-error">The underlying error<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-underlying-error" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>The policy makes three decisions in one interleaved pass, which page to retire, which statements to write, and where to put them, and lets each constrain the others.</strong></p>
+<ul>
+<li>Whether a leaf is retired depends on whether its restatements fill a page, which is a question about where they go.
+This is the fill floor, and it remains.</li>
+<li>Which leaves the cut could retire depended on the statements it had already laid out.
+The fillers’ check, which enforced it, is gone.</li>
+<li>The statements for an id were decided before the set of retired pages was final, so a later victim could contradict them.
+Since the newest size wins, the cut settles which of its statements states each id’s size once the fillers are known, and content restatements never could conflict.</li>
+</ul>
+<p>Each of these was locally sensible, and the later ones were added to keep the interleaving correct, but together they made the cheapest victims unreachable.
+The new size rule removed the two that guarded correctness, and the one left is a matter of policy alone: it no longer keeps the cheapest victims out, but it still makes the next cheapest wait.
+The same pattern makes the policy hard to reason about at all: the <a href="../impl/consolidation#the-budget-loop" class="internal internal-link alias" data-slug="impl/consolidation">budget loop</a>, free filling, the cut’s fillers, the rotating window, and compaction mode each choose victims under different constraints, and each constraint comes from a decision made elsewhere.</p>
+<h2 id="possible-solutions-from-the-statements-up">Possible solutions, from the statements up<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#possible-solutions-from-the-statements-up" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>This section ignores how consolidation and the flush after its fold work today, and starts only from what statements mean.</p>
+<h3 id="what-a-writer-must-guarantee">What a writer must guarantee<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-a-writer-must-guarantee" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>A file’s address table is the set of statements in its live table pages, each at its page’s epoch, and <a href="../spec/address-table#conflict-resolution-across-epochs" class="internal internal-link alias" data-slug="spec/address-table">their resolution</a> defines the fragment map: each id’s existence, its size, and for each byte, the statement that wins it and so its content.</strong>
+Call the statements <code>S</code>, and the fragment map they resolve to <code>R(S)</code>.
+Statements may contradict each other across epochs, since the newest wins at every probe; within one epoch, <a href="../spec/address-table#no-conflicts-within-each-epoch" class="internal internal-link alias" data-slug="spec/address-table">they may not</a>.</p>
+<p>A flush at epoch <code>e</code> starts from the file’s statements <code>S</code> and from the map <code>M</code> that the application’s writes since the last flush define: <code>R(S)</code> updated by the fold.
+It ends with a new set of live pages, whose statements <code>S'</code> must satisfy <code>R(S') = M</code>, and whose data pages hold every byte <code>M</code> resolves into the file.</p>
+<p><strong>Consolidation is the choice of which pages to give up, and what to write in their place, so that this still holds.</strong>
+That is three tasks, each of which needs only the results of the ones before it.</p>
+<h3 id="task-1-choose-the-victims">Task 1: choose the victims<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#task-1-choose-the-victims" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Choose a set <code>V</code> of pages to retire, table and data pages alike, the current header always among them, by what each costs and what it gains, and nothing else.</strong>
+Retiring a data page costs the live bytes it holds, which must be written again elsewhere, and retiring a table page costs the statements that must be written because it is gone, which task 3 infers and which are usually its live statements’ worth.
+Either gains a page.</p>
+<p>Nothing about packing or layout enters the choice, since any <code>V</code> is feasible: task 3 can always state the resolved map again, as shown below.
+So a page whose live content is nearly nothing is the best victim there is, whichever kind it is, and is taken first; a page of dead statements costs nothing at all.
+How to rank the rest, by a churn floor, by <a href="./ripeness" class="internal internal-link alias" data-slug="drafts/ripeness">ripeness</a>, or by any other estimate of what waiting saves, is a separate question, and so is how many pages a flush may retire, which bounds its work.
+Returning space to the file system belongs here too: preferring the highest pages, as compaction mode does, is a ranking, not a mechanism of its own.</p>
+<h3 id="task-2-combine-the-victims-with-the-fold-and-the-header">Task 2: combine the victims with the fold and the header<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#task-2-combine-the-victims-with-the-fold-and-the-header" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>What survives is the statements in the pages not retired, <code>S_keep</code>, and the data bytes in the data pages not retired; everything else that <code>M</code> needs must be written.</strong></p>
+<ul>
+<li><strong>Data</strong>: every byte of <code>M</code> that resolves into a retired data page, or into the flush’s own new content, must be written into a new data page.</li>
+<li><strong>Statements</strong>: a set <code>N</code> of statements at epoch <code>e</code> must be found such that <code>R(S_keep ∪ N) = M</code>.
+The retired header’s statements are among those that went, so whatever it stated that is still true must be inferred again like anything else.</li>
+</ul>
+<h3 id="task-3-write-the-result">Task 3: write the result<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#task-3-write-the-result" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Writing out is two independent policies: one packs the data bytes into new data pages, and one infers <code>N</code> and lays it out into new table pages.</strong></p>
+<h4 id="data-pages">Data pages<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#data-pages" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>The bytes to write are known once task 2 is done, so packing them is a bin-packing choice alone: in key order, as today, or sorted by temperature first, as <a href="./survivor-classes" class="internal internal-link alias" data-slug="drafts/survivor-classes">the survivor-classes draft</a> proposes, so that content that dies soon and content that waits do not share pages.
+Their addresses are what <code>N</code>’s <code>Ref</code> statements then point to.</p>
+<h4 id="statements-by-inference">Statements, by inference<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#statements-by-inference" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p><strong><code>N</code> is what a reader needs beyond <code>S_keep</code> to resolve to <code>M</code>, and it can be inferred id by id, by comparing what <code>S_keep</code> alone resolves to with <code>M</code>.</strong>
+<code>N</code>’s epoch <code>e</code> is newer than everything in <code>S_keep</code>, so every statement in <code>N</code> wins over every surviving one where both match.
+For each id:</p>
+<ul>
+<li><strong>Existence.</strong>
+If <code>M</code> says the id does not exist, <code>N</code> needs <code>Tombstone(id)</code> exactly when some statement in <code>S_keep</code> still names the id; otherwise nothing.
+If <code>M</code> says it exists, <code>N</code> needs at least one statement for it whenever <code>S_keep</code>’s newest statement naming it is a tombstone, or none names it; the size rule below provides one.</li>
+<li><strong>Content.</strong>
+For every byte below the id’s size in <code>M</code>, the winner among <code>S_keep</code>’s statements, the newest that matches, either already gives <code>M</code>’s content, or <code>N</code> must cover the byte with a <code>Ref</code>, <code>Inline</code>, or <code>Zero</code>.
+A byte whose winner sat in a retired page has no winner left among those that won it before, so it is covered again unless an older surviving statement happens to give the same content.</li>
+<li><strong>Size.</strong>
+The size is what the id’s newest size statement states, so <code>N</code> needs one exactly when <code>M</code>’s size differs from what <code>S_keep</code>’s newest size statement states — because the id was resized, or that statement went with a victim, or the id is new.
+It is the content statement in <code>N</code> that ends at the size, made sizing, or <code>Size(id, size)</code> if there is none.</li>
+</ul>
+<p><strong>Such an <code>N</code> always exists, and never breaks the rules of one epoch.</strong>
+The plain solution states, for every id whose resolution under <code>S_keep</code> differs from <code>M</code> at all, <code>Tombstone(id)</code> if it no longer exists, and otherwise content statements covering all of <code>[0, size)</code>, the last one sizing: it states the size, and the content statements win every probe below it.
+Those are one size statement per id and content statements on disjoint ranges below the size, which is all that <a href="../spec/address-table#no-conflicts-within-each-epoch" class="internal internal-link alias" data-slug="spec/address-table">one epoch’s rules</a> ask.
+The inference above only leaves out of that solution what <code>S_keep</code> already says, so it obeys the rules too, and no choice of victims can make the vocabulary fall short.</p>
+<p><strong>Inferring the smallest <code>N</code> needs nothing beyond the fragment map and each id’s size statement.</strong>
+The content half is local: the fragment map already records which statement each byte resolves through, and so which page, and a byte needs a statement in <code>N</code> only when that page is retired or the byte changed.
+The size half is local too: each id has one size statement, and it needs stating again only when the size changed or its page is retired.</p>
+<p><strong>Laying <code>N</code> out is then a packing problem alone.</strong>
+<code>N</code> is final when layout starts, so the header can take the hottest statements, as <a href="../impl/flush#the-header-as-write-buffer" class="internal internal-link alias" data-slug="impl/flush">it does now</a>, and the leaves the rest, in key order or sorted by temperature, every page full but the last, with nothing to revisit.
+The room the last page has left is not filled by choosing more victims after the fact; if it should be used, task 1 can plan for it, since the restatements of a table victim, nearly empty or not, cost about what its live statements take.</p>
+<h3 id="a-spec-change-that-would-make-it-simpler-still-statements-keep-their-epoch">A spec change that would make it simpler still: statements keep their epoch<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#a-spec-change-that-would-make-it-simpler-still-statements-keep-their-epoch" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Let each statement carry its own epoch, so that consolidation can move a statement to a new page without changing what it means.</strong>
+Today a statement’s epoch is <a href="../spec/address-table#the-idea" class="internal internal-link alias" data-slug="spec/address-table">its page’s</a>, so a statement moved to a new page is re-stamped as newest: it now outranks everything it used to lie beneath, and the writer must work out what else to state so that the rest still resolves the same way.
+That re-stamping is why retiring a table page means deriving its restatements rather than copying them: a restated statement changes its rank, so the cut must state content as resolved truth, merged with whatever else the flush states, and state the size and the tombstone again where the victim held them.</p>
+<p>With an epoch per statement, retiring a table page is copying its live statements, unchanged, into the flush’s pages.
+They resolve exactly as before, since no two statements change their order, and the dead ones are left behind, which by <a href="../impl/liveness#the-droppability-rule" class="internal internal-link alias" data-slug="impl/liveness">the droppability rule</a> changes nothing either.
+Evacuating a data page copies its referrers the same way, each with its new address and its old epoch, since the bytes it points to are the same.
+Only the flush’s own changes are stated at its epoch, so task 3’s inference is needed only for the ids the application touched, against a state the writer knows in full, and the size statements in the header stop moving every flush.</p>
+<p>What it would cost and change:</p>
+<ul>
+<li><strong>Bytes.</strong>
+A page would hold one or more runs, each of one epoch, given as a varint below the page’s own, and each sorted by <code>(id, offset)</code>, as a page is now; a page the flush writes from its own changes alone is one run, as today, and a page of copied statements has a run per epoch it copies from.</li>
+<li><strong>The rule of one epoch</strong>, <a href="../spec/address-table#no-conflicts-within-each-epoch" class="internal internal-link alias" data-slug="spec/address-table">no conflicts within it</a>, would speak of statements of one epoch wherever they lie; a writer keeps it by retiring the page it copies from in the same commit, so that the copy and the original never both count.</li>
+<li><strong>Open’s merge</strong> would merge runs instead of pages; it <a href="../impl/address-table-operations#three-facts-about-the-physical-format-that-decide-the-algorithm" class="internal internal-link alias" data-slug="impl/address-table-operations">already relies</a> on each run having one epoch and being sorted by key, and only the number of runs grows.</li>
+<li><strong>Validation</strong> would add that no statement’s epoch exceeds its page’s.</li>
+<li><strong>What estimates read from a page’s epoch</strong>, the age of its content, would come from its statements instead, which is finer than today.</li>
+</ul>
+<p>No rule of one epoch needs relaxing for consolidation’s sake, with or without this change.</p>
+<h3 id="what-this-would-remove">What this would remove<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-this-would-remove" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>The fill floor on table offers</strong>, since retiring a table page opens no page; its cost is the bytes task 3 infers.</li>
+<li><strong>The cut’s fillers</strong>, since the statements are inferred once the victims are known, and nothing laid out is ever revisited.</li>
+<li><strong>The distinction between free filling, budgeted pages, and compaction mode as ways to choose victims</strong>: one ranking chooses every victim, and the room left in pages is a packing matter.</li>
+</ul>
+<h3 id="open-questions">Open questions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#open-questions" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Whether an epoch per run pays for itself</strong>: its bytes against the restatements and re-stamped header statements it saves, which svg-bench’s drawings could measure.</li>
+<li><strong>How victims are ranked once packing no longer constrains them</strong>, and how much a flush may retire, which bounds both its work and how far the file can fall behind; this is where ripeness, survivor classes, and the churn floor’s price of space come back in.
+The diagnostic run without the fill floor on table offers traded 3 to 8 % more bytes per edit for 1 to 11 % fewer live pages.</li>
+<li><strong>Whether the rotating window survives</strong>: it restates a key range for description density, which in this frame is a victim too, a range rather than a page, ranked by what its restatement saves.</li>
+</ul></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-1" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#the-finding" data-for="the-finding">The finding</a></li><li class="depth-1"><a href="#before-the-newest-size-won" data-for="before-the-newest-size-won">Before the newest size won</a></li><li class="depth-0"><a href="#why-leaves-stay-empty" data-for="why-leaves-stay-empty">Why leaves stay empty</a></li><li class="depth-1"><a href="#the-budget-loop-holds-a-table-offer-to-the-data-pages-fill-floor" data-for="the-budget-loop-holds-a-table-offer-to-the-data-pages-fill-floor">The budget loop holds a table offer to the data pages’ fill floor</a></li><li class="depth-1"><a href="#leaves-were-kept-alive-for-the-size-alone" data-for="leaves-were-kept-alive-for-the-size-alone">Leaves were kept alive for the size alone</a></li><li class="depth-1"><a href="#the-cuts-fillers-refused-every-leaf-that-named-an-id-the-flush-touched" data-for="the-cuts-fillers-refused-every-leaf-that-named-an-id-the-flush-touched">The cut’s fillers refused every leaf that named an id the flush touched</a></li><li class="depth-1"><a href="#what-the-check-guarded-against" data-for="what-the-check-guarded-against">What the check guarded against</a></li><li class="depth-1"><a href="#dead-statements-cannot-block-a-rewrite" data-for="dead-statements-cannot-block-a-rewrite">Dead statements cannot block a rewrite</a></li><li class="depth-1"><a href="#compaction-mode-collected-them-in-bursts" data-for="compaction-mode-collected-them-in-bursts">Compaction mode collected them, in bursts</a></li><li class="depth-1"><a href="#data-pages-are-not-hit-the-same-way" data-for="data-pages-are-not-hit-the-same-way">Data pages are not hit the same way</a></li><li class="depth-0"><a href="#the-underlying-error" data-for="the-underlying-error">The underlying error</a></li><li class="depth-0"><a href="#possible-solutions-from-the-statements-up" data-for="possible-solutions-from-the-statements-up">Possible solutions, from the statements up</a></li><li class="depth-1"><a href="#what-a-writer-must-guarantee" data-for="what-a-writer-must-guarantee">What a writer must guarantee</a></li><li class="depth-1"><a href="#task-1-choose-the-victims" data-for="task-1-choose-the-victims">Task 1: choose the victims</a></li><li class="depth-1"><a href="#task-2-combine-the-victims-with-the-fold-and-the-header" data-for="task-2-combine-the-victims-with-the-fold-and-the-header">Task 2: combine the victims with the fold and the header</a></li><li class="depth-1"><a href="#task-3-write-the-result" data-for="task-3-write-the-result">Task 3: write the result</a></li><li class="depth-1"><a href="#a-spec-change-that-would-make-it-simpler-still-statements-keep-their-epoch" data-for="a-spec-change-that-would-make-it-simpler-still-statements-keep-their-epoch">A spec change that would make it simpler still: statements keep their epoch</a></li><li class="depth-1"><a href="#what-this-would-remove" data-for="what-this-would-remove">What this would remove</a></li><li class="depth-1"><a href="#open-questions" data-for="open-questions">Open questions</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-0" class="overflow"><li><a href="../drafts/" class="internal">Drafts</a></li><li><a href="../superseded/sizes-from-extents" class="internal">Sizes from extents</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/kladde-dev">GitHub</a></li><li><a href="https://kladde-dev.github.io/kladde.pdf">PDF</a></li><li><a href="https://robamler.github.io/">Robert Bamler</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-9114441b.js" type="module" data-persist="true"></script></html>
