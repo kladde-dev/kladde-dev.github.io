@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>Splices without restating the tail</title><meta charset="utf-8"/><link rel="preload" href="../index-2c86d77d.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="kladde"/><meta property="og:title" content="Splices without restating the tail"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Splices without restating the tail"/><meta name="twitter:description" content="Status: a proposal for the address table, comparing seven designs; it recommends linked spans over backings, with their compaction policy as the open question."/><meta property="og:description" content="Status: a proposal for the address table, comparing seven designs; it recommends linked spans over backings, with their compaction policy as the open question."/><meta property="og:image:alt" content="Status: a proposal for the address table, comparing seven designs; it recommends linked spans over backings, with their compaction policy as the open question."/><meta property="twitter:domain" content="kladde-dev.github.io"/><meta property="og:url" content="https://kladde-dev.github.io/drafts/splices"/><meta property="twitter:url" content="https://kladde-dev.github.io/drafts/splices"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Status: a proposal for the address table, comparing seven designs; it recommends linked spans over backings, with their compaction policy as the open question."/><meta name="generator" content="Quartz"/><link href="../index-2c86d77d.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://kladde-dev.github.io/drafts/splices-og-image.webp"/><meta property="og:image:url" content="https://kladde-dev.github.io/drafts/splices-og-image.webp"/><meta name="twitter:image" content="https://kladde-dev.github.io/drafts/splices-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="drafts/splices" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">kladde</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="Search" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something..." placeholder="Search for something..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="Dark mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="Reader mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-9" aria-label="Explorer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-9" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../drafts/">Drafts</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Splices without restating the tail</a></div></nav><h1 class="article-title">Splices without restating the tail</h1><p show-comma="true" class="content-meta"><time datetime="2026-10-13T18:29:47.000Z">Oct 13, 2026</time><span>27 min read</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p><strong>Status: a proposal for <a href="../superseded/allocations" class="internal internal-link alias" data-slug="superseded/allocations">the address table</a>, comparing seven designs; it recommends linked spans over backings, with their compaction policy as the open question.</strong>
+Today a splice restates every statement behind its point, because statements are keyed by their offset in the allocation, and a splice changes the offsets behind it.
+A design that states a splice in a constant number of statements must keep content statements at keys that no splice changes, and say elsewhere in which order their ranges follow each other.</p>
+<p>Of the designs that do, the recommended one keeps an allocation’s content in <strong>backings</strong>, offset spaces that no splice shifts, and orders it by <strong>spans</strong>, statements that show a range of a backing and name the span after it.
+A splice states two or three spans, wherever it lands, and moves no content statement.
+An allocation that was never spliced has one implicit span and is described exactly as today, at no cost.</p>
+<p><strong>Measured on kladde-svg’s drawings and on typing into a long string, spans would state 1 to 6 bytes per edit, where today’s flushes restate 0.4 to 24 bytes per edit that lay in leaves, and write 1 to 16 bytes per edit of data again.</strong>
+The gain is large where edits keep splicing long, fragmented allocations: 3 to 7 times on the small layout’s two larger drawings and the slotted world map, and 7 to 16 times for typing.
+On kladde-svg’s packed layout, where most splices land in a shape’s own short lists, today’s flush restates their tails in a statement or two, and spans gain little: nothing on the tiger and the coat of arms, and a third on the world map.</p>
+<p><strong>The price is that spans accumulate.</strong>
+Every splice leaves two more, so a list that is spliced again and again is described by ever more spans until something compacts them: without compaction, the drawings end with up to 9,600 live spans, more than twice the 4,302 statements the small world map has in all.
+Every design that states a splice in constant size has this price, in one form or another, since the order of the content has to be recorded somewhere; the designs differ in where, and in what compacts it.</p>
+<h2 id="what-a-splice-costs-today">What a splice costs today<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-a-splice-costs-today" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>A splice restates every fragment behind its point, since each fragment’s key is its offset.</strong>
+kladde-rs, at <code>e88fd47</code> on its <code>defrag-shifts</code> branch, states a shifted piece of the fold as the fragments its bytes lie in, each at its new offset with its data where it was: a statement per fragment, and a data byte moved by none.
+Runs of fragments whose statements would cost more than their bytes, at this flush and the shifts its history predicts, it writes again as one chunk instead (the kladde-docs branch <code>defrag-shifts</code> documents both in <code>impl/flush.md</code>, under “Shifted bytes: restated, or merged”).</p>
+<p><strong>What that costs the file depends on where the restated statements lay.</strong>
+A statement that lay in <a href="../impl/flush#the-header-as-write-buffer" class="internal internal-link alias" data-slug="impl/flush">the header</a> is restated by every flush anyway, so restating it at a new offset costs nothing more.
+A statement that lay in a leaf is restated into the header, as hot content, where it displaces other statements into new leaves; that, and the bytes written again, are what a splice adds.</p>
+<p>On svg-bench’s edits of kladde-svg’s three large drawings, with its default focused edits, a journal of four pages and main’s consolidation:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>drawing</th><th>layout</th><th>table pages written</th><th>restated from leaves</th><th>restated from the header</th><th>written again, as data</th><th>all bytes written</th></tr></thead><tbody><tr><td>tiger</td><td>slotted</td><td>19.0</td><td>1.3</td><td>3.3</td><td>1.5</td><td>128</td></tr><tr><td>tiger</td><td>packed</td><td>12.7</td><td>0.6</td><td>1.3</td><td>1.3</td><td>87</td></tr><tr><td>tiger</td><td>small</td><td>7.0</td><td>0.4</td><td>4.1</td><td>3.6</td><td>92</td></tr><tr><td>coat of arms</td><td>slotted</td><td>29.7</td><td>2.4</td><td>4.3</td><td>1.9</td><td>175</td></tr><tr><td>coat of arms</td><td>packed</td><td>16.0</td><td>1.2</td><td>1.7</td><td>1.8</td><td>109</td></tr><tr><td>coat of arms</td><td>small</td><td>15.4</td><td>6.0</td><td>5.1</td><td>5.2</td><td>130</td></tr><tr><td>world map</td><td>slotted</td><td>47.0</td><td>11.1</td><td>4.5</td><td>3.7</td><td>216</td></tr><tr><td>world map</td><td>packed</td><td>28.6</td><td>3.6</td><td>2.1</td><td>3.2</td><td>162</td></tr><tr><td>world map</td><td>small</td><td>39.8</td><td>24.3</td><td>6.2</td><td>15.5</td><td>214</td></tr></tbody></table></div>
+<p>All figures are bytes per edit; restated bytes are the statements’ estimated encoded size, 9 bytes for a <code>Ref</code>, 4 for a <code>Zero</code>, and 4 plus the payload for an <code>Inline</code>.
+The layouts are those of the variable-size evaluation on the kladde-docs branch <code>defrag-shifts</code>: slotted lists, packed lists of enums, and small values for every list.</p>
+<p><strong>On the small layout’s coat of arms and world map, the statements that splices take out of leaves amount to 39 and 61 % of the bytes of table pages written; elsewhere to 5 to 13 %, and 24 % on the slotted world map.</strong>
+Those are the runs in which ordinary edits splice long allocations.
+The small layout keeps a shape’s whole content inline in its parent’s child list, so a drag, a recolor or an inserted path node changes the shape’s size and splices the parent’s list, which on the world map holds up to 39 KB.
+In the packed and slotted layouts, those edits splice only the shape’s own lists, which are short, and the long child lists are spliced by duplicates, deletes and restacks alone; the slotted world map’s are the longest, at 38 bytes per child.</p>
+<p><strong>Typing into a long string costs as much as the journal does.</strong>
+A scratch benchmark typed 100,000 keystrokes into one string of 64 KB or 512 KB: 85 % insert a character at the cursor, 10 % delete the one before it, 4.5 % move the cursor, nine times in ten within a window of a tenth of the text, which jumps every 5000 keystrokes, and 0.5 % paste 200 bytes.
+Per keystroke, the flushes restated 6.6 and 18.4 bytes of statements from leaves, and wrote 7.5 and 17.9 bytes of table pages in all, where the journal took 13.3.
+It is the workload piece tables were invented for, and the one in which a splice’s cost grows with the length of what it splices.</p>
+<h2 id="what-every-design-has-to-answer">What every design has to answer<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-every-design-has-to-answer" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Two questions separate the designs: where the order of an allocation’s content is recorded, and what compacts that record when it grows.</strong>
+A statement keyed by offset records content and order at once, which is why a splice must restate it.
+Every alternative splits the two, and each records the order in its own way:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>design</th><th>order is recorded by</th><th>a splice states</th><th>what accumulates</th></tr></thead><tbody><tr><td>A. offsets, restated or merged (today)</td><td>each statement’s offset</td><td>every statement behind its point</td><td>fragments, which merging writes again as one</td></tr><tr><td>B. chunked containers</td><td>the container’s chunk index</td><td>the statements behind its point within one chunk</td><td>chunks</td></tr><tr><td>C. spans placed by offset</td><td>each span’s offset</td><td>every span behind its point</td><td>spans</td></tr><tr><td>D. <strong>linked spans over backings</strong></td><td>each span’s successor</td><td>two or three spans</td><td>spans</td></tr><tr><td>E. spans keyed by dense positions</td><td>each span’s key</td><td>one or two spans, and a tombstone per span removed</td><td>spans, tombstones, and key length</td></tr><tr><td>F. a tree of spans</td><td>each node’s list of children</td><td>the path from a span to the root</td><td>spans</td></tr><tr><td>G. shift statements</td><td>the epochs of the statements and the shifts between them</td><td>one shift</td><td>shifts</td></tr></tbody></table></div>
+<p><strong>What accumulates must be compacted, and compaction costs about what eager restating saved, unless it runs rarely or cheaply.</strong>
+That is the trade-off between write amplification and space amplification that log-structured storage makes between updating in place and compacting later: today’s design restates eagerly and keeps the description compact, and every other design defers the work to compaction.
+The designs that defer win where an allocation is spliced many times between compactions, and a policy that compacts too eagerly gives the gain back.</p>
+<h2 id="the-designs">The designs<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-designs" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="a-offsets-restated-or-merged-today">A. Offsets, restated or merged: today<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#a-offsets-restated-or-merged-today" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Every statement keeps the allocation’s offset as its key, a splice restates what lies behind its point, and runs that cost more to describe than to write are written again.</strong>
+It needs no change to the format, and the merge rule already keeps short allocations cheap: on kladde-svg’s packed layout, splices cost 1.9 to 6.8 bytes per edit, about what the recommended design D states there.
+It also keeps the description compact: a merged list is one <code>Ref</code> per page, however often it was spliced.</p>
+<p>Its cost grows with what lies behind the splice point, in statements or in bytes, so it is worst for long allocations spliced in many places, which are exactly what packed and variable-size values produce as documents grow: 14.8 bytes per edit on the slotted world map, 39.8 on the small one, and 19.4 per keystroke typing into 512 KB.
+In memory, every splice re-keys the fragment map’s entries behind its point, <code>O(fragments behind)</code> tree operations per flush.</p>
+<h3 id="b-chunked-containers-keep-allocations-short">B. Chunked containers: keep allocations short<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#b-chunked-containers-keep-allocations-short" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>A container that may grow long stores its elements in chunks of bounded size, each an allocation of its own, under an index of the chunks; a splice shifts only the tail of one chunk.</strong>
+It needs no change to the format, and it bounds the cost of a splice by the chunk’s size rather than the container’s, in the table and in memory alike.
+It is a rope at the level of the data type, which <a href="../superseded/allocations#what-it-was" class="internal internal-link alias" data-slug="superseded/allocations">the specification’s design directions</a> already consider for clones.</p>
+<p><strong>It bounds the cost rather than removing it, and it puts the work into every container instead of into the store once.</strong>
+Packed vectors, small vectors, strings and maps would each need chunking, the derive macro would need to know about it, and the <a href="../spec/schema/type-descriptors" class="internal internal-link alias" data-slug="spec/schema/type-descriptors">type descriptors</a> would have to describe chunked layouts for readers in other languages.
+Every chunk is an allocation, with its id, its size statement and its pointer in the index, which is what the small layout set out to remove.
+A move of an element between chunks writes its bytes again, and values kept inline inside an element still shift everything behind them within its chunk.</p>
+<p>A container could instead leave slack between its elements, so that a splice shifts only to the next gap, as a packed memory array does; that brings back the padding that packing removed.</p>
+<h3 id="c-spans-placed-by-offset">C. Spans placed by offset<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#c-spans-placed-by-offset" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Content statements move to backings, offset spaces that no splice shifts, and the allocation is described by spans, each stating at which offset of the allocation a range of a backing begins.</strong>
+Spans resolve by offset as content statements do today, newest wins, so the format gains one level and no new kind of rule, and an overwrite never touches a span.</p>
+<p><strong>But a splice restates every span behind its point, and spans accumulate with every splice, so the replay states more than today on every run measured: 5 to 71 bytes per edit on the drawings, and 27 to 31 per keystroke.</strong>
+It wins only where an allocation has far more fragments than spans, and only with compaction eager enough to give the gain back.
+It is rejected.</p>
+<h3 id="d-linked-spans-over-backings-the-recommendation">D. Linked spans over backings: the recommendation<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#d-linked-spans-over-backings-the-recommendation" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Content statements move to backings as in C, and each span names the span after it instead of stating its offset; a splice restates the span it lands in and states the new ones, two or three statements wherever it lands.</strong>
+That is a piece table, kept in the file: the spans are its pieces, and the backings its buffers.
+It is the per-allocation indirection that <a href="../superseded/allocations#what-it-was" class="internal internal-link alias" data-slug="superseded/allocations">the specification’s design directions</a> name as the open path for splice-heavy containers, with the order kept as links where they sketch a rope.
+An overwrite is one content statement in the backing that holds the bytes, shadowing as today, so the two most frequent edits of a drawing editor, overwrites and splices, both cost a constant number of statements.</p>
+<p><strong>Identities are stable because they are not positions.</strong>
+A span is known by where its bytes begin, its backing and its offset there, which no splice anywhere in the allocation changes; the order lives in the successor links alone.
+A design that numbered pieces in order would have to renumber them, or draw numbers from a dense order, which is design E.
+And a piece that owned its offset space, with no start of its own, could only be split by moving the tail of its content into a new piece, restating it; so a span shows a range of a backing, and splitting it at any point states two spans and moves nothing.</p>
+<p><strong>Existence follows from reachability, so a span that leaves needs no tombstone.</strong>
+A span is part of the allocation while the chain from the head reaches it; a span no longer reached is dead with its statements, and nothing can make it reached again except a statement of the epoch that does, by the rule below.
+Dropping a dead span’s statement, or a dead content statement in a backing no span shows, can therefore never change what the file resolves to.</p>
+<p><strong>A page rewrite restates what is live in the page, each statement at its own key, and nothing else.</strong>
+No key changes when the page goes, so no statement elsewhere changes its meaning, and the rewrite has no obligation beyond the one it has today, stating the size again, which here is stating the head again.</p>
+<p><strong>What it costs</strong>: a second level of keys wherever a structure is keyed by offset; a walk of each spliced allocation’s chain at open; a writer’s choice per splice between restating and linking; and a compaction policy for the spans that accumulate.
+<a href="#the-recommended-design-in-detail" class="internal internal-link alias">The design in detail</a> spells them out.</p>
+<h3 id="e-spans-keyed-by-dense-positions">E. Spans keyed by dense positions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#e-spans-keyed-by-dense-positions" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Spans are keyed by positions drawn from a dense order, in which another position always lies between two, as fractional indexing, Logoot and LSEQ draw them; the order of the keys is the order of the content, so spans sort and delta-encode as statements do today, and no chain has to be walked.</strong>
+A splice states the new spans at keys between their neighbours’.</p>
+<p><strong>But nothing says that a span has left except a statement at its key</strong>, a tombstone that must outlive every older statement physically present at that key, or an older span would come back.
+That is the predicate over physically present statements that <a href="../superseded/allocations#what-it-was" class="internal internal-link alias" data-slug="superseded/allocations">the newest size rule</a> removed for sizes, now for every span a splice removes.
+And keys grow where insertions keep landing in one gap: with midpoints in base 128, the replay’s keys averaged 1.3 to 6.3 bytes on the drawings, up to 28, and 10 to 14 bytes when typing, up to 26, where LSEQ’s strategies for choosing a key near one end of the gap would shorten them.
+Labels of fixed width instead need relabeling, which order-maintenance algorithms bound to <code>O(log n)</code> labels per insertion amortized, restating spans again.
+On bytes written, it states about what D states, 1.6 to 5.0 bytes per edit, because it saves the successor links and pays for tombstones and keys.</p>
+<h3 id="f-a-tree-of-spans">F. A tree of spans<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#f-a-tree-of-spans" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>The spans hang in a tree whose interior nodes list their children and the lengths below each, as a rope or a counted B-tree does; a splice restates its span and every node on the path to the root, to correct the lengths.</strong>
+The order is explicit, no chain is walked, and any offset is found in <code>O(log n)</code> without reading the rest.</p>
+<p><strong>That random access is what a rope is for, and kladde does not need it in the file</strong>: a file is read whole at open, and every read after that is served from memory.
+What remains is a cost of <code>O(log n)</code> restated nodes per splice, each listing up to a node’s fanout of children, where D restates <code>O(1)</code> spans; it is the path copying of a copy-on-write B-tree, whose cost statements exist to avoid.
+The tree belongs in memory, as the index over a spliced allocation’s spans, where it answers which span holds a given offset; D keeps it there.</p>
+<h3 id="g-shift-statements">G. Shift statements<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#g-shift-statements" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>A statement <code>Shift(id, at, removed, inserted)</code> says that the content behind <code>at</code> moved; content statements keep the offsets of their own epoch, and a reader replays each id’s epochs in order, shifting older content as it goes.</strong>
+It writes least of all designs: the replay states 0.8 to 2.5 bytes per edit for the shifts on the drawings, and 0.3 per keystroke.
+Shifts compact themselves through consolidation: a shift is needed exactly while some byte behind it, in today’s offsets, is won by a statement older than it, since dropping it moves only such statements, and only to offsets at or behind its point; once consolidation has restated the content behind it, the shift is dead.
+That test is decidable from live state, with the minimum epoch of the fragments behind each point.</p>
+<p><strong>But the meaning of every statement depends on every newer shift of its id, which makes three things hard.</strong></p>
+<ul>
+<li><strong>A shift can never be restated at a newer epoch</strong>, since it would then shift what lies between its old epoch and its new one.
+The header, which restates its content every flush, can therefore not carry a shift, and no page holding a live shift can be rewritten, unless every statement keeps its own epoch, the change <a href="./consolidation-from-statements#a-spec-change-that-would-make-it-simpler-still-statements-keep-their-epoch" class="internal internal-link alias" data-slug="drafts/consolidation-from-statements">Sparse leaves</a> considers for consolidation’s sake.
+Without it, retiring a page that holds a live shift means restating every older fragment behind the shift: exactly today’s cost.</li>
+<li><strong>Opening becomes a replay</strong>: statements of different epochs use different offsets, so they cannot be merged by key in one sweep as today, and each spliced id is replayed epoch by epoch into a tree of fragments.</li>
+<li><strong>A shift cannot reorder</strong>: within an epoch, an id’s shifts form one monotone map of offsets, so moving content forward or back, as a restack does, writes the moved bytes again, 0.2 to 3.3 bytes per edit in the replay.</li>
+</ul>
+<p>A design whose statements’ meaning depends on statements elsewhere is what the newest size rule just removed for sizes; this one would bring it back for content.
+It is not recommended.</p>
+<h2 id="the-recommended-design-in-detail">The recommended design in detail<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-recommended-design-in-detail" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="statements">Statements<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#statements" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Two kinds of statement are new; every statement of a never-spliced allocation stays as it is.</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>statement</th><th>meaning</th></tr></thead><tbody><tr><td><code>Backing(id, b)</code></td><td>in this page, the content statements that follow, up to the next <code>Backing</code> or the next id, belong to backing <code>b</code> of <code>id</code>, <code>b >= 1</code></td></tr><tr><td><code>Span(id, b, start, len, next)</code></td><td>allocation <code>id</code> shows <code>[start, start + len)</code> of its backing <code>b</code> here, followed by the span that begins at <code>next = (b′, start′)</code>, or by nothing</td></tr></tbody></table></div>
+<p><strong>Backings</strong> are an allocation’s offset spaces: backing 0 is the one every allocation has, and the only one of an allocation that was never spliced.
+A content statement belongs to backing 0 unless a <code>Backing</code> precedes it, so statements of backing 0 are encoded as today, at no extra byte.
+A backing’s number means nothing but identity; a writer numbers them per allocation and may reuse a number once no span shows it, by the same argument that lets it <a href="../superseded/allocations#what-it-was" class="internal internal-link alias" data-slug="superseded/allocations">reuse an id</a>.</p>
+<p><strong>A span is known by its key, <code>(id, b, start)</code></strong>, and its newest statement is its value.
+The span keyed <code>(id, 0, 0)</code> is the allocation’s <strong>head</strong>, and it alone may be empty, for an allocation whose first byte lies in another backing.</p>
+<h3 id="resolution">Resolution<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#resolution" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Existence</strong>: as today.</li>
+<li><strong>Form and size</strong>: the newest statement of an id that either states a size or is its head decides.
+A size statement makes the allocation <strong>contiguous</strong>: its content is backing 0 from offset 0 to that size, as today.
+A head makes it <strong>spliced</strong>: its content is the concatenation of the spans reached from the head, following each span’s <code>next</code>, and its size their total length.</li>
+<li><strong>Content</strong> at an offset of a backing: the newest content statement of that backing that covers it, as today.</li>
+<li><strong>A spliced allocation is invalid</strong> if its chain names a key with no span statement, visits a span twice, shows a byte of a backing twice, or shows a byte that no content statement covers.</li>
+</ul>
+<p>Shown twice is forbidden so that no two places of an allocation alias one byte, which keeps <a href="../superseded/allocations#what-it-was" class="internal internal-link alias" data-slug="superseded/allocations">the byte-referenced-once invariant</a> meaningful without refcounts.</p>
+<h3 id="rules-for-writers">Rules for writers<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#rules-for-writers" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>No conflicts within an epoch</strong>: at most one statement per id that states a size or is its head, at most one statement per span key, and content statements per backing as today.</li>
+<li><strong>What becomes part of an allocation in an epoch is stated in that epoch</strong>, which generalizes <a href="../superseded/allocations#what-it-was" class="internal internal-link alias" data-slug="superseded/allocations">the coverage rule</a>:
+a byte of a backing becomes part of a spliced allocation when a span reached at the end of the epoch shows it and none reached at the end of the epoch before did;
+and a span becomes part of it when it becomes reached.
+Relinking a span that was reached before needs no statement of it; reaching one that was not, or showing a byte that was not shown, does.</li>
+</ul>
+<p>Without the second half, a span that left the chain could come back with an old statement: a span keyed <code>(id, 2, 40)</code> is cut out at epoch 5 and its newest statement, now dead, is dropped by a page rewrite; an older statement at the same key, from epoch 3, is still physically present; a writer that linked <code>(id, 2, 40)</code> again at epoch 9 without stating it would show epoch 3’s span.</p>
+<h3 id="encoding">Encoding<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#encoding" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>statement     := id_delta (tagged_ref | tagged_zero | tagged_tombstone | tagged_size
+                           | tagged_span | tagged_backing | inline)
+tagged_span   := 252:byte offset_delta:varint len:varint next_b:varint next_start:varint?
+               ; next_b = 0: the last span, without next_start;
+               ; else the next span begins at offset next_start of backing next_b - 1
+tagged_backing := 253:byte b_delta:varint
+inline        := tag:byte offset_delta:varint payload:byte{(tag - 4) >> 1}   ; 6 &lt;= tag &lt;= 251
+</code></pre>
+<p>Statements sort by <code>(id, backing, offset)</code>, a span at its <code>start</code>, before content statements at the same offset; a span moves the offset cursor by nothing, and a <code>Backing</code> resets it.
+The tags need room: <code>Inline</code> payloads would take at most 123 bytes instead of 125, which frees tags 252 to 255, two of them for these statements.
+A span takes 5 to 9 bytes, by the replay’s estimate about 8.</p>
+<h3 id="open-and-memory">Open and memory<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#open-and-memory" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Opening resolves each backing as today’s sweep resolves an allocation, and walks each spliced allocation’s chain once its statements are merged.</strong>
+The sweep already merges statements by key, and the key gains a backing; spans collect per id, and when an id’s statements are done, its chain is walked from the head, each span’s range taken from its backing’s resolved runs, and everything the chain does not show left unpinned.
+The checks that make a file invalid fall out of the walk: a missing key, a revisit, a byte shown twice, a shown byte that no run covers.</p>
+<p><strong>In memory, the fragment map is keyed by <code>(id, backing, offset)</code>, and a spliced allocation keeps an index of its spans by position.</strong>
+The index is the rope of design F: a counted tree, which finds the span holding an offset and takes a splice in <code>O(log spans)</code>; for a few hundred spans, a vector with running totals, updated in <code>O(spans)</code> per flush, does as well.
+No fragment is re-keyed by a splice, so a flush no longer does <code>O(fragments behind)</code> work in memory for each.
+A reached span holds a pin of a third kind beside <a href="../superseded/allocations#what-it-was" class="internal internal-link" data-slug="superseded/allocations"><code>F</code> and <code>S</code></a>, taken when the chain comes to reach it and released when it stops; the head holds <code>S</code> besides, as the statement that decides the allocation’s form.</p>
+<h3 id="flushing">Flushing<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#flushing" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong><a href="../superseded/allocations#what-it-was" class="internal internal-link alias" data-slug="superseded/allocations">The fold</a> is unchanged; the flush maps its pieces through the span index.</strong>
+Committed bytes taken from an old offset become the backing ranges that show them; new content goes into a backing of the flush’s own, one per spliced allocation and flush, or onto the end of the backing whose end the allocation’s tail shows; overwrites in place go to the backings that hold the bytes.
+The flush states the spans whose length or successor changed, and the new ones.</p>
+<p><strong>A writer may restate instead of linking, and should while the tail is short.</strong>
+An allocation stays contiguous, its splices restating its tail as today, until restating would cost more than the two or three spans a link costs; the measurements below show where that line runs: short packed lists stay contiguous, long lists and strings become spliced.</p>
+<h3 id="compacting-spans">Compacting spans<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#compacting-spans" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>A spliced allocation is compacted by writing runs of short spans again as one, and by flattening it: restating its content in backing 0, at the allocation’s offsets, and stating its size, which makes it contiguous again.</strong>
+Writing short spans again costs their bytes and saves their statements, the trade today’s merge rule already makes, but once instead of at every later shift.
+Flattening costs a statement per content fragment the allocation has, today’s restatement paid once instead of at every splice.</p>
+<p><strong>A rule that flattens an allocation once its spans outnumber, by a margin, the content statements it had after its last flattening keeps its spans about as few as its content statements, and pays for each flattening with the splices before it.</strong>
+On the typing runs, it cut the live spans from about 8,000 to 1,786 and 1,460, for 0.8 and 1.1 more bytes per keystroke.
+On the drawings it barely fired, because the replay keeps every content fragment an overwrite made, without the description defragmentation that kladde-rs runs; how it behaves there is for an implementation to measure.</p>
+<h3 id="what-it-changes-elsewhere">What it changes elsewhere<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-it-changes-elsewhere" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>The newest size rule</strong> holds for contiguous allocations as it is; for a spliced one, the head takes the size statement’s place, and a size statement newer than the head makes it contiguous again.</li>
+<li><strong><a href="../superseded/allocations#what-it-was" class="internal internal-link alias" data-slug="superseded/allocations">Stating the size again</a></strong>, a page rewrite’s one obligation, extends to the head.</li>
+<li><strong><a href="../impl/consolidation" class="internal internal-link alias" data-slug="impl/consolidation">Description defragmentation</a></strong> works per backing, and gains flattening as a way to pay down a description.</li>
+<li><strong>The reverse index</strong>, from a data page to the ranges that point into it, the dirty set, and <a href="../impl/consolidator-state" class="internal internal-link alias" data-slug="impl/consolidator-state">the consolidator state</a> key ranges by backing as well as by id.</li>
+<li><strong>A move within an allocation</strong>, as a restack, is a relinking that writes no data byte; <a href="./move-op" class="internal internal-link" data-slug="drafts/move-op">the <code>Move</code> operation</a> between allocations is unaffected.</li>
+</ul>
+<h2 id="measured">Measured<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#measured" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>All designs but C state far less than today where long allocations are spliced, and about as much where they are short; D pays for its constant cost with spans that accumulate.</strong></p>
+<h3 id="how">How<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#how" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Scratch instrumentation of kladde-rs <code>e88fd47</code> recorded every flush’s fold, the piece table of every allocation it touched, and what today’s flush made of the shifted pieces, without changing what was written; a replay then derived from the same piece tables what each design would state.</strong>
+The runs are those of the table above, and the two typing runs.
+The replay keeps each allocation as spans over backings, maps each piece table through them as the <a href="#flushing" class="internal internal-link alias">flush above</a> does, and counts the statements whose key or value changed, at their encoded size with varints.
+For today, the bytes are what the flush restated from leaves and what it wrote again, from the instrumentation.</p>
+<p>The replay is a model: it does not run consolidation, so it counts what flushes state, not where statements end up; and it models content fragments only as boundaries of writes, without description defragmentation.</p>
+<h3 id="what-the-flushes-state">What the flushes state<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-the-flushes-state" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Bytes per edit, or per keystroke for the typing runs; ”+” separates statements from data written again:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>drawing</th><th>layout</th><th>today, from leaves + written again</th><th>D: spans</th><th>D, rewriting short spans</th><th>E: dense keys</th><th>G: shifts + moves written again</th><th>C: spans by offset</th></tr></thead><tbody><tr><td>tiger</td><td>slotted</td><td>1.3 + 1.5</td><td>2.1</td><td>2.1 + 0.0</td><td>1.6</td><td>0.8 + 1.0</td><td>5.1</td></tr><tr><td>tiger</td><td>packed</td><td>0.6 + 1.3</td><td>2.1</td><td>1.7 + 1.1</td><td>2.1</td><td>0.8 + 0.2</td><td>6.9</td></tr><tr><td>tiger</td><td>small</td><td>0.4 + 3.6</td><td>2.5</td><td>2.2 + 0.6</td><td>4.3</td><td>1.3 + 0.8</td><td>10.9</td></tr><tr><td>coat of arms</td><td>slotted</td><td>2.4 + 1.9</td><td>3.1</td><td>3.1 + 0.0</td><td>2.2</td><td>1.2 + 1.3</td><td>8.2</td></tr><tr><td>coat of arms</td><td>packed</td><td>1.2 + 1.8</td><td>2.9</td><td>2.5 + 1.5</td><td>2.5</td><td>1.1 + 0.3</td><td>8.9</td></tr><tr><td>coat of arms</td><td>small</td><td>6.0 + 5.2</td><td>3.5</td><td>3.4 + 0.4</td><td>4.3</td><td>1.9 + 2.1</td><td>18.5</td></tr><tr><td>world map</td><td>slotted</td><td>11.1 + 3.7</td><td>4.2</td><td>4.2 + 0.0</td><td>2.4</td><td>1.7 + 1.7</td><td>17.8</td></tr><tr><td>world map</td><td>packed</td><td>3.6 + 3.2</td><td>4.3</td><td>4.0 + 2.5</td><td>2.9</td><td>1.7 + 0.4</td><td>25.2</td></tr><tr><td>world map</td><td>small</td><td>24.3 + 15.5</td><td>5.8</td><td>5.7 + 0.7</td><td>5.0</td><td>2.5 + 3.3</td><td>71.2</td></tr><tr><td>typing, 64 KB</td><td></td><td>6.6 + 1.3</td><td>1.1</td><td>1.0 + 0.2</td><td>2.3</td><td>0.3 + 0.0</td><td>26.7</td></tr><tr><td>typing, 512 KB</td><td></td><td>18.4 + 1.0</td><td>1.2</td><td>1.2 + 0.1</td><td>1.9</td><td>0.3 + 0.0</td><td>30.6</td></tr></tbody></table></div>
+<p>“Rewriting short spans” writes a run of spans again as one where its spans and their content statements, counted at 14 bytes each, outweigh its bytes, by today’s merge rule over spans.</p>
+<ul>
+<li><strong>D’s cost does not grow with the allocation</strong>: 1.1 to 5.8 bytes per edit on every run, where today’s grows from 1.9 to 39.8 with the length and fragmentation of what is spliced.</li>
+<li><strong>On the packed layout, D gains little</strong>: 2.1 and 2.9 bytes per edit on the tiger and the coat of arms, against today’s 1.9 and 3.0, and 4.3 against 6.8 on the world map, since most splices there land in short lists, whose tails today’s merge keeps at a statement or two.
+That is why the writer should keep short allocations contiguous.</li>
+<li><strong>G writes least</strong>, and its moves written again cost as much again on the small layout; what it would cost in compaction the replay cannot say, since that depends on when consolidation restates the content behind each shift.</li>
+<li><strong>C is worse than today everywhere</strong>, since spans accumulate and it restates all of them behind each splice.</li>
+</ul>
+<h3 id="what-accumulates">What accumulates<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-accumulates" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Live spans at the end of each run, against the statements today’s file holds in all:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>drawing</th><th>layout</th><th>today’s statements</th><th>D, live spans</th><th>in the largest allocation</th><th>rewriting short spans</th><th>and flattening</th></tr></thead><tbody><tr><td>tiger</td><td>slotted</td><td>1,752</td><td>738</td><td>142</td><td>738</td><td>626</td></tr><tr><td>tiger</td><td>packed</td><td>1,585</td><td>818</td><td>224</td><td>512</td><td>459</td></tr><tr><td>tiger</td><td>small</td><td>459</td><td>841</td><td>270</td><td>656</td><td>569</td></tr><tr><td>coat of arms</td><td>slotted</td><td>3,857</td><td>1,855</td><td>263</td><td>1,855</td><td>1,752</td></tr><tr><td>coat of arms</td><td>packed</td><td>3,529</td><td>2,058</td><td>284</td><td>1,421</td><td>1,385</td></tr><tr><td>coat of arms</td><td>small</td><td>1,130</td><td>2,081</td><td>630</td><td>1,739</td><td>1,664</td></tr><tr><td>world map</td><td>slotted</td><td>17,966</td><td>8,953</td><td>305</td><td>8,953</td><td>8,413</td></tr><tr><td>world map</td><td>packed</td><td>15,944</td><td>9,381</td><td>426</td><td>6,719</td><td>6,373</td></tr><tr><td>world map</td><td>small</td><td>4,302</td><td>9,631</td><td>787</td><td>8,394</td><td>7,833</td></tr><tr><td>typing, 64 KB</td><td></td><td>2,501</td><td>8,030</td><td>8,030</td><td>5,785</td><td>1,786</td></tr><tr><td>typing, 512 KB</td><td></td><td>5,608</td><td>8,477</td><td>8,477</td><td>7,830</td><td>1,460</td></tr></tbody></table></div>
+<p><strong>Kept, spans would add about half again to the slotted and packed files’ statements, and nearly triple the small layout’s.</strong>
+The allocations with the most spans show why: one of 23 KB on the small world map ends with 787 spans, and one of 1.9 KB on the packed world map with 426, a span for every 4.5 bytes.
+Rewriting short spans helps where elements are short, in the packed layout, and not where they are 38 bytes, in the slotted one.
+Flattening paid off on the typing runs, at 0.8 to 1.1 bytes per keystroke, and fired too rarely on the drawings to judge, for the reason <a href="#compacting-spans" class="internal internal-link alias">above</a>.</p>
+<h2 id="what-the-literature-does">What the literature does<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-the-literature-does" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Text editors keep sequences as piece tables or ropes, in memory; file systems key extents by offset, and pay for inserting in the middle; collaborative editors give elements identities independent of position.</strong></p>
+<ul>
+<li><strong>Piece tables</strong> describe a text as a sequence of pieces, each a range of an unchanging original buffer or an append-only one, so an edit changes the sequence and never the buffers; Bravo and Microsoft Word used them, Charles Crowley’s “Data Structures for Text Sequences” (1998) compares them with gap buffers and others, and Visual Studio Code’s piece tree (2018) keeps one in a balanced tree.
+Design D is a piece table whose sequence lives in the file as a linked list, and whose index lives in memory.</li>
+<li><strong>Ropes</strong>, Boehm, Atkinson and Plass’s “Ropes: an Alternative to Strings” (1995), are balanced trees over string fragments for fast concatenation and indexing, an in-memory structure; counted B-trees and finger trees serve the same purpose.</li>
+<li><strong>Extent trees of file systems</strong> key a file’s extents by offset, as today’s statements do: inserting a range, as Linux’s <code>FALLOC_FL_INSERT_RANGE</code> on ext4 and XFS does, shifts every extent behind it, the cost kladde pays today.
+Copy-on-write B-trees, as Ohad Rodeh’s “B-trees, Shadowing, and Clones” (2008) describes them, copy the path to the root on every change, which is design F’s cost.</li>
+<li><strong>Sequence CRDTs</strong> give every inserted element an identity independent of its position, and order elements either by links to a neighbour, as RGA and Yjs do, or by dense position identifiers, as Logoot and LSEQ do; they keep tombstones for removed elements until every replica has seen the removal.
+A single writer needs none of their machinery for merging concurrent edits, which leaves links, design D, and dense keys, design E.</li>
+<li><strong>Order maintenance</strong>, from Dietz and Sleator (1987) to Bender et al.’s “Two Simplified Algorithms for Maintaining Order in a List” (2002), keeps fixed-width labels in order by relabeling <code>O(log n)</code> of them per insertion, amortized.</li>
+</ul>
+<h2 id="open-questions">Open questions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#open-questions" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>The compaction policy</strong>: when to rewrite short spans, when to flatten, and how much description a hot list may carry; it is the policy this design adds, and the one a test should probe for failure modes before anything else.</li>
+<li><strong>Where the line between restating and linking runs</strong>, which the replay places between kladde-svg’s packed lists and its long lists, but which a writer has to find per splice, from the tail it would restate.</li>
+<li><strong>Whether the head and the size statements should be one kind</strong>: both decide an allocation’s form and size, and the newest of them wins; a size statement could be read as a head over backing 0 that runs to the size, which would leave one rule where there are two.</li>
+<li><strong>What the in-memory index costs</strong>, in memory and in time, against today’s <code>O(fragments behind)</code> re-keying per splice, which this draft does not measure.</li>
+<li><strong>Whether shift statements’ low write cost is worth a second look</strong> once statements keep their epoch for some other reason; without that, they are not an option.</li>
+</ul></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-7" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#what-a-splice-costs-today" data-for="what-a-splice-costs-today">What a splice costs today</a></li><li class="depth-0"><a href="#what-every-design-has-to-answer" data-for="what-every-design-has-to-answer">What every design has to answer</a></li><li class="depth-0"><a href="#the-designs" data-for="the-designs">The designs</a></li><li class="depth-1"><a href="#a-offsets-restated-or-merged-today" data-for="a-offsets-restated-or-merged-today">A. Offsets, restated or merged: today</a></li><li class="depth-1"><a href="#b-chunked-containers-keep-allocations-short" data-for="b-chunked-containers-keep-allocations-short">B. Chunked containers: keep allocations short</a></li><li class="depth-1"><a href="#c-spans-placed-by-offset" data-for="c-spans-placed-by-offset">C. Spans placed by offset</a></li><li class="depth-1"><a href="#d-linked-spans-over-backings-the-recommendation" data-for="d-linked-spans-over-backings-the-recommendation">D. Linked spans over backings: the recommendation</a></li><li class="depth-1"><a href="#e-spans-keyed-by-dense-positions" data-for="e-spans-keyed-by-dense-positions">E. Spans keyed by dense positions</a></li><li class="depth-1"><a href="#f-a-tree-of-spans" data-for="f-a-tree-of-spans">F. A tree of spans</a></li><li class="depth-1"><a href="#g-shift-statements" data-for="g-shift-statements">G. Shift statements</a></li><li class="depth-0"><a href="#the-recommended-design-in-detail" data-for="the-recommended-design-in-detail">The recommended design in detail</a></li><li class="depth-1"><a href="#statements" data-for="statements">Statements</a></li><li class="depth-1"><a href="#resolution" data-for="resolution">Resolution</a></li><li class="depth-1"><a href="#rules-for-writers" data-for="rules-for-writers">Rules for writers</a></li><li class="depth-1"><a href="#encoding" data-for="encoding">Encoding</a></li><li class="depth-1"><a href="#open-and-memory" data-for="open-and-memory">Open and memory</a></li><li class="depth-1"><a href="#flushing" data-for="flushing">Flushing</a></li><li class="depth-1"><a href="#compacting-spans" data-for="compacting-spans">Compacting spans</a></li><li class="depth-1"><a href="#what-it-changes-elsewhere" data-for="what-it-changes-elsewhere">What it changes elsewhere</a></li><li class="depth-0"><a href="#measured" data-for="measured">Measured</a></li><li class="depth-1"><a href="#how" data-for="how">How</a></li><li class="depth-1"><a href="#what-the-flushes-state" data-for="what-the-flushes-state">What the flushes state</a></li><li class="depth-1"><a href="#what-accumulates" data-for="what-accumulates">What accumulates</a></li><li class="depth-0"><a href="#what-the-literature-does" data-for="what-the-literature-does">What the literature does</a></li><li class="depth-0"><a href="#open-questions" data-for="open-questions">Open questions</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-0" class="overflow"><li><a href="../drafts/" class="internal">Drafts</a></li><li><a href="../evaluation/cleaning-edits" class="internal">Cleaning edited drawings and texts</a></li><li><a href="../superseded/allocations" class="internal">Allocations and the address table</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/kladde-dev">GitHub</a></li><li><a href="https://kladde-dev.github.io/kladde.pdf">PDF</a></li><li><a href="https://robamler.github.io/">Robert Bamler</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-9114441b.js" type="module" data-persist="true"></script></html>

@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>Cleaning edited drawings and texts</title><meta charset="utf-8"/><link rel="preload" href="../index-2c86d77d.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="kladde"/><meta property="og:title" content="Cleaning edited drawings and texts"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Cleaning edited drawings and texts"/><meta name="twitter:description" content="Executive summary Cleaning until its live pages are about nine tenths full, kladde keeps the live pages of an edited drawing at 1.12 to 1.35 times its live size and of a typed text at 1.10 to 1.19 times; at main’s default settings they take 1.34 to 1.56 times the live size on the drawings, and 1.09 ..."/><meta property="og:description" content="Executive summary Cleaning until its live pages are about nine tenths full, kladde keeps the live pages of an edited drawing at 1.12 to 1.35 times its live size and of a typed text at 1.10 to 1.19 times; at main’s default settings they take 1.34 to 1.56 times the live size on the drawings, and 1.09 ..."/><meta property="og:image:alt" content="Executive summary Cleaning until its live pages are about nine tenths full, kladde keeps the live pages of an edited drawing at 1.12 to 1.35 times its live size and of a typed text at 1.10 to 1.19 times; at main’s default settings they take 1.34 to 1.56 times the live size on the drawings, and 1.09 ..."/><meta property="twitter:domain" content="kladde-dev.github.io"/><meta property="og:url" content="https://kladde-dev.github.io/evaluation/cleaning-edits"/><meta property="twitter:url" content="https://kladde-dev.github.io/evaluation/cleaning-edits"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Executive summary Cleaning until its live pages are about nine tenths full, kladde keeps the live pages of an edited drawing at 1.12 to 1.35 times its live size and of a typed text at 1.10 to 1.19 times; at main’s default settings they take 1.34 to 1.56 times the live size on the drawings, and 1.09 ..."/><meta name="generator" content="Quartz"/><link href="../index-2c86d77d.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://kladde-dev.github.io/evaluation/cleaning-edits-og-image.webp"/><meta property="og:image:url" content="https://kladde-dev.github.io/evaluation/cleaning-edits-og-image.webp"/><meta name="twitter:image" content="https://kladde-dev.github.io/evaluation/cleaning-edits-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="evaluation/cleaning-edits" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">kladde</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="Search" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something..." placeholder="Search for something..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="Dark mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="Reader mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-13" aria-label="Explorer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-13" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../evaluation/">Evaluation</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Cleaning edited drawings and texts</a></div></nav><h1 class="article-title">Cleaning edited drawings and texts</h1><p show-comma="true" class="content-meta"><time datetime="2026-10-13T18:29:47.000Z">Oct 13, 2026</time><span>34 min read</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h2 id="executive-summary">Executive summary<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#executive-summary" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Cleaning until its live pages are about nine tenths full, kladde keeps the live pages of an edited drawing at 1.12 to 1.35 times its live size and of a typed text at 1.10 to 1.19 times; at main’s default settings they take 1.34 to 1.56 times the live size on the drawings, and 1.09 and 1.25 times on the texts.</strong>
+Four cleaning policies ran on kladde-svg’s three drawings, in three layouts, under a drawing editor’s edits that keep to one part of the drawing at a time, and on texts of 64 and 512 KiB, typed into keystroke by keystroke.
+In the regime this page dwells on, main’s churn floor runs at λ = 0.25, which fills the drawings’ live pages 89 to 92 % full.
+Cleaning by ripeness, with a static share, and by Bayesian ripeness each aim at a target fill of 0.9, which they reach on the world map and fall short of on the tiger and the coat of arms, at 80 to 90 %.
+The churn floor at λ = 0.1 fills the drawings’ live pages fullest, 91 to 97 %, at 1.08 to 1.19 times the live size.</p>
+<p><strong>Main’s churn floor lies lowest on every workload, or within 0.7 % of the lowest.</strong>
+At equal writes, the ripeness branches keep 0.3 to 15 % more live pages than the churn floor in the drawings’ base and packed layouts, between 0.7 % fewer and 8 % more in the small layout, and 2 to 22 % more on the texts.
+The churn floor also reaches further: at λ = 0.1 it keeps 1.08 to 1.19 times the drawings’ live size, where the best setting of any ripeness branch stops at 1.10 to 1.26.
+In the regime, the ripeness branches keep 1 to 12 % more live pages than the churn floor at λ = 0.25, with between 19 % fewer and 10 % more writes.</p>
+<p><strong>The ripeness branches give up the cleaning that costs nothing.</strong>
+Main’s free filling takes any victim that fits into the room of the pages a flush writes anyway: at λ = 1, 54 to 919 per run, half to four times as many as the pages it opens to clean, 14 to 1,673.
+The ripeness branches measured here take only small, ripe victims there, 0 to 116 per run at τ = 0.9, and open 117 to 4,809 pages instead.
+With main’s free filling instead, <a href="./ripeness-free-filling" class="internal internal-link alias" data-slug="evaluation/ripeness-free-filling">the ripeness branches</a> close a third of their gap to the churn floor in the drawings’ base and packed layouts, two thirds in the small layout, and none of it on the texts.</p>
+<p><strong>The leaves fill about as much as the data pages under the churn floor, and a few points less under the ripeness branches.</strong>
+In the drawings’ base and packed layouts, the address table’s statements are 19 to 27 % of the live bytes, and the leaves that hold them 20 to 29 % of the live pages.
+At λ = 0.25, the leaves come out 88 to 90 % full, against data pages 89 to 93 % full, since the churn floor prices a leaf as it prices a data page; under the ripeness branches at τ = 0.9, they come out 79 to 86 % full, against data pages 82 to 93 %.
+Leaves as full as the data pages would save at most 3.5 % of the live pages.
+In the drawings’ small layout and on the texts, the leaves are 3 to 7 % of the live pages, and their fill matters little.</p>
+<p><strong>Free pages make up much of the smaller files, and cleaning harder adds to them.</strong>
+During the edits, the tiger’s files hold 23 to 47 free pages beside 13 to 34 live ones, and the coat of arms’ 26 to 71 beside 35 to 95; the texts’ free pages are 20 to 30 % of the file at 64 KiB and 11 to 12 % at 512 KiB.
+Closed, the tiger’s files take 2.4 to 5.1 times its edited SVG, the coat of arms’ 1.5 to 3.0 times, the world map’s 1.07 to 1.9 times, and the texts’ 1.24 to 1.71 times the typed text.
+From λ = 1 to λ = 0.1, the drawings’ files gain 3 to 41 free pages while they lose 3 to 99 live ones, and the closed files come out between 16 % smaller and 24 % larger.</p>
+<p><strong>Filling the pages costs 1.2 to 1.9 times the writes of main’s default on the drawings, and up to 1.2 times on the texts, which is still a fraction of saving the file.</strong>
+In the regime, an edit writes 118 to 432 bytes, against 96 to 233 at main’s default, and a keystroke 40.5 to 54.2, against 36.8 and 49.9.
+Saving the canonical SVG every 100 edits would write 590 bytes per edit on the tiger, 1,845 on the coat of arms, and 10,699 on the world map, and saving the text every 1000 keystrokes 241 and 700 bytes per keystroke.
+On the drawings, the journal and the headers take 48 to 83 bytes per edit under every policy, and cleaning decides the rest; on the texts, the journal, the headers, and the leaves that splices fill with restated statements take 31 to 47 bytes of each keystroke’s writes, and the data pages 5 to 13.</p>
+<p><strong>Edits and keystrokes stay fast, and flushes short: in the regime, kladde’s calls take 22,000 to 108,000 edits per second on the drawings, against 37,000 to 119,000 at main’s default, and 936,000 to 1,016,000 keystrokes per second on the texts; the median flush takes 3.2 to 10.6 ms on the drawings and 6.8 to 10.8 ms on the texts.</strong>
+On the drawings, the regime costs up to 42 % of the edit rate, the least under single-rate ripeness, up to 17 %; on the world map, the static share’s and the Bayesian posterior’s flushes take 1.2 to 1.7 times as long as single-rate ripeness’s.
+Reopening an edited file takes 0.7 to 18 ms.</p>
+<h2 id="what-was-measured">What was measured<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-was-measured" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>kladde-svg’s <code>svg-bench</code> edits an SVG drawing stored in kladde as a drawing editor would, recording a row in <a href="./consolidation#what-was-measured" class="internal internal-link alias" data-slug="evaluation/consolidation">kladde-bench’s</a> format every 1000 edits.</strong>
+Its mix: 30 % drags, which set a shape’s translation; 20 % node moves, 8 % node insertions and 7 % node deletions in a path’s data; 15 % recolours; 8 % duplications and 7 % deletions of a shape; and 5 % restacks, which move a shape among its siblings.
+Nine edits in ten go to a window of a tenth of what they pick from, the shapes, the paths, or the elements without children, at the same place in each, and the window jumps elsewhere every 3000 edits, so that the edits keep to one part of the drawing at a time, as a person’s do.
+This is <code>svg-bench</code>’s default since kladde-rs <code>e88fd47</code>.</p>
+<p><strong>The drawings are the Ghostscript tiger, the coat of arms of Spain, and a blank world map</strong>, each edited as many times as it took an earlier, uniform mix to store eight times the drawing’s live size in the base layout:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>drawing</th><th>edits</th><th>canonical SVG, before → after the edits</th><th>live size during the edits: base / packed / small</th></tr></thead><tbody><tr><td>tiger</td><td>31,613</td><td>66,850 → 59,005 bytes</td><td>92 / 47 / 46 KiB</td></tr><tr><td>coat of arms</td><td>41,130</td><td>163,768 → 184,541 bytes</td><td>252 / 131 / 128 KiB</td></tr><tr><td>world map</td><td>177,831</td><td>1,005,908 → 1,069,891 bytes</td><td>1,353 / 954 / 943 KiB</td></tr></tbody></table></div>
+<p>Every run makes the same edits, whatever the branch, layout, or setting.
+The <em>live size</em> is the bytes of the drawing’s allocations, and the <em>canonical SVG</em> what kladde-svg writes, without whitespace between tags and with path data in the grammar’s shortcuts; the edits leave the coat of arms and the world map larger, and the tiger smaller.</p>
+<p><strong>The layouts are cargo features of kladde-svg that choose the model’s containers</strong>: <em>base</em> stores every list as a vector of fixed slots, <em>packed</em> packs the lists of enums, children, transforms, attributes and path data, and <em>small</em> also keeps short lists and strings inline in their parent.
+The small layout keeps most of a drawing’s content in a few large allocations, so that its address table is small.</p>
+<p><strong>kladde-bench’s <code>text-bench</code> types into one text, stored in a single allocation of the store, keystroke by keystroke at a cursor, as a text editor would, recording a row every 1000 keystrokes</strong>; <a href="./tools#text-bench-typing-into-one-text" class="internal internal-link alias" data-slug="evaluation/tools">Benchmarks and tests</a> describes it.
+Of its 100,000 keystrokes, 85 % type a letter, 10 % delete the one before the cursor, 4.5 % move the cursor, nine moves in ten within a window of a tenth of the text that jumps every 5000 keystrokes, and 0.5 % paste 200 letters; every keystroke that changes the text is a splice, which the flush states by restating the statements behind it.
+It ran on texts of 64 and 512 KiB of random words, which the typing grows to 241,322 and 700,340 bytes; their live size averaged 193 and 642 KiB over the second half.</p>
+<p><strong>The store flushes whenever the journal outgrows four pages</strong>, <code>Options::journal_budget_pages = 4</code>, and at every row: on the drawings every 230 to 372 edits on average, on the texts every 1000 keystrokes, the journal never filling between rows; otherwise it runs with its defaults.</p>
+<p><strong>Four branches of kladde-rs ran, each with the <a href="../superseded/allocations#what-it-was" class="internal internal-link alias" data-slug="superseded/allocations">newest size rule</a>:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>branch</th><th>commit</th><th>policy</th><th>knob, default</th><th>settings run</th></tr></thead><tbody><tr><td><code>defrag-shifts</code></td><td><code>7eb2ec4</code></td><td>main’s <a href="../impl/consolidation#the-churn-floor-is-a-parameter-not-an-identity" class="internal internal-link alias" data-slug="impl/consolidation">churn floor</a></td><td>churn floor λ, 1</td><td>1, 0.5, 0.35, 0.25, 0.15, 0.1</td></tr><tr><td><code>ripeness-svg</code></td><td><code>d3b3a7e</code></td><td><a href="../drafts/ripeness" class="internal internal-link alias" data-slug="drafts/ripeness">cleaning by ripeness</a>, one rate per page</td><td>target fill τ, 0.75</td><td>0.75, 0.85, 0.9, 0.95</td></tr><tr><td><code>ripeness2-svg</code></td><td><code>f659de7</code></td><td>ripeness with a static share per page</td><td>target fill τ, 0.75</td><td>as above</td></tr><tr><td><code>bayesian-ripeness-svg</code></td><td><code>65d041a</code></td><td><a href="../drafts/bayesian-ripeness" class="internal internal-link alias" data-slug="drafts/bayesian-ripeness">Bayesian ripeness</a>, rule (a), with the empirical prior capped at the events it has seen</td><td>target fill τ, 0.75</td><td>as above</td></tr></tbody></table></div>
+<p>The three ripeness branches are ports, onto <code>defrag-shifts</code>, of the branches that <a href="./ripeness" class="internal internal-link alias" data-slug="evaluation/ripeness">Cleaning by ripeness</a>, <a href="./ripeness2" class="internal internal-link alias" data-slug="evaluation/ripeness2">Ripeness with a static share</a>, and <a href="./bayesian-ripeness" class="internal internal-link alias" data-slug="evaluation/bayesian-ripeness">Bayesian ripeness</a> measured on kladde-bench’s workloads.
+On every branch, a budgeted rewrite of leaves opens no page of its own and costs the budget the pages its restatements take, which <a href="../impl/consolidation#the-page-rewrite" class="internal internal-link alias" data-slug="impl/consolidation">the page rewrite</a> estimates at the leaves’ coverage; on main, the churn floor weighs a leaf by the same estimate, as <a href="../impl/consolidation#the-budget-loop" class="internal internal-link alias" data-slug="impl/consolidation">the budget loop</a> has it.
+<code>text-bench</code> came from kladde-rs <code>7c5cdd6</code>, on the branch <code>text-bench</code>, and was added to each of these commits with <code>git cherry-pick</code>, without its <code>--churn-floor</code> option on the ripeness branches, whose store lacks it.</p>
+<p>Main’s budget controller aims the file at a target fill of 0.8, measured over all of its pages, free ones included.
+Over the second half of every run but those on the 512 KiB text, it held the budget at its maximum, 256 pages, but for a row or two in four runs on the world map, where it dipped to 196 pages at the lowest, so that the churn floor alone decided what was cleaned; on the world map, whose file starts out fuller than the target, it held the budget lower during parts of the first half.
+On the 512 KiB text, the file passed the target after about 11,000 keystrokes, the controller had cut the budget to its minimum, one page, by 39,000 to 42,000, and every λ cleaned about alike.
+The ripeness branches’ controller moves the price of space until the data pages and leaves are as full as the target.</p>
+<p><strong>The regime this page dwells on is live pages about nine tenths full</strong>: λ = 0.25 for the churn floor, and τ = 0.9 for the ripeness branches, whose results at 0.85, 0.9, and 0.95 hardly differ on the tiger and the coat of arms.
+Main’s default, λ = 1, is the reference, and λ = 0.1, which fills the pages most, the churn floor’s furthest reach; the <a href="#the-sweep-in-numbers" class="internal internal-link alias">sweep</a> has every setting.
+The tables name the churn floor by its λ, and the three ripeness branches, each at τ = 0.9, by their estimate: <em>ripeness</em>, <em>static share</em>, and <em>Bayesian</em>.</p>
+<p><strong>Space is averaged over the second half of each run, and writes are what kladde wrote during that half, per edit or keystroke</strong>, as on the other evaluation pages.
+<em>Live pages</em> are the data pages and the leaves, the latter with the interior pages of the address table, but without the header and the journal.
+<em>Fill</em> is the live bytes in a page over the 4,081 bytes it can hold: for a data page the bytes that fragments resolve to, for a leaf its statements’ framing and inline payloads.
+<em>Free pages</em> are pages within the file that hold nothing live; the <em>closed file</em> is the file’s size after the last edit and <code>close</code>, which truncates it after its last live page.
+Writes count the journal’s bytes and every page written, headers included, at 4,096 bytes each.</p>
+<p><strong>The space and the writes come from 198 runs, eight at a time, 162 of <code>svg-bench</code> and 36 of <code>text-bench</code>; the times from two further passes, one run at a time on an otherwise idle host, of the six configurations in the tables on the drawings and of every setting on the texts.</strong>
+All were built with <code>--release</code> by Rust 1.99.0 and ran on an Intel Core i7-1165G7, four cores and eight threads, with 16 GB of memory under Linux 7.0, in a development container, on mains power.
+The benchmarks are deterministic but for their times, and both timing passes reproduced the first runs’ tables to the byte; the <a href="#times" class="internal internal-link alias">times</a> give their mean, and how far the two passes differed.
+<code>data/cleaning-edits/</code> keeps every run’s table, <code>logs/</code> beside them the end of each run’s output, with the closed file’s size, and <code>timing/</code> and <code>timing2/</code> that of the two timing passes, with the texts’ tables, from which their keystroke rates come.</p>
+<p>To reproduce a run, build <code>svg-bench</code> on the branch’s commit, with <code>--features packed</code> or <code>--features small</code> for those layouts, and run it on the drawing with its number of edits, or add <code>text-bench</code> and run it on a text of the size:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">git</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> cherry-pick</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --no-commit</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 7c5cdd6</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">   # text-bench; drop --churn-floor on the ripeness branches</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> build</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --release</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-svg</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --bin</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> svg-bench</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --features</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> packed</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># --target-fill 0.9 instead of --churn-floor 0.25 on the ripeness branches</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">target/release/svg-bench</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> crates/kladde-svg/corpus/drawings/world-map.svg</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="string"> \</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    out/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --edits</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 177831</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --journal-budget</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 4</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --churn-floor</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 0.25</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> build</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --release</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-bench</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --bin</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> text-bench</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">target/release/text-bench</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> out/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --size</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 524288</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --journal-budget</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 4</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --churn-floor</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 0.25</span></span></code></pre></figure>
+<p>The figures come from the tables in <code>data/</code>; each run’s directory is named <code>&lt;policy>-&lt;knob>&lt;value>-&lt;layout></code>, with <code>text</code> for the layout of the texts’ runs, and <code>tools/plot-evaluation.py</code> takes it labelled <code>&lt;policy>/&lt;knob>/&lt;value>/&lt;layout></code>:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">D</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">content/evaluation/data/cleaning-edits</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">; F</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">content/evaluation/figures/cleaning-edits</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">runs</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">()</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> dir </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">in</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> $D</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">/*-*-*/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">do</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">    IFS</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">-</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function"> read</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -r</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> k</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> l</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> &lt;&lt;&lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;$(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">basename</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> $dir</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="punctuation">)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">; knob</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">${k</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%%</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">[0-9]</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">*</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">    runs</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">+=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">$p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">$knob</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">/${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">k</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">#</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">$knob</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="punctuation">}/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">$l</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">$dir</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">)</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">done</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">tools/plot-evaluation.py</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --only</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> svg-tradeoff,text-tradeoff</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --out</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> $F </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">runs</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="punctuation">[</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="punctuation">]}&quot;</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">tools/plot-evaluation.py</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --only</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> svg-pages</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --out</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> $F $(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">printf</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> '%s\n'</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">runs</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="punctuation">[</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="punctuation">]}&quot;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> |</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">    grep</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -E</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> '^(main/lambda/(1|0.25|0.1)|[a-z0-9]+/tau/0.9)/'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">)</span></span></code></pre></figure>
+<h2 id="live-pages">Live pages<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#live-pages" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>On the drawings, the regime takes 9 to 21 % of main’s live pages at its default away, most of them data pages; on the 64 KiB text, 5 to 6 %, while on the 512 KiB text, which main’s default already keeps 95 % full, the churn floor at λ = 0.25 keeps as many and the ripeness branches 7 to 8 % more.</strong>
+Each cell gives the live pages, and in parentheses the leaves among them; the first column gives the live bytes they hold, in data pages and in leaves, which differ by at most 1.4 % between the policies:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>workload</th><th>layout or size</th><th>live bytes, KiB</th><th>λ = 1</th><th>λ = 0.25</th><th>λ = 0.1</th><th>ripeness</th><th>static share</th><th>Bayesian</th></tr></thead><tbody><tr><td>tiger</td><td>base</td><td>72 + 26</td><td>34.2 (8.8)</td><td>26.9 (7.1)</td><td>25.8 (6.9)</td><td>30.1 (8.2)</td><td>28.4 (8.2)</td><td>29.3 (8.0)</td></tr><tr><td>tiger</td><td>packed</td><td>37 + 14</td><td>18.0 (4.6)</td><td>14.4 (4.0)</td><td>14.1 (4.0)</td><td>15.8 (4.4)</td><td>14.9 (4.4)</td><td>15.9 (4.4)</td></tr><tr><td>tiger</td><td>small</td><td>45 + 1</td><td>16.1 (0.5)</td><td>13.1 (0.5)</td><td>12.7 (0.5)</td><td>14.3 (0.5)</td><td>13.2 (0.5)</td><td>14.6 (0.6)</td></tr><tr><td>coat of arms</td><td>base</td><td>203 + 67</td><td>94.8 (23.7)</td><td>75.2 (18.8)</td><td>71.0 (17.7)</td><td>78.2 (20.3)</td><td>76.6 (20.5)</td><td>77.1 (20.0)</td></tr><tr><td>coat of arms</td><td>packed</td><td>107 + 38</td><td>51.0 (13.6)</td><td>40.6 (10.8)</td><td>38.3 (10.1)</td><td>43.2 (11.9)</td><td>40.9 (11.5)</td><td>42.0 (11.0)</td></tr><tr><td>coat of arms</td><td>small</td><td>127 + 7</td><td>45.8 (2.1)</td><td>37.1 (2.0)</td><td>35.0 (2.0)</td><td>40.3 (2.6)</td><td>37.5 (2.8)</td><td>40.8 (2.8)</td></tr><tr><td>world map</td><td>base</td><td>1,110 + 345</td><td>478.8 (123.6)</td><td>398.6 (96.6)</td><td>379.4 (91.6)</td><td>408.0 (106.3)</td><td>409.8 (106.1)</td><td>409.2 (107.1)</td></tr><tr><td>world map</td><td>packed</td><td>834 + 202</td><td>333.2 (72.6)</td><td>282.2 (57.0)</td><td>269.3 (53.8)</td><td>290.0 (63.3)</td><td>291.3 (63.5)</td><td>290.8 (62.6)</td></tr><tr><td>world map</td><td>small</td><td>937 + 36</td><td>314.1 (12.0)</td><td>264.6 (10.6)</td><td>253.8 (11.1)</td><td>273.1 (15.1)</td><td>274.1 (17.1)</td><td>273.7 (14.3)</td></tr><tr><td>text</td><td>64 KiB</td><td>192 + 13</td><td>60.4 (3.8)</td><td>56.9 (3.8)</td><td>54.3 (3.7)</td><td>57.4 (3.9)</td><td>57.5 (4.1)</td><td>57.3 (3.8)</td></tr><tr><td>text</td><td>512 KiB</td><td>640 + 28</td><td>175.7 (7.6)</td><td>176.5 (7.6)</td><td>175.2 (7.6)</td><td>188.5 (10.7)</td><td>187.9 (11.3)</td><td>189.9 (10.6)</td></tr></tbody></table></div>
+<p>Over the live size, which the first column gives here, the same live pages:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>workload</th><th>layout or size</th><th>live size, KiB</th><th>λ = 1</th><th>λ = 0.25</th><th>λ = 0.1</th><th>ripeness</th><th>static share</th><th>Bayesian</th></tr></thead><tbody><tr><td>tiger</td><td>base</td><td>92</td><td>1.49</td><td>1.17</td><td>1.12</td><td>1.31</td><td>1.24</td><td>1.28</td></tr><tr><td>tiger</td><td>packed</td><td>47</td><td>1.52</td><td>1.22</td><td>1.19</td><td>1.33</td><td>1.26</td><td>1.35</td></tr><tr><td>tiger</td><td>small</td><td>46</td><td>1.39</td><td>1.12</td><td>1.09</td><td>1.23</td><td>1.14</td><td>1.26</td></tr><tr><td>coat of arms</td><td>base</td><td>252</td><td>1.50</td><td>1.19</td><td>1.13</td><td>1.24</td><td>1.22</td><td>1.22</td></tr><tr><td>coat of arms</td><td>packed</td><td>131</td><td>1.56</td><td>1.24</td><td>1.17</td><td>1.32</td><td>1.25</td><td>1.29</td></tr><tr><td>coat of arms</td><td>small</td><td>128</td><td>1.43</td><td>1.16</td><td>1.09</td><td>1.26</td><td>1.17</td><td>1.27</td></tr><tr><td>world map</td><td>base</td><td>1,353</td><td>1.42</td><td>1.18</td><td>1.12</td><td>1.21</td><td>1.21</td><td>1.21</td></tr><tr><td>world map</td><td>packed</td><td>954</td><td>1.40</td><td>1.18</td><td>1.13</td><td>1.22</td><td>1.22</td><td>1.22</td></tr><tr><td>world map</td><td>small</td><td>943</td><td>1.34</td><td>1.12</td><td>1.08</td><td>1.16</td><td>1.16</td><td>1.16</td></tr><tr><td>text</td><td>64 KiB</td><td>193</td><td>1.25</td><td>1.18</td><td>1.13</td><td>1.19</td><td>1.19</td><td>1.19</td></tr><tr><td>text</td><td>512 KiB</td><td>642</td><td>1.09</td><td>1.10</td><td>1.09</td><td>1.17</td><td>1.17</td><td>1.18</td></tr></tbody></table></div>
+<p>The live bytes exceed the live size in the drawings’ base and packed layouts, since the statements that describe the allocations are live too.</p>
+<p><strong>The churn floor fills the drawings’ data pages 89 to 93 % full at λ = 0.25 and 93 to 97 % at λ = 0.1; the ripeness branches at τ = 0.9 fill them 82 to 93 % full.</strong>
+Each cell gives the fill of the data pages, of the leaves, and of all live pages, in percent:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>workload</th><th>layout or size</th><th>λ = 1</th><th>λ = 0.25</th><th>λ = 0.1</th><th>ripeness</th><th>static share</th><th>Bayesian</th></tr></thead><tbody><tr><td>tiger</td><td>base</td><td>71 / 74 / 71</td><td>91 / 90 / 91</td><td>96 / 93 / 95</td><td>83 / 79 / 82</td><td>90 / 79 / 87</td><td>85 / 81 / 84</td></tr><tr><td>tiger</td><td>packed</td><td>70 / 75 / 71</td><td>89 / 88 / 89</td><td>93 / 86 / 91</td><td>82 / 80 / 81</td><td>90 / 79 / 87</td><td>82 / 80 / 81</td></tr><tr><td>tiger</td><td>small</td><td>73 / 28 / 72</td><td>91 / 33 / 89</td><td>94 / 35 / 91</td><td>83 / 28 / 81</td><td>90 / 29 / 88</td><td>82 / 32 / 80</td></tr><tr><td>coat of arms</td><td>base</td><td>72 / 71 / 72</td><td>90 / 89 / 90</td><td>96 / 94 / 95</td><td>89 / 83 / 87</td><td>92 / 82 / 89</td><td>90 / 84 / 88</td></tr><tr><td>coat of arms</td><td>packed</td><td>72 / 71 / 72</td><td>90 / 89 / 90</td><td>96 / 93 / 95</td><td>86 / 81 / 85</td><td>92 / 83 / 90</td><td>88 / 86 / 87</td></tr><tr><td>coat of arms</td><td>small</td><td>73 / 80 / 73</td><td>91 / 81 / 90</td><td>97 / 85 / 96</td><td>85 / 64 / 84</td><td>92 / 65 / 90</td><td>84 / 63 / 83</td></tr><tr><td>world map</td><td>base</td><td>78 / 70 / 76</td><td>92 / 89 / 92</td><td>97 / 95 / 96</td><td>93 / 83 / 90</td><td>92 / 83 / 90</td><td>93 / 82 / 90</td></tr><tr><td>world map</td><td>packed</td><td>80 / 70 / 78</td><td>93 / 89 / 92</td><td>97 / 95 / 97</td><td>93 / 81 / 90</td><td>93 / 80 / 90</td><td>92 / 81 / 90</td></tr><tr><td>world map</td><td>small</td><td>78 / 76 / 78</td><td>93 / 91 / 92</td><td>97 / 94 / 97</td><td>91 / 66 / 90</td><td>92 / 59 / 90</td><td>91 / 70 / 90</td></tr><tr><td>text</td><td>64 KiB</td><td>85 / 87 / 85</td><td>91 / 87 / 90</td><td>95 / 88 / 95</td><td>90 / 81 / 90</td><td>91 / 74 / 89</td><td>90 / 84 / 90</td></tr><tr><td>text</td><td>512 KiB</td><td>96 / 93 / 95</td><td>95 / 93 / 95</td><td>96 / 94 / 96</td><td>90 / 65 / 89</td><td>91 / 61 / 89</td><td>90 / 65 / 88</td></tr></tbody></table></div>
+<p><strong>On the world map, the ripeness branches reach their target, their live pages 90 % full at τ = 0.9 in every layout; on the tiger and the coat of arms, single-rate ripeness and the Bayesian posterior stop at 80 to 88 %, and the static share at 87 to 90 %.</strong>
+Their controller raises the price of space as long as the pages are emptier than the target, but on the smaller files no price makes it clean the pages that the churn floor cleans, and the targets 0.85, 0.9, and 0.95 end within a few points of each other.
+Of the three, single-rate ripeness writes least, and on the world map it fills the pages as full as the other two.</p>
+<p><strong>What the ripeness branches do not take is free cleaning.</strong>
+<a href="../impl/consolidation#victims-are-pulled-one-at-a-time" class="internal internal-link alias" data-slug="impl/consolidation">Free filling</a> puts victims into the room left in the pages a flush writes anyway, which costs no page of its own.
+Main takes any whole victim that fits there, sparsest first; the ripeness branches measured here take only ripe victims whose survivors fill at most θ, 5 %, of a page, and then the survivors of a cursor through the previous flush’s least-filled page, so that survivors, cold by selection, do not settle next to fresh content, as <a href="../drafts/ripeness#the-flushs-own-pages-take-what-costs-nothing" class="internal internal-link alias" data-slug="drafts/ripeness">the ripeness draft</a> proposed before it took main’s free filling.
+So the ripeness branches clean nearly everything on pages they open for it.
+Each cell gives, over a whole run, the data victims that free filling took, the data pages opened only to take victims, and the leaves rewritten, by the budget or by the cut’s fillers:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>workload</th><th>layout or size</th><th>λ = 1</th><th>λ = 0.25</th><th>λ = 0.1</th><th>ripeness</th><th>static share</th><th>Bayesian</th></tr></thead><tbody><tr><td>tiger</td><td>base</td><td>112 / 145 / 219</td><td>66 / 545 / 411</td><td>78 / 923 / 601</td><td>7 / 340 / 292</td><td>5 / 524 / 310</td><td>6 / 395 / 324</td></tr><tr><td>tiger</td><td>packed</td><td>90 / 64 / 118</td><td>56 / 301 / 200</td><td>51 / 482 / 275</td><td>8 / 196 / 168</td><td>1 / 336 / 168</td><td>0 / 213 / 175</td></tr><tr><td>tiger</td><td>small</td><td>97 / 120 / 61</td><td>66 / 413 / 65</td><td>59 / 664 / 63</td><td>8 / 241 / 61</td><td>5 / 415 / 61</td><td>7 / 245 / 64</td></tr><tr><td>coat of arms</td><td>base</td><td>215 / 226 / 388</td><td>131 / 1,045 / 858</td><td>100 / 2,282 / 1,569</td><td>9 / 847 / 645</td><td>11 / 1,155 / 660</td><td>15 / 1,004 / 737</td></tr><tr><td>coat of arms</td><td>packed</td><td>123 / 145 / 223</td><td>90 / 604 / 460</td><td>84 / 1,186 / 748</td><td>13 / 433 / 348</td><td>13 / 701 / 390</td><td>20 / 495 / 443</td></tr><tr><td>coat of arms</td><td>small</td><td>147 / 225 / 202</td><td>98 / 883 / 249</td><td>77 / 1,589 / 255</td><td>11 / 536 / 219</td><td>10 / 931 / 229</td><td>6 / 552 / 208</td></tr><tr><td>world map</td><td>base</td><td>919 / 1,194 / 3,002</td><td>673 / 4,729 / 6,522</td><td>646 / 10,636 / 12,451</td><td>72 / 4,405 / 5,112</td><td>88 / 4,630 / 5,657</td><td>96 / 4,720 / 5,256</td></tr><tr><td>world map</td><td>packed</td><td>795 / 817 / 1,792</td><td>573 / 3,130 / 3,867</td><td>523 / 7,691 / 7,993</td><td>50 / 3,102 / 2,865</td><td>97 / 3,269 / 3,050</td><td>60 / 3,173 / 3,018</td></tr><tr><td>world map</td><td>small</td><td>774 / 1,673 / 2,400</td><td>571 / 5,996 / 4,157</td><td>515 / 12,072 / 5,903</td><td>76 / 4,406 / 2,435</td><td>116 / 4,809 / 2,380</td><td>87 / 4,357 / 2,870</td></tr><tr><td>text</td><td>64 KiB</td><td>54 / 14 / 157</td><td>50 / 69 / 161</td><td>45 / 210 / 162</td><td>8 / 117 / 127</td><td>8 / 148 / 119</td><td>4 / 133 / 134</td></tr><tr><td>text</td><td>512 KiB</td><td>63 / 90 / 174</td><td>57 / 101 / 190</td><td>61 / 110 / 186</td><td>6 / 137 / 22</td><td>9 / 178 / 8</td><td>6 / 146 / 29</td></tr></tbody></table></div>
+<p>At λ = 1, main takes half to four times as many victims free as it opens pages for; the ripeness branches at τ = 0.9 take 0 to 16 % as many free as main does at λ = 1.
+That count leaves out the pages the cursor empties, a whole statement at a time, in the room that small ripe victims leave.
+<a href="./ripeness-free-filling" class="internal internal-link alias" data-slug="evaluation/ripeness-free-filling">Ripeness with main’s free filling</a> gives the ripeness branches main’s free filling, which takes about one victim per flush on the drawings, as main’s does: they write 2 to 3 % less at the same target, and close a third to two thirds of their gap to the churn floor on the drawings, and none of it on the texts.</p>
+<h2 id="leaves">Leaves<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#leaves" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Under the churn floor, the leaves of the drawings’ base and packed layouts fill about as much as the data pages: 70 to 75 % at λ = 1, 88 to 90 % at λ = 0.25 and 86 to 95 % at λ = 0.1, where the data pages are 70 to 80 %, 89 to 93 % and 93 to 97 % full.</strong>
+The churn floor prices a leaf as it prices a data page: rewriting it reclaims the page less what the leaf’s statements take restated, and writes those, which the page rewrite estimates at the leaf’s coverage, so that a leaf is a victim up to the same fill as a data page.
+In those layouts, the statements are 19 to 27 % of the live bytes and the leaves 20 to 29 % of the live pages, so their fill matters; leaves as full as the data pages would save at most 2.8 % of the live pages under the churn floor.</p>
+<p><strong>Under the ripeness branches, the leaves stay a few points emptier than the data pages: at τ = 0.9, 79 to 86 % full, against 82 to 93 %, and leaves as full as the data pages would save at most 3.5 % of the live pages.</strong>
+They charge a rewrite of leaves to the budget by the same estimate as main, but rank leaves by their ripeness; this page has not traced what keeps them emptier.</p>
+<p><strong>Where the leaves hold little, their fill matters little.</strong>
+In the drawings’ small layout, the statements are 1 to 5 % of the live bytes and the leaves 3 to 7 % of the live pages, and on the texts 4 to 6 % and 4 to 7 %.
+On the 512 KiB text, the ripeness branches’ leaves stay 61 to 65 % full; they rewrite 8 to 29 leaves over a whole run, and this page has not traced why so few.</p>
+<h2 id="the-trade-off-between-space-and-writes">The trade-off between space and writes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-trade-off-between-space-and-writes" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Each policy trades writes for space along its own curve, and the churn floor’s lies lowest on every workload, or within 0.7 % of the lowest.</strong>
+The curves run through each policy’s settings, from the one that cleans least, hollow, to the one that cleans most:</p>
+<p><img src="./figures/cleaning-edits/text-tradeoff.svg" alt="Live pages over live size against the bytes written per keystroke, a panel per text, for the churn floor at λ = 1, 0.5, 0.35, 0.25, 0.15 and 0.1, and the ripeness branches at τ = 0.75, 0.85, 0.9 and 0.95"/></p>
+<ul>
+<li><strong>On the texts, the churn floor lies lowest at every setting.</strong>
+On the 64 KiB text, the ripeness branches keep 2 to 22 % more live pages at equal writes.
+On the 512 KiB text, every λ keeps 1.09 to 1.10 times the live size at 50 to 52 bytes per keystroke, since the controller holds the budget at one page; the ripeness branches keep 7 to 12 % more live pages at those writes, and come within 4 % of it only at τ = 0.95, with 53.5 to 56.3 bytes per keystroke.</li>
+<li><strong>The ripeness branches’ default target, 0.75, cleans less than main’s default on the texts and the world map, and more on the smaller drawings.</strong>
+It keeps 1.44 and 1.45 times the 64 KiB text’s live size, where main’s default keeps 1.25, and 2 to 5 % more live pages than main’s default on the world map; on the tiger and the coat of arms, it keeps 2 to 6 % fewer, for 8 to 24 % more writes.</li>
+</ul>
+<p>Each drawing takes a row, whose panels share their range of live pages:</p>
+<p><img src="./figures/cleaning-edits/svg-tradeoff.svg" alt="Live pages over live size against the bytes written per edit, a panel per drawing and layout, for the churn floor at λ = 1, 0.5, 0.35, 0.25, 0.15 and 0.1, and the ripeness branches at τ = 0.75, 0.85, 0.9 and 0.95"/></p>
+<ul>
+<li><strong>In the drawings’ base and packed layouts, the ripeness branches keep 0.3 to 15 % more live pages than the churn floor at equal writes</strong>, the most at τ = 0.75, and the least at their fuller targets on the world map, where single-rate ripeness at τ = 0.95 comes within 0.3 %.</li>
+<li><strong>In the small layout, the curves come closest</strong>: the ripeness branches keep 1 to 8 % more live pages than the churn floor at equal writes on the tiger and the coat of arms, and on the world map between 0.7 % fewer, single-rate ripeness at τ = 0.95, and 8 % more.</li>
+<li><strong>On the tiger and the coat of arms, the ripeness branches’ curves bunch once their target passes 0.85</strong>: each branch’s settings from 0.85 up lie within 0.07 of each other in live pages over live size, at 1.14 to 1.35 times the live size.
+On the world map, each step of the target still takes live pages off, down to 1.10 to 1.17 times the live size at τ = 0.95.</li>
+<li><strong>The churn floor reaches further</strong>: at λ = 0.1 it keeps 1.08 to 1.19 times the drawings’ live size, for 168 to 731 bytes per edit, where the best setting of any ripeness branch stops at 1.10 to 1.26.</li>
+</ul>
+<p>The equal-write comparisons interpolate the churn floor’s curve between its settings, at every setting of the ripeness branches whose writes lie within it.</p>
+<h2 id="files">Files<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#files" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Free pages take 14 to 69 % of the drawings’ files during the edits, and on the tiger more pages than the live ones under every policy but main’s default in the base layout; of the texts’ files, they take 11 to 30 %.</strong>
+Each bar is a drawing’s file averaged over the second half of the edits, in multiples of the live size:</p>
+<p><img src="./figures/cleaning-edits/svg-pages.svg" alt="What the file holds during the edits, as multiples of the live size: data pages, leaves, free pages, and the headers and the journal, for main's churn floor at λ = 1, 0.25 and 0.1 and the ripeness branches at τ = 0.9"/></p>
+<p>Each cell gives the file’s pages during the edits, and in parentheses the free ones among them:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>workload</th><th>layout or size</th><th>λ = 1</th><th>λ = 0.25</th><th>λ = 0.1</th><th>ripeness</th><th>static share</th><th>Bayesian</th></tr></thead><tbody><tr><td>tiger</td><td>base</td><td>64 (27)</td><td>69 (39)</td><td>76 (47)</td><td>67 (34)</td><td>70 (38)</td><td>69 (36)</td></tr><tr><td>tiger</td><td>packed</td><td>44 (23)</td><td>46 (29)</td><td>52 (35)</td><td>46 (28)</td><td>51 (33)</td><td>50 (31)</td></tr><tr><td>tiger</td><td>small</td><td>45 (26)</td><td>44 (28)</td><td>49 (34)</td><td>45 (27)</td><td>47 (31)</td><td>43 (26)</td></tr><tr><td>coat of arms</td><td>base</td><td>127 (29)</td><td>125 (47)</td><td>144 (71)</td><td>125 (44)</td><td>128 (48)</td><td>124 (44)</td></tr><tr><td>coat of arms</td><td>packed</td><td>80 (26)</td><td>83 (39)</td><td>94 (53)</td><td>80 (33)</td><td>86 (43)</td><td>84 (39)</td></tr><tr><td>coat of arms</td><td>small</td><td>78 (29)</td><td>79 (39)</td><td>89 (51)</td><td>78 (34)</td><td>83 (43)</td><td>79 (35)</td></tr><tr><td>world map</td><td>base</td><td>579 (97)</td><td>510 (109)</td><td>504 (121)</td><td>477 (66)</td><td>487 (74)</td><td>482 (69)</td></tr><tr><td>world map</td><td>packed</td><td>428 (92)</td><td>369 (83)</td><td>367 (94)</td><td>357 (64)</td><td>371 (76)</td><td>365 (71)</td></tr><tr><td>world map</td><td>small</td><td>408 (91)</td><td>346 (78)</td><td>355 (98)</td><td>367 (91)</td><td>345 (68)</td><td>354 (77)</td></tr><tr><td>text</td><td>64 KiB</td><td>79 (16)</td><td>79 (20)</td><td>81 (24)</td><td>81 (21)</td><td>83 (23)</td><td>82 (22)</td></tr><tr><td>text</td><td>512 KiB</td><td>201 (23)</td><td>203 (24)</td><td>201 (24)</td><td>214 (23)</td><td>216 (26)</td><td>217 (25)</td></tr></tbody></table></div>
+<p>The rest of a file, about three pages, is the two header pages and the journal.</p>
+<p><strong>Free pages are returned only in bulk.</strong>
+<a href="../impl/consolidation#truncation" class="internal internal-link alias" data-slug="impl/consolidation">Truncation</a> waits until 16 pages at the file’s end are free, <code>Options::truncate_tail</code>, 64 KiB, more than the tiger’s live size in its packed and small layouts, and <a href="../impl/consolidation#compaction-mode" class="internal internal-link alias" data-slug="impl/consolidation">compaction mode</a> starts only once free pages below the tail exceed a quarter of the file, <code>Options::hole_share</code>.
+Cleaning harder frees more pages per flush: at λ = 0.1, the drawings’ files hold 3 to 41 free pages more than at λ = 1, and compaction mode ran in 2 to 38 flushes where it ran in 1 to 10; the 64 KiB text’s file holds 8 more, and the 512 KiB text’s, whose budget the controller holds at one page, 1 more.
+This page has not measured how much of the free space either threshold accounts for.</p>
+<p><strong>Closed, the drawings’ files take 1.07 to 5.1 times their edited SVG and the texts’ 1.24 to 1.71 times the typed text, and which policy closes smallest changes from workload to workload.</strong>
+<code>close</code> truncates the file after its last live page, so what it keeps is the free pages below it:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>workload</th><th>layout or size</th><th>edited SVG or text, KiB</th><th>λ = 1</th><th>λ = 0.25</th><th>λ = 0.1</th><th>ripeness</th><th>static share</th><th>Bayesian</th></tr></thead><tbody><tr><td>tiger</td><td>base</td><td>58</td><td>244</td><td>228</td><td>296</td><td>248</td><td>248</td><td>228</td></tr><tr><td>tiger</td><td>packed</td><td>58</td><td>164</td><td>164</td><td>172</td><td>164</td><td>148</td><td>148</td></tr><tr><td>tiger</td><td>small</td><td>58</td><td>136</td><td>164</td><td>168</td><td>144</td><td>156</td><td>144</td></tr><tr><td>coat of arms</td><td>base</td><td>180</td><td>544</td><td>472</td><td>524</td><td>484</td><td>488</td><td>480</td></tr><tr><td>coat of arms</td><td>packed</td><td>180</td><td>312</td><td>312</td><td>332</td><td>292</td><td>272</td><td>304</td></tr><tr><td>coat of arms</td><td>small</td><td>180</td><td>292</td><td>276</td><td>324</td><td>280</td><td>300</td><td>296</td></tr><tr><td>world map</td><td>base</td><td>1,045</td><td>1,980</td><td>1,912</td><td>1,796</td><td>1,764</td><td>1,760</td><td>1,756</td></tr><tr><td>world map</td><td>packed</td><td>1,045</td><td>1,508</td><td>1,356</td><td>1,272</td><td>1,240</td><td>1,188</td><td>1,324</td></tr><tr><td>world map</td><td>small</td><td>1,045</td><td>1,280</td><td>1,120</td><td>1,196</td><td>1,160</td><td>1,156</td><td>1,140</td></tr><tr><td>text</td><td>64 KiB</td><td>236</td><td>384</td><td>360</td><td>400</td><td>380</td><td>404</td><td>380</td></tr><tr><td>text</td><td>512 KiB</td><td>684</td><td>848</td><td>868</td><td>876</td><td>944</td><td>924</td><td>932</td></tr></tbody></table></div>
+<p>The closed sizes vary by up to a third between policies that keep nearly as many live pages, since they depend on where the last live page happens to lie when the edits end.</p>
+<h2 id="writes">Writes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#writes" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Filling the pages costs writes: on the drawings, the churn floor at λ = 0.25 writes 1.4 to 1.8 times as much per edit as at λ = 1, and the ripeness branches at τ = 0.9 1.2 to 1.9 times; on the texts, up to 1.2 times.</strong>
+The journal and the headers write the same under every policy; the rest is data pages and leaves, the flush’s own and those cleaning rewrites:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>workload</th><th>layout or size</th><th>journal + headers</th><th>λ = 1</th><th>λ = 0.25</th><th>λ = 0.1</th><th>ripeness</th><th>static share</th><th>Bayesian</th></tr></thead><tbody><tr><td>tiger</td><td>base</td><td>52 + 15</td><td>152</td><td>230</td><td>311</td><td>185</td><td>227</td><td>210</td></tr><tr><td>tiger</td><td>packed</td><td>37 + 11</td><td>96</td><td>136</td><td>168</td><td>119</td><td>141</td><td>120</td></tr><tr><td>tiger</td><td>small</td><td>37 + 11</td><td>96</td><td>135</td><td>169</td><td>118</td><td>146</td><td>118</td></tr><tr><td>coat of arms</td><td>base</td><td>65 + 18</td><td>204</td><td>349</td><td>569</td><td>312</td><td>365</td><td>348</td></tr><tr><td>coat of arms</td><td>packed</td><td>44 + 12</td><td>121</td><td>195</td><td>289</td><td>170</td><td>214</td><td>187</td></tr><tr><td>coat of arms</td><td>small</td><td>45 + 13</td><td>142</td><td>213</td><td>291</td><td>180</td><td>228</td><td>182</td></tr><tr><td>world map</td><td>base</td><td>63 + 17</td><td>233</td><td>426</td><td>731</td><td>395</td><td>432</td><td>421</td></tr><tr><td>world map</td><td>packed</td><td>49 + 14</td><td>164</td><td>280</td><td>489</td><td>261</td><td>280</td><td>273</td></tr><tr><td>world map</td><td>small</td><td>51 + 14</td><td>215</td><td>356</td><td>541</td><td>300</td><td>315</td><td>314</td></tr><tr><td>text</td><td>64 KiB</td><td>13.2 + 4.1</td><td>36.8</td><td>40.5</td><td>47.9</td><td>42.8</td><td>44.0</td><td>44.3</td></tr><tr><td>text</td><td>512 KiB</td><td>13.2 + 4.1</td><td>49.9</td><td>51.5</td><td>51.7</td><td>50.4</td><td>54.2</td><td>51.8</td></tr></tbody></table></div>
+<p>All values are bytes per edit on the drawings, and per keystroke on the texts, over the second half of the run.
+Each cell splits the rest into data pages and leaves:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>workload</th><th>layout or size</th><th>λ = 1</th><th>λ = 0.25</th><th>λ = 0.1</th><th>ripeness</th><th>static share</th><th>Bayesian</th></tr></thead><tbody><tr><td>tiger</td><td>base</td><td>56 + 30</td><td>111 + 51</td><td>165 + 79</td><td>81 + 37</td><td>118 + 42</td><td>99 + 44</td></tr><tr><td>tiger</td><td>packed</td><td>31 + 16</td><td>60 + 27</td><td>84 + 35</td><td>47 + 23</td><td>69 + 23</td><td>48 + 23</td></tr><tr><td>tiger</td><td>small</td><td>41 + 7</td><td>79 + 8</td><td>114 + 8</td><td>62 + 7</td><td>91 + 7</td><td>62 + 8</td></tr><tr><td>coat of arms</td><td>base</td><td>78 + 43</td><td>171 + 95</td><td>311 + 176</td><td>156 + 74</td><td>205 + 77</td><td>181 + 85</td></tr><tr><td>coat of arms</td><td>packed</td><td>43 + 23</td><td>91 + 48</td><td>153 + 80</td><td>77 + 37</td><td>114 + 44</td><td>85 + 45</td></tr><tr><td>coat of arms</td><td>small</td><td>63 + 21</td><td>129 + 27</td><td>208 + 26</td><td>97 + 25</td><td>146 + 25</td><td>101 + 23</td></tr><tr><td>world map</td><td>base</td><td>80 + 73</td><td>176 + 169</td><td>329 + 322</td><td>185 + 130</td><td>209 + 143</td><td>207 + 134</td></tr><tr><td>world map</td><td>packed</td><td>58 + 42</td><td>120 + 97</td><td>230 + 196</td><td>127 + 70</td><td>143 + 73</td><td>135 + 75</td></tr><tr><td>world map</td><td>small</td><td>95 + 54</td><td>196 + 95</td><td>336 + 139</td><td>176 + 58</td><td>193 + 57</td><td>180 + 68</td></tr><tr><td>text</td><td>64 KiB</td><td>4.6 + 14.9</td><td>8.0 + 15.2</td><td>15.3 + 15.3</td><td>11.0 + 14.6</td><td>12.6 + 14.1</td><td>12.3 + 14.7</td></tr><tr><td>text</td><td>512 KiB</td><td>4.8 + 27.8</td><td>4.7 + 29.5</td><td>4.8 + 29.5</td><td>5.7 + 27.4</td><td>9.7 + 27.1</td><td>7.4 + 27.1</td></tr></tbody></table></div>
+<ul>
+<li><strong>In the drawings’ base and packed layouts, the leaves take 25 to 49 % of what goes to data pages and leaves</strong>, more than their 20 to 29 % of the live pages.</li>
+<li><strong>On the texts, describing the splices writes more than cleaning does.</strong>
+A keystroke’s splice shifts the text behind the cursor, 133 bytes per keystroke on the 64 KiB text and 529 on the 512 KiB one, which the flush states where it lies, restating the statements that describe it.
+So the leaves take 14 to 15 and 27 to 30 bytes of each keystroke’s writes, the journal 13, and the headers 4, about the same under every policy, and the data pages, which cleaning writes, 5 to 15.
+<a href="../drafts/splices" class="internal internal-link alias" data-slug="drafts/splices">Splices without restating the tail</a> proposes how to state a splice without that.</li>
+</ul>
+<p><strong>Every policy writes far less than saving the file would.</strong>
+Saving the canonical SVG every 100 edits would write 590 bytes per edit on the tiger, 1,845 on the coat of arms, and 10,699 on the world map, and every 1000 edits 59, 185, and 1,070; saving the text every 1000 keystrokes would write 241 and 700 bytes per keystroke.
+In the regime, kladde writes 118 to 230 bytes per edit on the tiger, 170 to 365 on the coat of arms, and 261 to 432 on the world map, and 40.5 to 54.2 bytes per keystroke on the texts.</p>
+<h2 id="times">Times<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#times" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Edits stay fast and flushes short under every policy; on the drawings, the regime costs up to 42 % of the edit rate, and on the world map the static share and the Bayesian posterior take up to 1.7 times single-rate ripeness’s flush time; on the texts, the policies differ by little.</strong>
+Each cell gives the edits per second in kladde’s calls, in thousands, or on the texts the keystrokes per second, counting the flushes that a full journal starts within an edit; the median time of the flushes at the rows, in milliseconds; and the median time to reopen the closed file, in milliseconds; each the mean of the two timing passes:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>workload</th><th>layout or size</th><th>λ = 1</th><th>λ = 0.25</th><th>λ = 0.1</th><th>ripeness</th><th>static share</th><th>Bayesian</th></tr></thead><tbody><tr><td>tiger</td><td>base</td><td>86 / 3.0 / 1.3</td><td>74 / 4.2 / 1.2</td><td>68 / 4.8 / 1.1</td><td>84 / 3.4 / 1.2</td><td>79 / 4.1 / 1.2</td><td>73 / 3.6 / 1.2</td></tr><tr><td>tiger</td><td>packed</td><td>119 / 2.8 / 1.2</td><td>105 / 3.8 / 1.2</td><td>90 / 4.2 / 1.4</td><td>107 / 3.4 / 1.3</td><td>101 / 4.1 / 1.4</td><td>95 / 3.9 / 1.4</td></tr><tr><td>tiger</td><td>small</td><td>111 / 2.6 / 0.8</td><td>101 / 3.6 / 0.8</td><td>99 / 3.9 / 0.8</td><td>108 / 3.2 / 0.8</td><td>100 / 3.3 / 0.9</td><td>102 / 3.3 / 1.1</td></tr><tr><td>coat of arms</td><td>base</td><td>62 / 3.2 / 3.4</td><td>49 / 4.3 / 3.0</td><td>34 / 6.9 / 2.9</td><td>55 / 3.8 / 3.1</td><td>45 / 5.3 / 3.5</td><td>42 / 5.3 / 3.3</td></tr><tr><td>coat of arms</td><td>packed</td><td>85 / 3.5 / 3.4</td><td>70 / 5.2 / 3.0</td><td>58 / 7.5 / 2.9</td><td>77 / 4.4 / 3.1</td><td>67 / 5.3 / 3.3</td><td>60 / 6.5 / 3.0</td></tr><tr><td>coat of arms</td><td>small</td><td>74 / 4.2 / 1.8</td><td>67 / 5.0 / 1.7</td><td>64 / 5.1 / 1.7</td><td>75 / 4.5 / 1.8</td><td>64 / 5.3 / 2.0</td><td>68 / 4.8 / 1.8</td></tr><tr><td>world map</td><td>base</td><td>37 / 4.5 / 17.6</td><td>29 / 6.3 / 15.2</td><td>21 / 9.4 / 14.5</td><td>31 / 6.6 / 16.0</td><td>23 / 8.6 / 17.0</td><td>22 / 10.6 / 16.8</td></tr><tr><td>world map</td><td>packed</td><td>45 / 4.3 / 16.3</td><td>35 / 5.8 / 14.8</td><td>26 / 8.6 / 14.0</td><td>39 / 6.0 / 15.4</td><td>32 / 7.3 / 16.7</td><td>27 / 9.4 / 16.0</td></tr><tr><td>world map</td><td>small</td><td>37 / 6.1 / 8.0</td><td>29 / 7.8 / 7.9</td><td>24 / 10.8 / 7.6</td><td>35 / 6.3 / 8.2</td><td>29 / 8.1 / 8.2</td><td>26 / 10.5 / 8.2</td></tr><tr><td>text</td><td>64 KiB</td><td>982 / 6.9 / 0.7</td><td>1,016 / 6.8 / 0.7</td><td>968 / 7.2 / 0.7</td><td>990 / 6.8 / 0.7</td><td>994 / 7.3 / 0.9</td><td>968 / 7.3 / 0.9</td></tr><tr><td>text</td><td>512 KiB</td><td>958 / 9.2 / 1.4</td><td>993 / 8.9 / 1.4</td><td>966 / 9.0 / 1.5</td><td>936 / 9.1 / 1.7</td><td>975 / 10.8 / 1.9</td><td>970 / 9.4 / 2.2</td></tr></tbody></table></div>
+<ul>
+<li><strong>Against main’s default, the churn floor at λ = 0.25 edits the drawings 9 to 23 % slower, and at λ = 0.1 11 to 46 %; single-rate ripeness up to 17 %, the static share 8 to 39 %, and the Bayesian posterior 8 to 42 %.</strong>
+The edit rate falls with the writes, since cleaning works inside the flushes that edits start.</li>
+<li><strong>The flushes at the rows take 2.6 to 6.1 ms at the median on the drawings under main’s default, 3.2 to 10.6 ms in the regime, and 6.8 to 10.8 ms on the texts</strong>, where each row’s flush states a thousand keystrokes’ splices, the journal never having filled before it.
+On the world map, single-rate ripeness flushes as fast as the churn floor at λ = 0.25 in the base and packed layouts, and faster in the small one; the static share and the Bayesian posterior take 1.2 to 1.7 times as long as single-rate ripeness, more than their 5 to 9 % more writes explain, and on kladde-bench too, <a href="./bayesian-ripeness" class="internal internal-link alias" data-slug="evaluation/bayesian-ripeness">their ranking cost more</a>.</li>
+<li><strong>Reopening the edited file takes 0.8 to 1.4 ms on the tiger, 1.7 to 3.5 ms on the coat of arms, 7.6 to 18 ms on the world map, and 0.7 to 2.2 ms on the texts</strong>; the layout matters more than the policy, since the small layout’s address table is small.</li>
+<li><strong>On the texts, every setting takes 936,000 to 1,016,000 keystrokes per second</strong>, with median flushes of 6.8 to 7.7 ms at 64 KiB and 8.8 to 10.8 ms at 512 KiB; the settings’ keystroke rates lie within 9 % of each other, little more than identical runs differ.</li>
+</ul>
+<p><strong>Identical runs differed by little.</strong>
+The two timing passes differed in the drawings’ edit rate by 1 % at the median and 23 % at most, in their median flush by 3 % and 19 %, and in their reopen times by 2.5 % and 29 %, the largest on the tiger, whose reopens take about a millisecond; on the texts, by 1 to 2 % at the median and at most 8, 10 and 9 %.
+The reopen times are medians of 21 opens each.</p>
+<h2 id="the-sweep-in-numbers">The sweep in numbers<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-sweep-in-numbers" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Every setting’s steady state: the live pages over the live size, and the bytes written per edit or keystroke.</strong>
+These are the points of <a href="#the-trade-off-between-space-and-writes" class="internal internal-link alias">the trade-off figures</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>base</th><th>tiger</th><th>coat of arms</th><th>world map</th></tr></thead><tbody><tr><td>churn floor, λ = 1</td><td>1.49, 152</td><td>1.50, 204</td><td>1.42, 233</td></tr><tr><td>churn floor, λ = 0.5</td><td>1.29, 179</td><td>1.29, 259</td><td>1.26, 304</td></tr><tr><td>churn floor, λ = 0.35</td><td>1.22, 203</td><td>1.23, 296</td><td>1.21, 354</td></tr><tr><td>churn floor, λ = 0.25</td><td>1.17, 230</td><td>1.19, 349</td><td>1.18, 426</td></tr><tr><td>churn floor, λ = 0.15</td><td>1.15, 279</td><td>1.14, 447</td><td>1.14, 570</td></tr><tr><td>churn floor, λ = 0.1</td><td>1.12, 311</td><td>1.13, 569</td><td>1.12, 731</td></tr><tr><td>ripeness, τ = 0.75</td><td>1.43, 166</td><td>1.44, 236</td><td>1.45, 273</td></tr><tr><td>ripeness, τ = 0.85</td><td>1.30, 189</td><td>1.27, 291</td><td>1.28, 337</td></tr><tr><td>ripeness, τ = 0.9</td><td>1.31, 185</td><td>1.24, 312</td><td>1.21, 395</td></tr><tr><td>ripeness, τ = 0.95</td><td>1.28, 200</td><td>1.24, 307</td><td>1.17, 476</td></tr><tr><td>static share, τ = 0.75</td><td>1.44, 172</td><td>1.45, 252</td><td>1.46, 303</td></tr><tr><td>static share, τ = 0.85</td><td>1.26, 204</td><td>1.27, 311</td><td>1.28, 369</td></tr><tr><td>static share, τ = 0.9</td><td>1.24, 227</td><td>1.22, 365</td><td>1.21, 432</td></tr><tr><td>static share, τ = 0.95</td><td>1.23, 226</td><td>1.20, 378</td><td>1.16, 548</td></tr><tr><td>Bayesian, τ = 0.75</td><td>1.43, 171</td><td>1.44, 243</td><td>1.45, 285</td></tr><tr><td>Bayesian, τ = 0.85</td><td>1.28, 199</td><td>1.27, 306</td><td>1.28, 351</td></tr><tr><td>Bayesian, τ = 0.9</td><td>1.28, 210</td><td>1.22, 348</td><td>1.21, 421</td></tr><tr><td>Bayesian, τ = 0.95</td><td>1.28, 197</td><td>1.22, 345</td><td>1.16, 549</td></tr></tbody></table></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>packed</th><th>tiger</th><th>coat of arms</th><th>world map</th></tr></thead><tbody><tr><td>churn floor, λ = 1</td><td>1.52, 96</td><td>1.56, 121</td><td>1.40, 164</td></tr><tr><td>churn floor, λ = 0.5</td><td>1.33, 109</td><td>1.34, 150</td><td>1.26, 208</td></tr><tr><td>churn floor, λ = 0.35</td><td>1.27, 126</td><td>1.29, 164</td><td>1.22, 240</td></tr><tr><td>churn floor, λ = 0.25</td><td>1.22, 136</td><td>1.24, 195</td><td>1.18, 280</td></tr><tr><td>churn floor, λ = 0.15</td><td>1.21, 155</td><td>1.20, 247</td><td>1.15, 365</td></tr><tr><td>churn floor, λ = 0.1</td><td>1.19, 168</td><td>1.17, 289</td><td>1.13, 489</td></tr><tr><td>ripeness, τ = 0.75</td><td>1.48, 108</td><td>1.50, 138</td><td>1.46, 188</td></tr><tr><td>ripeness, τ = 0.85</td><td>1.34, 121</td><td>1.32, 171</td><td>1.29, 224</td></tr><tr><td>ripeness, τ = 0.9</td><td>1.33, 119</td><td>1.32, 170</td><td>1.22, 261</td></tr><tr><td>ripeness, τ = 0.95</td><td>1.35, 117</td><td>1.32, 176</td><td>1.17, 328</td></tr><tr><td>static share, τ = 0.75</td><td>1.46, 113</td><td>1.50, 149</td><td>1.47, 202</td></tr><tr><td>static share, τ = 0.85</td><td>1.30, 135</td><td>1.32, 179</td><td>1.30, 242</td></tr><tr><td>static share, τ = 0.9</td><td>1.26, 141</td><td>1.25, 214</td><td>1.22, 280</td></tr><tr><td>static share, τ = 0.95</td><td>1.26, 140</td><td>1.26, 210</td><td>1.16, 365</td></tr><tr><td>Bayesian, τ = 0.75</td><td>1.46, 107</td><td>1.50, 145</td><td>1.47, 197</td></tr><tr><td>Bayesian, τ = 0.85</td><td>1.34, 120</td><td>1.32, 174</td><td>1.29, 234</td></tr><tr><td>Bayesian, τ = 0.9</td><td>1.35, 120</td><td>1.29, 187</td><td>1.22, 273</td></tr><tr><td>Bayesian, τ = 0.95</td><td>1.32, 121</td><td>1.28, 192</td><td>1.16, 364</td></tr></tbody></table></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>small</th><th>tiger</th><th>coat of arms</th><th>world map</th></tr></thead><tbody><tr><td>churn floor, λ = 1</td><td>1.39, 96</td><td>1.43, 142</td><td>1.34, 215</td></tr><tr><td>churn floor, λ = 0.5</td><td>1.20, 117</td><td>1.26, 170</td><td>1.20, 269</td></tr><tr><td>churn floor, λ = 0.35</td><td>1.17, 122</td><td>1.20, 189</td><td>1.16, 307</td></tr><tr><td>churn floor, λ = 0.25</td><td>1.12, 135</td><td>1.16, 213</td><td>1.12, 356</td></tr><tr><td>churn floor, λ = 0.15</td><td>1.11, 155</td><td>1.11, 255</td><td>1.09, 451</td></tr><tr><td>churn floor, λ = 0.1</td><td>1.09, 169</td><td>1.09, 291</td><td>1.08, 541</td></tr><tr><td>ripeness, τ = 0.75</td><td>1.31, 106</td><td>1.40, 154</td><td>1.39, 217</td></tr><tr><td>ripeness, τ = 0.85</td><td>1.22, 116</td><td>1.27, 179</td><td>1.23, 256</td></tr><tr><td>ripeness, τ = 0.9</td><td>1.23, 118</td><td>1.26, 180</td><td>1.16, 300</td></tr><tr><td>ripeness, τ = 0.95</td><td>1.23, 117</td><td>1.26, 179</td><td>1.13, 334</td></tr><tr><td>static share, τ = 0.75</td><td>1.31, 114</td><td>1.40, 164</td><td>1.40, 233</td></tr><tr><td>static share, τ = 0.85</td><td>1.17, 131</td><td>1.24, 194</td><td>1.23, 271</td></tr><tr><td>static share, τ = 0.9</td><td>1.14, 146</td><td>1.17, 228</td><td>1.16, 315</td></tr><tr><td>static share, τ = 0.95</td><td>1.15, 145</td><td>1.16, 227</td><td>1.10, 416</td></tr><tr><td>Bayesian, τ = 0.75</td><td>1.34, 109</td><td>1.40, 156</td><td>1.40, 234</td></tr><tr><td>Bayesian, τ = 0.85</td><td>1.28, 120</td><td>1.26, 181</td><td>1.23, 274</td></tr><tr><td>Bayesian, τ = 0.9</td><td>1.26, 118</td><td>1.27, 182</td><td>1.16, 314</td></tr><tr><td>Bayesian, τ = 0.95</td><td>1.27, 118</td><td>1.27, 182</td><td>1.12, 368</td></tr></tbody></table></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>text</th><th>64 KiB</th><th>512 KiB</th></tr></thead><tbody><tr><td>churn floor, λ = 1</td><td>1.25, 36.8</td><td>1.09, 49.9</td></tr><tr><td>churn floor, λ = 0.5</td><td>1.23, 37.8</td><td>1.09, 50.4</td></tr><tr><td>churn floor, λ = 0.35</td><td>1.20, 39.0</td><td>1.09, 50.8</td></tr><tr><td>churn floor, λ = 0.25</td><td>1.18, 40.5</td><td>1.10, 51.5</td></tr><tr><td>churn floor, λ = 0.15</td><td>1.15, 44.0</td><td>1.09, 51.6</td></tr><tr><td>churn floor, λ = 0.1</td><td>1.13, 47.9</td><td>1.09, 51.7</td></tr><tr><td>ripeness, τ = 0.75</td><td>1.45, 37.9</td><td>1.21, 49.5</td></tr><tr><td>ripeness, τ = 0.85</td><td>1.26, 40.2</td><td>1.19, 49.9</td></tr><tr><td>ripeness, τ = 0.9</td><td>1.19, 42.8</td><td>1.17, 50.4</td></tr><tr><td>ripeness, τ = 0.95</td><td>1.17, 43.7</td><td>1.13, 53.5</td></tr><tr><td>static share, τ = 0.75</td><td>1.44, 40.5</td><td>1.20, 51.8</td></tr><tr><td>static share, τ = 0.85</td><td>1.26, 42.3</td><td>1.19, 52.6</td></tr><tr><td>static share, τ = 0.9</td><td>1.19, 44.0</td><td>1.17, 54.2</td></tr><tr><td>static share, τ = 0.95</td><td>1.15, 48.7</td><td>1.12, 56.3</td></tr><tr><td>Bayesian, τ = 0.75</td><td>1.45, 39.3</td><td>1.22, 51.0</td></tr><tr><td>Bayesian, τ = 0.85</td><td>1.27, 41.2</td><td>1.21, 51.1</td></tr><tr><td>Bayesian, τ = 0.9</td><td>1.19, 44.3</td><td>1.18, 51.8</td></tr><tr><td>Bayesian, τ = 0.95</td><td>1.19, 44.0</td><td>1.12, 55.0</td></tr></tbody></table></div></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-11" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#executive-summary" data-for="executive-summary">Executive summary</a></li><li class="depth-0"><a href="#what-was-measured" data-for="what-was-measured">What was measured</a></li><li class="depth-0"><a href="#live-pages" data-for="live-pages">Live pages</a></li><li class="depth-0"><a href="#leaves" data-for="leaves">Leaves</a></li><li class="depth-0"><a href="#the-trade-off-between-space-and-writes" data-for="the-trade-off-between-space-and-writes">The trade-off between space and writes</a></li><li class="depth-0"><a href="#files" data-for="files">Files</a></li><li class="depth-0"><a href="#writes" data-for="writes">Writes</a></li><li class="depth-0"><a href="#times" data-for="times">Times</a></li><li class="depth-0"><a href="#the-sweep-in-numbers" data-for="the-sweep-in-numbers">The sweep in numbers</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-0" class="overflow"><li><a href="../drafts/consolidation-from-statements" class="internal">Sparse leaves, and consolidation from the statements up</a></li><li><a href="../evaluation/" class="internal">Evaluation</a></li><li><a href="../evaluation/one-sequence" class="internal">The file as one sequence, measured</a></li><li><a href="../evaluation/ripeness-free-filling" class="internal">Ripeness with main's free filling</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/kladde-dev">GitHub</a></li><li><a href="https://kladde-dev.github.io/kladde.pdf">PDF</a></li><li><a href="https://robamler.github.io/">Robert Bamler</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-9114441b.js" type="module" data-persist="true"></script></html>

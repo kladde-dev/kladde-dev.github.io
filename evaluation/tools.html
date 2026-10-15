@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>Benchmarks and tests</title><meta charset="utf-8"/><link rel="preload" href="../index-2c86d77d.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="kladde"/><meta property="og:title" content="Benchmarks and tests"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Benchmarks and tests"/><meta name="twitter:description" content="Every program that tests kladde-rs or measures it, in kladde-rs and in this repository: what each runs, what it records, how to run it, and how to read what it prints."/><meta property="og:description" content="Every program that tests kladde-rs or measures it, in kladde-rs and in this repository: what each runs, what it records, how to run it, and how to read what it prints."/><meta property="og:image:alt" content="Every program that tests kladde-rs or measures it, in kladde-rs and in this repository: what each runs, what it records, how to run it, and how to read what it prints."/><meta property="twitter:domain" content="kladde-dev.github.io"/><meta property="og:url" content="https://kladde-dev.github.io/evaluation/tools"/><meta property="twitter:url" content="https://kladde-dev.github.io/evaluation/tools"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Every program that tests kladde-rs or measures it, in kladde-rs and in this repository: what each runs, what it records, how to run it, and how to read what it prints."/><meta name="generator" content="Quartz"/><link href="../index-2c86d77d.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://kladde-dev.github.io/evaluation/tools-og-image.webp"/><meta property="og:image:url" content="https://kladde-dev.github.io/evaluation/tools-og-image.webp"/><meta name="twitter:image" content="https://kladde-dev.github.io/evaluation/tools-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="evaluation/tools" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">kladde</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="Search" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something..." placeholder="Search for something..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="Dark mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="Reader mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-21" aria-label="Explorer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-21" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../evaluation/">Evaluation</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Benchmarks and tests</a></div></nav><h1 class="article-title">Benchmarks and tests</h1><p show-comma="true" class="content-meta"><time datetime="2026-10-14T18:08:18.000Z">Oct 14, 2026</time><span>19 min read</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p>Every program that tests kladde-rs or measures it, in kladde-rs and in this repository: what each runs, what it records, how to run it, and how to read what it prints.
+The results are on the other pages of <a href="./" class="internal internal-link alias" data-slug="evaluation/index">Evaluation</a>; this page has none.</p>
+<p>It describes kladde-rs at commit <code>7c5cdd6</code> on its branch <code>text-bench</code>, which is the branch <code>defrag-shifts</code> and one more benchmark, and which holds the design of <a href="../superseded/allocations" class="internal internal-link alias" data-slug="superseded/allocations">allocations and an address table</a> that every evaluation page but the last measured; the branch <code>address-table</code>, kladde-rs’s main branch at the time, lacks <code>text-bench</code> and most of what kladde-svg measures.</p>
+<p><strong>kladde-rs’s <code>main</code> now holds the present design, and keeps less of this.</strong>
+It has <code>text-bench</code>, and <code>svg-bench</code> with one layout, since every list and string is inline in one sequence, with the options <code>--quick</code>, <code>--edits</code>, <code>--only</code>, <code>--seed</code>, <code>--variant</code>, <code>--focus</code>, <code>--focus-moves</code>, <code>--journal-budget</code>, <code>--churn-floor</code> and <code>--target-fill</code>, and the span policy’s <code>--span-min</code> and <code>--rewrite-below</code>; <a href="./one-sequence" class="internal internal-link alias" data-slug="evaluation/one-sequence">the file as one sequence, measured</a> describes its tables.
+<code>kladde-bench</code>’s synthetic scenarios, which allocated, resized and freed, went with the design they measured.
+Its tests are the store’s oracle, against a byte vector, its simulated power cuts and its consolidation, the containers’ randomized tests, the derive’s, and kladde-svg’s round trip.</p>
+<h2 id="at-a-glance">At a glance<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#at-a-glance" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>program</th><th>where</th><th>what it does</th><th>what it leaves</th></tr></thead><tbody><tr><td><a href="#the-tests" class="internal internal-link"><code>cargo test --workspace</code></a></td><td>kladde-rs</td><td>unit, integration and documentation tests, among them a differential oracle and simulated power cuts</td><td>pass or fail</td></tr><tr><td><a href="#kladde-bench-synthetic-workloads" class="internal internal-link"><code>kladde-bench</code></a></td><td>kladde-rs, <code>crates/kladde-bench</code></td><td>six synthetic workloads on the store, and variants of the options</td><td>one table per workload</td></tr><tr><td><a href="#text-bench-typing-into-one-text" class="internal internal-link"><code>text-bench</code></a></td><td>kladde-rs, <code>crates/kladde-bench</code></td><td>typing into one long text</td><td>one table, and a summary</td></tr><tr><td><a href="#svg-bench-a-drawing-editor" class="internal internal-link"><code>svg-bench</code></a></td><td>kladde-rs, <code>crates/kladde-svg</code></td><td>a drawing editor’s edits on an SVG drawing</td><td>one table, and a summary</td></tr><tr><td><a href="#svg-roundtrip-a-corpus-through-kladde" class="internal internal-link"><code>svg-roundtrip</code></a></td><td>kladde-rs, <code>crates/kladde-svg</code></td><td>every SVG file of a corpus through kladde and back, and their sizes</td><td>one table, a summary, and an exit status</td></tr><tr><td><a href="#the-figures" class="internal internal-link"><code>plot-evaluation.py</code></a></td><td>kladde-docs, <code>tools/</code></td><td>the figures of the evaluation pages, from the tables</td><td>SVG figures, and a summary table</td></tr><tr><td><a href="#the-ripeness-simulation" class="internal internal-link"><code>simulate-ripeness.py</code></a></td><td>kladde-docs, <code>tools/</code></td><td>a simulation of the ripeness drafts’ estimators</td><td>tables of their costs</td></tr><tr><td><a href="#checks-of-this-repository" class="internal internal-link"><code>check-examples.py</code></a></td><td>kladde-docs, <code>tools/</code></td><td>the Rust examples of these pages, compiled and run against kladde-rs</td><td>pass or fail</td></tr><tr><td><a href="#checks-of-this-repository" class="internal internal-link"><code>make-pdf.py --check-only</code>, <code>check-site-links.py</code></a></td><td>kladde-docs, <code>tools/</code></td><td>this repository’s links and page list</td><td>pass or fail</td></tr></tbody></table></div>
+<p>kladde-rs runs no continuous integration; this repository’s <a href="#continuous-integration" class="internal internal-link alias">runs on every push</a>.</p>
+<p><strong>Every benchmark is deterministic but for its times</strong>: the same commit, options and seed make the same operations and write the same tables.
+Each one checks, at the end, that the reopened file reads what the program holds in memory, and panics otherwise, so a table from a run that finished describes a file that was right.</p>
+<h2 id="the-tests">The tests<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-tests" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> test</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --workspace</span></span></code></pre></figure>
+<p><strong>The suite takes about half a minute once built, in debug mode, where the store’s debug assertions check its invariants as it goes</strong>: among others, that a page a flush retires holds no live statement.
+<code>Store::check</code>, which the tests call after flushes, cross-checks the fragment map, the statement slab, the pins and every page’s coverage, and panics on the first disagreement.
+Building with <code>--release</code> skips the assertions, so the tests are meant for debug builds.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>crate</th><th>tests</th><th>what they cover</th></tr></thead><tbody><tr><td><code>kladde-store</code></td><td><code>tests/oracle.rs</code></td><td>the differential oracle: allocations, frees, resizes, writes, splices, copies and moves, chosen at random, against a model of byte vectors; a check of every allocation’s size and bytes and of <code>Store::check</code> after one step in twenty, and a reopening from the storage’s bytes after one in a hundred; small and large allocations, with and without consolidation, and with a journal of one page</td></tr><tr><td></td><td><code>tests/crash.rs</code></td><td>power cuts: <code>MemoryStorage::with_crash_tracking</code> fails the storage after a random number of operations, and the file as it would be with none of the writes since the last sync, all of them, or four random subsets of them, must recover onto a transaction boundary no earlier than the last completed flush</td></tr><tr><td></td><td><code>tests/consolidation.rs</code></td><td>that consolidation keeps a file near its live size under overwrites, appends and a mass free, without changing what it reads</td></tr><tr><td></td><td><code>tests/churn.rs</code>, <code>tests/restate.rs</code>, <code>tests/sizes.rs</code></td><td>id recycling, bytes that splices shift within an allocation, and the newest size rule, each checked in a reopened file</td></tr><tr><td></td><td>unit tests</td><td>the CRC, the fold, loading, pages, the journal, and the encoding of statements</td></tr><tr><td><code>kladde-types</code></td><td><code>tests/packed.rs</code>, <code>tests/small.rs</code></td><td>packed vectors and small values under random edits through every mutating method they offer, against a model after every edit and a reopened file after every few</td></tr><tr><td></td><td>the other <code>tests/</code></td><td>the whole stack through <code>Kladde</code>, enums’ <code>parts()</code>, <code>move_element</code>, schemas, tuples</td></tr><tr><td><code>kladde-derive</code></td><td><code>tests/</code>, and <code>compile_fail</code> examples</td><td>what <code>#[derive(Persistable)]</code> generates, and what it must refuse to compile</td></tr><tr><td><code>kladde-schema</code>, <code>kladde-persist</code>, <code>kladde-varint</code>, <code>kladde</code></td><td>unit tests</td><td>descriptors, canonical encoding and fingerprints; the serialization layer; varints; the facade</td></tr><tr><td><code>kladde-svg</code></td><td><code>tests/roundtrip.rs</code></td><td>the canonical form of SVG, what the model types, and a drawing’s trip through kladde and a reopening, byte for byte</td></tr><tr><td>every crate</td><td>documentation examples</td><td>that every public item’s example compiles and runs</td></tr></tbody></table></div>
+<p><strong>The randomized tests are seeded, so a failure repeats.</strong>
+They run a range of seeds each; the crash test names the failing seed in its message, and for the oracle, narrowing the range finds it.
+A seed that found a defect is kept as a test of its own, as <code>a_grow_witness_in_a_reused_page_survives</code> keeps seed 229.</p>
+<p>Some tests run only with a feature of kladde-svg, which the workspace’s run leaves off:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> test</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-svg</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --features</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> f64</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">      # decimals as f64</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> test</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-svg</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --features</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> packed</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">   # and small-ids, small-attrs, small: the layouts</span></span></code></pre></figure>
+<h2 id="the-tables">The tables<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-tables" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong><code>kladde-bench</code>, <code>text-bench</code> and <code>svg-bench</code> write the same table: a CSV file with one row per explicit flush, which <code>plot-evaluation.py</code> reads whichever program wrote it.</strong>
+A run first builds its file, which is not measured, then records a row after every interval of operations; the columns are the run’s identity, a snapshot of the file, the work done since the measured phase began, and two times.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>column</th><th>meaning</th></tr></thead><tbody><tr><td><code>scenario</code></td><td>the workload: a <code>kladde-bench</code> scenario, <code>text</code>, or <code>svg</code></td></tr><tr><td><code>variant</code></td><td>what distinguishes runs of one workload: <code>on</code> or <code>off</code> for consolidation, the name of a variant of the options, the text’s size, or the drawing</td></tr><tr><td><code>size</code></td><td>the workload’s size in bytes: its nominal live size for <code>kladde-bench</code>, the text’s size at the start for <code>text-bench</code>, and the drawing’s live bytes once stored for <code>svg-bench</code></td></tr><tr><td><code>flush</code></td><td>rows so far</td></tr><tr><td><code>ops</code></td><td>operations since the measured phase began: writes, allocations and the like for <code>kladde-bench</code>, keystrokes, or edits</td></tr><tr><td><code>app_bytes</code></td><td>the bytes the application wrote since then, by the program’s own measure (see each program)</td></tr><tr><td><code>file_pages</code></td><td>the file’s length, in pages of 4,096 bytes</td></tr><tr><td><code>data_pages</code>, <code>table_pages</code></td><td>live data pages, and live address-table pages without the headers</td></tr><tr><td><code>free_pages</code></td><td>pages within the file that hold nothing live: reusable, or retired by the last commit</td></tr><tr><td><code>live_data</code>, <code>live_table</code></td><td>the bytes of those data and table pages that current state relies on</td></tr><tr><td><code>alloc_bytes</code>, <code>allocations</code></td><td>the sizes of the live allocations, summed, and their number, without the store’s own consolidator state</td></tr><tr><td><code>statements</code>, <code>fragments</code></td><td>live statements in the address table, and entries in the fragment map</td></tr><tr><td><code>budget</code></td><td>the consolidation budget, in pages, as the controller set it</td></tr><tr><td><code>data_written</code>, <code>table_written</code>, <code>headers_written</code></td><td>pages written since the measured phase began: data pages, table pages without the headers, and headers</td></tr><tr><td><code>journal_bytes</code></td><td>bytes appended to the journal since then</td></tr><tr><td><code>fresh_bytes</code></td><td>bytes of the application’s content that flushes wrote into data pages</td></tr><tr><td><code>evacuated_pages</code>, <code>evacuated_bytes</code></td><td>data pages that consolidation evacuated, and the live bytes it wrote again to do so</td></tr><tr><td><code>free_filled</code></td><td>victims taken into pages the flush wrote anyway</td></tr><tr><td><code>budget_pages</code></td><td>data pages opened only to take victims</td></tr><tr><td><code>table_rewrites</code></td><td>table pages that a page rewrite drained</td></tr><tr><td><code>window_restated</code></td><td>fragments that the rotating window restated</td></tr><tr><td><code>defrag_rewrites</code>, <code>defrag_bytes</code></td><td>rewrites by description defragmentation, and the bytes they wrote</td></tr><tr><td><code>compaction_flushes</code>, <code>truncations</code></td><td>flushes in compaction mode, and truncations of the file</td></tr><tr><td><code>flush_us</code></td><td>the explicit flush that ended the interval, in microseconds, its <code>fsync</code> included</td></tr><tr><td><code>ops_us</code></td><td>the interval’s operations, in microseconds: for <code>kladde-bench</code> the whole loop, choosing the operations and keeping the model included; for <code>text-bench</code> and <code>svg-bench</code> the time in kladde’s calls alone</td></tr><tr><td><code>restated_bytes</code>, <code>merged_bytes</code></td><td>bytes that splices and moves shifted within their allocation, which flushes stated at their new offsets where they lie, or wrote again to merge the fragments they lay in</td></tr></tbody></table></div>
+<h3 id="reading-a-table">Reading a table<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reading-a-table" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>The counters of work are cumulative</strong>: the difference between two rows is the work of the interval between them, and the last row’s is the run’s.</li>
+<li><strong>The bytes written</strong> are <code>journal_bytes</code> plus 4,096 bytes for every page in <code>data_written</code>, <code>table_written</code> and <code>headers_written</code>.
+Over <code>app_bytes</code>, they are the <em>write amplification</em>; over <code>ops</code>, the bytes per operation.</li>
+<li><strong>The file’s size over its live size</strong>, <code>file_pages</code> × 4,096 over <code>alloc_bytes</code>, is the <em>space amplification</em>; the live pages, (<code>data_pages</code> + <code>table_pages</code>) × 4,096 over <code>alloc_bytes</code>, leave out the free pages, the headers and the journal.</li>
+<li><strong>A page’s fill</strong> is its live bytes over the 4,081 bytes of content it holds, so <code>live_data</code> over 4,081 × <code>data_pages</code> for the data pages, and likewise for the table.</li>
+<li><strong>The steady state</strong> is what the evaluation pages average over the second half of a run, after the file has settled from its fill; its first rows still show the file the fill left.</li>
+<li><strong>Times</strong> depend on the machine and vary between identical runs, so they compare only between runs on one machine, and best by their medians over rows; ratios such as bytes per operation carry over to other machines.
+The evaluation pages name the machine and how far identical runs differed on it.</li>
+</ul>
+<h2 id="kladde-bench-synthetic-workloads"><code>kladde-bench</code>: synthetic workloads<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#kladde-bench-synthetic-workloads" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --release</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-bench</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> &lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">output</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> director</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">y</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> [scenario </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">...]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> [quick]</span></span></code></pre></figure>
+<p><strong>Each scenario fills a file, then writes to it until the application has written eight times its live size, flushing after every 1000 operations, and records a row per flush in <code>&lt;scenario>.csv</code>.</strong>
+Without a scenario, all of them run, which takes a few minutes; <code>quick</code> makes every one small.
+The files go to <code>files/</code> in the output directory and are removed when the run is done.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>scenario</th><th>live size</th><th>what the application does</th><th><code>app_bytes</code> counts</th><th>variants, one run each</th></tr></thead><tbody><tr><td><code>uniform</code></td><td>1, 8 and 64 MiB</td><td>writes of 1 to 511 bytes at random offsets of random allocations of 16 KiB</td><td>the bytes written</td><td>consolidation <code>on</code> at each size, and <code>off</code> at 1 and 8 MiB</td></tr><tr><td><code>skewed</code></td><td>as above</td><td>the same, with nine writes in ten going to a tenth of the allocations</td><td>as above</td><td>as above</td></tr><tr><td><code>append</code></td><td>16 MiB</td><td>512 logs, appended to in records of 16 to 240 bytes and truncated to nothing once a record would take one past 64 KiB</td><td>the records</td><td><code>on</code>, <code>off</code></td></tr><tr><td><code>churn</code></td><td>16 MiB</td><td>values of 16 to 128 bytes, or one in five of 1 to 8 KiB, replaced by a new allocation, rewritten whole, or patched in 1 to 64 bytes</td><td>the bytes written</td><td><code>on</code>, <code>off</code></td></tr><tr><td><code>shrink</code></td><td>64 MiB</td><td>allocations of 64 KiB, three quarters of them freed at once, then 400 flushes of 100 patches of 1 to 64 bytes</td><td>the patches</td><td><code>on</code>, <code>no-compaction</code>, <code>off</code></td></tr><tr><td><code>typed</code></td><td>16 MiB</td><td>a <code>Kladde&lt;PersistableHashMap&lt;u64, PersistableString>></code> of strings of 50 to 500 bytes, through the typed layers: 40 % replace a string, 30 % append to one, 20 % insert one, 10 % remove one</td><td>the strings’ bytes</td><td><code>on</code></td></tr><tr><td><code>tuning</code></td><td>8 and 16 MiB</td><td><code>uniform</code> and <code>skewed</code> at 8 MiB with a churn floor of 0.5 or 2, or a target fill of 0.6 or 0.5; <code>append</code> with 4 and 16 pages of defragmentation share</td><td>as above</td><td>one table per workload, <code>tuning-&lt;workload>.csv</code>, with the default among the variants</td></tr></tbody></table></div>
+<p>With <code>quick</code>, every live size is 1 MiB, and <code>shrink</code>’s 4 MiB.
+The <code>shrink</code> scenario flushes every 100 patches rather than every 1000 operations, and its first row follows the mass free.</p>
+<p><strong>The branches of the cleaning policies extend it</strong>, and their evaluation pages say so where they use it: the ripeness branches add a scenario <code>mixed</code>, skewed overwrites of allocations that are each hot, cool or cold, and five columns after the others, <code>kappa</code>, the price of space their controller sets, and <code>mixed_pages</code>, <code>mixed_bytes</code>, <code>cold_bytes</code> and <code>cold_mixed_bytes</code>, how the three classes share data pages.
+On those branches, <code>KLADDE_BENCH_NO_STATE</code> in the environment makes the stores keep no consolidator state, and <code>KLADDE_BENCH_MYOPIC</code> makes them rank pages by the myopic rule.</p>
+<h2 id="text-bench-typing-into-one-text"><code>text-bench</code>: typing into one text<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#text-bench-typing-into-one-text" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --release</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-bench</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --bin</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> text-bench</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> &lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">output</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> director</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">y</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="string"> \</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    [--quick] [--size BYTES] [--keystrokes N] [--seed N] [--variant NAME] </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="string">\</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    [--focus SHARE] [--focus-moves N] </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="string">\</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    [--journal-budget PAGES] [--shift-decay FACTOR] [--churn-floor λ] [--target-fill τ]</span></span></code></pre></figure>
+<p><strong>A text of random words in one allocation of the store is edited keystroke by keystroke at a cursor, as a text editor would; every keystroke that changes it is a splice, which makes this the benchmark of what splices cost.</strong>
+The text is 64 KiB by default, words of one to nine lowercase letters each followed by a space, and is stored below the typed layers, so that only the store is measured.
+Each of the 100,000 keystrokes, 10,000 with <code>--quick</code>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>share</th><th>keystroke</th></tr></thead><tbody><tr><td>85 %</td><td>type a letter at the cursor, which moves past it</td></tr><tr><td>10 %</td><td>delete the byte before the cursor, if there is one</td></tr><tr><td>4.5 %</td><td>move the cursor</td></tr><tr><td>0.5 %</td><td>paste 200 random letters at the cursor, which moves past them</td></tr></tbody></table></div>
+<p>Nine moves in ten land in a window of a tenth of the text, which jumps to a random place every 5000 keystrokes, and the tenth anywhere; <code>--focus</code> sets the window’s share, <code>--focus-moves</code> the keystrokes between its jumps, and <code>--focus 0</code> sends every move anywhere.
+The text grows with the typing, to about 3.7 times its size at the defaults.</p>
+<p><strong>Every 1000 keystrokes the store is flushed and a row goes to <code>text-&lt;variant>.csv</code></strong>, where the variant is the text’s size in KiB, as in <code>64k</code>, unless <code>--variant</code> names it.
+<code>app_bytes</code> counts the bytes typed and pasted; deletions count nothing.
+<code>--journal-budget</code> sets <code>Options::journal_budget_pages</code>, so that the store also flushes by itself whenever a transaction would not fit in that many journal pages; <code>--shift-decay</code>, <code>--churn-floor</code> and <code>--target-fill</code> set the options of those names.</p>
+<p>The summary on stderr has five lines:</p>
+<ol>
+<li>the keystrokes of each kind, the text’s size before and after, and the flushes, of them those at rows;</li>
+<li>what kladde wrote, per keystroke, split into the journal, data pages, table pages and headers;</li>
+<li>the bytes per keystroke that splices shifted, restated where they lie and written again;</li>
+<li>the statements, fragments, table pages and data pages the file holds at the end, and the median flush;</li>
+<li>the closed file’s size, over the text’s, and the median of 21 reopenings.</li>
+</ol>
+<h2 id="svg-bench-a-drawing-editor"><code>svg-bench</code>: a drawing editor<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#svg-bench-a-drawing-editor" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">crates/kladde-svg/corpus/fetch.sh</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --release</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-svg</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --bin</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> svg-bench</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> [--features </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">LAYOUT]</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="string"> \</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">    &lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">drawing.sv</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">g</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> &lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">output</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> director</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">y</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> [--quick] [--edits N] [--only KIND] [--seed N] [--variant NAME] </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="string">\</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    [--focus SHARE] [--focus-moves N] </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="string">\</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    [--journal-budget PAGES] [--shift-decay FACTOR] [--churn-floor λ] [--target-fill τ]</span></span></code></pre></figure>
+<p><strong>kladde-svg stores an SVG drawing in a model of <code>#[derive(Persistable)]</code> types, and <code>svg-bench</code> edits it with a seeded mix of what a drawing editor does.</strong>
+<code>fetch.sh</code> downloads the corpus, pinned by SHA-256 and not committed: the Ghostscript tiger, the coat of arms of Spain and a blank world map from Wikimedia Commons, under <code>drawings/</code>, and resvg’s test suite at v0.48.1, under <code>resvg/</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>share</th><th>edit</th><th>what it does to the model</th></tr></thead><tbody><tr><td>30 %</td><td><code>Drag</code></td><td>set the translation that leads a shape’s transform list, or insert one</td></tr><tr><td>20 %</td><td><code>MoveNode</code></td><td>set the end point of a segment of a path’s data</td></tr><tr><td>8 % / 7 %</td><td><code>InsertNode</code> / <code>DeleteNode</code></td><td>insert a relative line into a path’s data, or delete a segment other than the first</td></tr><tr><td>10 %</td><td><code>Recolor</code></td><td>set a shape’s fill colour where it is set, in its attributes or its style, or add a fill attribute</td></tr><tr><td>8 % / 7 %</td><td><code>Duplicate</code> / <code>Delete</code></td><td>insert a deep copy of a shape right above it, or delete one; each turns into the other when the drawing has grown or shrunk by a fifth</td></tr><tr><td>5 %</td><td><code>Restack</code></td><td>move a shape elsewhere among its siblings, with <code>move_element</code></td></tr><tr><td>5 %</td><td><code>Text</code></td><td>type into a text, or replace it once it is long; a recolour in a drawing without text</td></tr></tbody></table></div>
+<p><strong>The edits keep to one part of the drawing at a time</strong>: nine in ten pick from a window of a tenth of what they pick from, the shapes, the paths, the shapes without children or the texts, and the window jumps every 3000 edits.
+<code>--focus</code> and <code>--focus-moves</code> set the window as in <code>text-bench</code>; <code>--focus 0</code> picks every edit from the whole drawing, except that nine drags in ten move one of the first tenth of the shapes, which was the benchmark’s only mix before kladde-rs <code>e88fd47</code>.
+<code>--only KIND</code> makes every edit one kind.</p>
+<p><strong>A run ends once the edits have stored eight times the drawing’s live size, once with <code>--quick</code>, or after exactly <code>N</code> edits with <code>--edits</code></strong>, which is how runs of different layouts, branches or options make the same edits: the evaluation pages give each drawing’s number.
+Every 1000 edits the drawing is flushed and a row goes to <code>svg-&lt;variant>.csv</code>, where the variant is the drawing’s file name unless <code>--variant</code> names it.
+<code>app_bytes</code> counts what each edit stores: the bytes of the numbers it sets, or the encoding of the value it stores, in its place, with everything that value owns; deletions count nothing.
+The options of the store are set as in <code>text-bench</code>.</p>
+<p><strong>The layouts are cargo features of kladde-svg, each adding to the one before</strong>: none, the <em>slotted</em> layout of fixed slots; <code>packed</code>, lists of enums packed; <code>small-ids</code>, ids as small strings; <code>small-attrs</code>, attribute lists and strings small; <code>small</code>, every list small.
+<code>f64</code> stores decimals as <code>f64</code> instead of <code>f32</code>.
+Each layout is a build of its own, so a script that compares them builds once per feature and copies the binary aside.</p>
+<p>The summary on stderr gives the drawing’s size in SVG and in kladde and what it holds to edit; the edits, the bytes they stored and the mix as it came out; what kladde wrote, per edit and per byte stored, and the file over its live size; what saving the whole canonical SVG every 1, 100 or 1000 edits would have written instead; the edits per second in kladde’s calls and the median flush; the closed file’s size; and the times to parse the SVG, to reopen the closed file, as the median of 21, and to write the SVG.
+After the edits, the reopened drawing must write the same canonical SVG as before closing.</p>
+<h2 id="svg-roundtrip-a-corpus-through-kladde"><code>svg-roundtrip</code>: a corpus through kladde<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#svg-roundtrip-a-corpus-through-kladde" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --release</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-svg</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --bin</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> svg-roundtrip</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> [--features </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">LAYOUT,render]</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="string"> \</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    [--csv </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">table.cs</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">v</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> [--render] [--journal-budget PAGES] </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">file or directory</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> ...</span></span></code></pre></figure>
+<p><strong>For every <code>.svg</code> file under the paths, it checks that the canonical form is stable and that kladde gives it back byte for byte, and records the sizes of the file in each form.</strong>
+The canonical form is what kladde-svg writes: no whitespace between tags outside text, single spaces between attributes, and path data in the grammar’s shortcuts.
+It exits with a failure if any canonical form was not idempotent or any trip through kladde differed.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>column</th><th>meaning</th></tr></thead><tbody><tr><td><code>file</code>, <code>status</code></td><td>the file, and <code>ok</code>, <code>not-idempotent</code>, <code>kladde-mismatch</code>, <code>not-xml</code>, <code>not-utf8</code> or <code>unreadable</code></td></tr><tr><td><code>orig_bytes</code>, <code>orig_gz</code>, <code>canon_bytes</code>, <code>canon_gz</code></td><td>the original and the canonical form, plain and gzipped at the highest level</td></tr><tr><td><code>kladde_bytes</code></td><td>the kladde file after one flush and <code>close</code></td></tr><tr><td><code>settled_bytes</code></td><td>the same file once two more sessions have opened and closed it, which returns the free pages a new file holds ahead of its data</td></tr><tr><td><code>alloc_bytes</code>, <code>allocations</code>, <code>statements</code></td><td>the store’s live allocation bytes, allocations and statements</td></tr><tr><td><code>data_pages</code>, <code>table_pages</code>, <code>free_pages</code></td><td>the first-closed file’s pages by kind</td></tr><tr><td><code>numbers</code>, <code>numbers_changed</code></td><td>the numbers stored, and those whose shortest decimal changed by being stored as the model’s number type</td></tr><tr><td><code>attrs</code>, <code>other_attrs</code>, <code>attr_bytes</code>, <code>other_attr_bytes</code></td><td>attributes, and those the model kept verbatim, by count and bytes</td></tr><tr><td><code>idempotent</code>, <code>kladde_ok</code></td><td>the two checks, as 1 or 0</td></tr><tr><td><code>render_max_diff</code>, <code>render_diff_share</code></td><td>with <code>--render</code>: the largest difference of any channel of any pixel between the original and the canonical form, rendered by resvg, and the share of pixels that differ by more than 1; a difference is a gap in the model, not a defect of kladde</td></tr><tr><td><code>parse_us</code>, <code>open_us</code></td><td>the time to parse the SVG, and to reopen the kladde file</td></tr></tbody></table></div>
+<p>The summary on stderr counts the files by status, names those that failed, and sums the sizes.</p>
+<p><code>svg2kladde &lt;in.svg> &lt;out.kladde></code> and <code>kladde2svg [--indent] &lt;in.kladde> &lt;out.svg></code>, binaries of the same crate, convert single files, for looking at one by hand.</p>
+<h2 id="tools-in-this-repository">Tools in this repository<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#tools-in-this-repository" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="the-figures">The figures<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-figures" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">tools/plot-evaluation.py</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> [--only </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">NAMES]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> [--summary] --out </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">directory</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> &lt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">label</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">directory</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> ...</span></span></code></pre></figure>
+<p><strong>Draws the evaluation pages’ figures from tables, gzipped or not, each directory a run and each label its name in the figures.</strong>
+It recognizes the tables by name: <code>kladde-bench</code>’s by their scenario, <code>svg-bench</code>’s as <code>svg-&lt;drawing>.csv</code>, and <code>text-bench</code>’s as <code>text-&lt;size>.csv</code>.
+<code>--only</code> draws the figures it names, out of <code>space-amplification</code>, <code>mixed</code>, <code>live-fraction</code>, <code>write-breakdown</code>, <code>budget</code>, <code>shrink</code>, <code>description</code>, <code>flush-latency</code>, <code>throughput</code>, <code>tradeoff</code>, <code>defrag-share</code>, <code>kappa</code>, <code>svg</code>, <code>svg-tradeoff</code>, <code>svg-pages</code> and <code>text-tradeoff</code>; a figure whose tables are missing is skipped.
+<code>svg-tradeoff</code> and <code>text-tradeoff</code> also draw the runs labelled <code>before/policy/knob/value/layout</code>, dashed and pale, to show how a change moved each policy’s curve.
+<code>--summary</code> prints the last row of every series as a Markdown table.
+The figures are SVG, the same bytes whenever the data and matplotlib’s version are, which <code>tools/requirements.txt</code> pins; install it with pip into a virtual environment.</p>
+<p>Each evaluation page keeps its tables, gzipped, in <code>content/evaluation/data/</code>, and lists the commands that ran them and that redraw its figures.</p>
+<h3 id="the-ripeness-simulation">The ripeness simulation<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-ripeness-simulation" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">tools/simulate-ripeness.py</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> compare</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">sweep</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">example</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> [--set </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">drafts</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">bayes]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> [options]</span></span></code></pre></figure>
+<p><strong>Simulates pages whose statements die at the rates of the shares they belong to, cleans each page when an estimator says it is ripe, and prints how much more each estimator costs than cleaning at the true ripeness</strong>, over all pages of a scenario.
+<code>compare</code> runs every estimator of a set, the <a href="../drafts/ripeness" class="internal internal-link alias" data-slug="drafts/ripeness">ripeness drafts’</a> or with <code>--set bayes</code> the <a href="../drafts/bayesian-ripeness" class="internal internal-link alias" data-slug="drafts/bayesian-ripeness">Bayesian draft’s</a>; <code>sweep</code> varies their parameters <code>β</code>, <code>n0</code> and <code>c</code>; <code>example</code> computes the draft’s worked example without noise.
+Its module docstring lists the estimators and the options.</p>
+<h3 id="checks-of-this-repository">Checks of this repository<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#checks-of-this-repository" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>command</th><th>checks</th></tr></thead><tbody><tr><td><code>tools/check-examples.py</code></td><td>the Rust examples these pages mark with a <code>kladde-example</code> comment, compiled against a checkout of kladde-rs next to this one, and run, or refused by the compiler, where the comment says so</td></tr><tr><td><code>tools/make-pdf.py --check-only</code></td><td>the links and anchors between pages, and that <code>tools/pages.py</code> lists every page</td></tr><tr><td><code>tools/make-pdf.py --self-test</code></td><td>the layout passes of the diagrams</td></tr><tr><td><code>site/build.sh</code>, then <code>tools/check-site-links.py</code></td><td>the links and anchors of the built site, as Quartz made them</td></tr></tbody></table></div>
+<p><a href="https://github.com/kladde-dev/kladde-docs#tooling" class="external external-link">The README<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> describes them in full.</p>
+<h3 id="continuous-integration">Continuous integration<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#continuous-integration" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>.github/workflows/site.yml</code> runs on every push and pull request: it builds the PDF, builds the site and checks its links, and compiles and runs the examples against kladde-rs’s <code>main</code>.
+A broken link fails the run; a failing example does not hold up publishing.
+On <code>main</code>, it then publishes the site and the PDF.</p>
+<h2 id="a-measurement-kept-with-its-evaluation">A measurement kept with its evaluation<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#a-measurement-kept-with-its-evaluation" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The heap an open drawing takes was measured once, for the evaluation of variable-size values on this repository’s branch <code>defrag-shifts</code>, by <code>content/evaluation/data/variable-size/memory.rs</code> there.
+It counts the bytes allocated through a global allocator while a drawing is parsed and while its kladde file is opened, and the median time of 21 opens, one drawing per call; it is built as the binary of a crate of its own that depends on kladde and kladde-svg, with their layout features.</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-18" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#at-a-glance" data-for="at-a-glance">At a glance</a></li><li class="depth-0"><a href="#the-tests" data-for="the-tests">The tests</a></li><li class="depth-0"><a href="#the-tables" data-for="the-tables">The tables</a></li><li class="depth-1"><a href="#reading-a-table" data-for="reading-a-table">Reading a table</a></li><li class="depth-0"><a href="#kladde-bench-synthetic-workloads" data-for="kladde-bench-synthetic-workloads">kladde-bench: synthetic workloads</a></li><li class="depth-0"><a href="#text-bench-typing-into-one-text" data-for="text-bench-typing-into-one-text">text-bench: typing into one text</a></li><li class="depth-0"><a href="#svg-bench-a-drawing-editor" data-for="svg-bench-a-drawing-editor">svg-bench: a drawing editor</a></li><li class="depth-0"><a href="#svg-roundtrip-a-corpus-through-kladde" data-for="svg-roundtrip-a-corpus-through-kladde">svg-roundtrip: a corpus through kladde</a></li><li class="depth-0"><a href="#tools-in-this-repository" data-for="tools-in-this-repository">Tools in this repository</a></li><li class="depth-1"><a href="#the-figures" data-for="the-figures">The figures</a></li><li class="depth-1"><a href="#the-ripeness-simulation" data-for="the-ripeness-simulation">The ripeness simulation</a></li><li class="depth-1"><a href="#checks-of-this-repository" data-for="checks-of-this-repository">Checks of this repository</a></li><li class="depth-1"><a href="#continuous-integration" data-for="continuous-integration">Continuous integration</a></li><li class="depth-0"><a href="#a-measurement-kept-with-its-evaluation" data-for="a-measurement-kept-with-its-evaluation">A measurement kept with its evaluation</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-0" class="overflow"><li><a href="../evaluation/cleaning-edits" class="internal">Cleaning edited drawings and texts</a></li><li><a href="../evaluation/cpp-port" class="internal">Porting kladde to C++ and into Inkscape</a></li><li><a href="../evaluation/" class="internal">Evaluation</a></li><li><a href="../rust/crates" class="internal">Crate layout</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/kladde-dev">GitHub</a></li><li><a href="https://kladde-dev.github.io/kladde.pdf">PDF</a></li><li><a href="https://robamler.github.io/">Robert Bamler</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-9114441b.js" type="module" data-persist="true"></script></html>

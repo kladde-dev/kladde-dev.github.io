@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>Type descriptors</title><meta charset="utf-8"/><link rel="preload" href="../../index-2c86d77d.css" as="style"/><link rel="preload" href="../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="kladde"/><meta property="og:title" content="Type descriptors"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Type descriptors"/><meta name="twitter:description" content="The language-neutral model of how a value type encodes into the sequence, and what its bytes mean. Status: settled and implemented."/><meta property="og:description" content="The language-neutral model of how a value type encodes into the sequence, and what its bytes mean. Status: settled and implemented."/><meta property="og:image:alt" content="The language-neutral model of how a value type encodes into the sequence, and what its bytes mean. Status: settled and implemented."/><meta property="twitter:domain" content="kladde-dev.github.io"/><meta property="og:url" content="https://kladde-dev.github.io/spec/schema/type-descriptors"/><meta property="twitter:url" content="https://kladde-dev.github.io/spec/schema/type-descriptors"/><link rel="icon" href="../../static/icon.png"/><meta name="description" content="The language-neutral model of how a value type encodes into the sequence, and what its bytes mean. Status: settled and implemented."/><meta name="generator" content="Quartz"/><link href="../../index-2c86d77d.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://kladde-dev.github.io/spec/schema/type-descriptors-og-image.webp"/><meta property="og:image:url" content="https://kladde-dev.github.io/spec/schema/type-descriptors-og-image.webp"/><meta name="twitter:image" content="https://kladde-dev.github.io/spec/schema/type-descriptors-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="spec/schema/type-descriptors" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../..">kladde</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="Search" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something..." placeholder="Search for something..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="Dark mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="Reader mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-58" aria-label="Explorer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-58" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../spec/">Specification</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../spec/schema/">Schema</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Type descriptors</a></div></nav><h1 class="article-title">Type descriptors</h1><p show-comma="true" class="content-meta"><time datetime="2026-10-14T18:50:07.000Z">Oct 14, 2026</time><span>12 min read</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p>The language-neutral model of how a value type encodes into the <a href="../sequence" class="internal internal-link alias" data-slug="spec/sequence">sequence</a>, and what its bytes mean.</p>
+<p><strong>Status:</strong> settled and implemented.
+This document is normative.</p>
+<h2 id="terminology">Terminology<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#terminology" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>Type descriptor</strong> (<em>descriptor</em>): a node describing one value type’s encoding.</li>
+<li><strong>Descriptor table</strong>: an ordered array of descriptors.
+A descriptor refers to another by its <strong>index</strong> in this table — a table-local, otherwise arbitrary integer.
+Indices are an artifact of one serialization; a type’s fingerprint does not depend on them.</li>
+<li><strong>Type graph</strong>: the directed graph whose vertices are descriptors and whose edges are the references one descriptor makes to others.
+It may contain cycles — recursive and mutually recursive types are legal, within <a href="#rules-of-nesting" class="internal internal-link alias">the rules of nesting</a>.</li>
+</ul>
+<h2 id="the-kinds">The kinds<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-kinds" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A descriptor is one of nine kinds: <strong>Primitive</strong>, <strong>Struct</strong>, <strong>Enum</strong>, <strong>Array</strong>, <strong>Sequence</strong>, <strong>Map</strong>, <strong>Text</strong>, <strong>Opaque</strong>, and <strong>Fixed</strong>.
+Every type has <strong>one encoding</strong>, which a reader decodes front to back from the type’s descriptor, <a href="#encodings" class="internal internal-link alias">below</a>.</p>
+<h3 id="primitive">Primitive<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#primitive" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>A scalar, identified by a <strong>primitive code</strong>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>code</th><th>type</th><th>encoding</th><th>fixed form</th></tr></thead><tbody><tr><td>0</td><td><code>u8</code></td><td>one byte</td><td>the same byte</td></tr><tr><td>1</td><td><code>u16</code></td><td>unsigned LEB128</td><td>2 bytes, little-endian</td></tr><tr><td>2</td><td><code>u32</code></td><td>unsigned LEB128</td><td>4 bytes, little-endian</td></tr><tr><td>3</td><td><code>u64</code></td><td>unsigned LEB128</td><td>8 bytes, little-endian</td></tr><tr><td>4</td><td><code>i8</code></td><td>one byte, two’s complement</td><td>the same byte</td></tr><tr><td>5</td><td><code>i16</code></td><td>zigzag, then LEB128</td><td>2 bytes, little-endian two’s complement</td></tr><tr><td>6</td><td><code>i32</code></td><td>zigzag, then LEB128</td><td>4 bytes, little-endian two’s complement</td></tr><tr><td>7</td><td><code>i64</code></td><td>zigzag, then LEB128</td><td>8 bytes, little-endian two’s complement</td></tr><tr><td>8</td><td><code>f32</code></td><td>4 bytes, little-endian IEEE-754</td><td>the same bytes</td></tr><tr><td>9</td><td><code>f64</code></td><td>8 bytes, little-endian IEEE-754</td><td>the same bytes</td></tr><tr><td>10</td><td><code>bool</code></td><td>one byte, <code>0x00</code> false, <code>0x01</code> true</td><td>the same byte</td></tr><tr><td>11</td><td><code>char</code></td><td>UTF-8, 1 to 4 bytes</td><td>the Unicode scalar value, 4 bytes, little-endian</td></tr></tbody></table></div>
+<p>Zigzag maps <code>0, −1, 1, −2, …</code> to <code>0, 1, 2, 3, …</code>, so that a number of small magnitude takes one byte whatever its sign.
+The <em>fixed form</em> is what the type’s values take inside a <a href="#fixed" class="internal internal-link"><code>Fixed</code></a> value.</p>
+<p>The primitive code doubles as the descriptor’s kind tag: codes <code>0..=127</code> are reserved for primitives, so a Primitive descriptor is a <strong>single byte</strong> with no further content.</p>
+<h4 id="reserved-primitive-codes">Reserved primitive codes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reserved-primitive-codes" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>Fixed here so later additions cannot conflict.
+An implementation need not accept them until a corresponding type exists and can be tested, and must refuse a table that uses one it does not implement.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>code</th><th>type</th></tr></thead><tbody><tr><td>12</td><td><code>u128</code></td></tr><tr><td>13</td><td><code>i128</code></td></tr><tr><td>14</td><td><code>f16</code>, IEEE-754 binary16</td></tr><tr><td>15</td><td><code>bf16</code>, bfloat16</td></tr><tr><td>16–19</td><td><code>u24</code>, <code>u40</code>, <code>u48</code>, <code>u56</code></td></tr><tr><td>20–23</td><td><code>i24</code>, <code>i40</code>, <code>i48</code>, <code>i56</code></td></tr></tbody></table></div>
+<h3 id="struct">Struct<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#struct" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>An ordered, fixed set of named fields, encoded back to back — no discriminant, no header.</p>
+<p>Carries:</p>
+<ul>
+<li><code>name</code>: UTF-8, <strong>diagnostics only</strong>; a struct’s own name is not fingerprinted.</li>
+<li><code>fields</code>: an ordered list of <code>(field_name, type_reference)</code>.</li>
+</ul>
+<p>Field <strong>order</strong> is significant: it is the order of the encodings.
+Each field <strong>name</strong> is significant.
+A positional (tuple) field’s name is the decimal rendering of its position — <code>&quot;0&quot;</code>, <code>&quot;1&quot;</code>, … — so the model stays uniform.</p>
+<h3 id="enum">Enum<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#enum" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>A discriminated union: a discriminant, followed by the value that the variant it selects holds, its <strong>payload</strong>.</p>
+<p>Carries:</p>
+<ul>
+<li><code>name</code>: UTF-8, diagnostics only.</li>
+<li><code>discriminant_width</code>: the bytes the discriminant takes in the <strong>fixed form</strong> — 1, 2, 4, or 8; every discriminant value must fit in it.
+The encoding itself writes the discriminant as a varint.</li>
+<li><code>variants</code>: each <code>(discriminant_value, variant_name, payload)</code>, canonically ordered by ascending <code>discriminant_value</code>; discriminant values are distinct, and <code>payload</code> is a reference.</li>
+</ul>
+<p>Each discriminant value, each variant name, and each variant’s payload type is significant.
+Variant <em>declaration</em> order is <strong>not</strong>: a value’s encoding is selected by the stored discriminant, not by a variant’s position, so reordering variants in the source without changing their discriminants changes neither the encoding nor the fingerprint.</p>
+<p><strong>Every variant holds exactly one value.</strong>
+A variant that holds nothing holds the empty Struct, which encodes to no bytes; a variant that holds several fields holds a Struct of them; and a variant that holds one value of any type holds that type directly.
+So in Rust, a unit variant <code>Nil</code> holds the empty Struct, a tuple variant <code>Element(Element)</code> or <code>Text(String)</code> holds its field’s type, a struct variant <code>Point { x: f32, y: f32 }</code> holds a Struct of its fields named after the variant, and a tuple variant of several fields <code>Pair(u8, u8)</code> a Struct of positional fields.</p>
+<p><em>Why one value, always.</em>
+Languages disagree about what a variant holds: Rust has unit, tuple and struct variants, while a C++ <code>std::variant</code>, a C++ class hierarchy, Swift’s enums with associated values and TypeScript’s discriminated unions all hold exactly one value per alternative.
+Describing a variant by one payload lets every one of them map to the same descriptor with no choice left to the programmer: Rust’s <code>Element(Element)</code> and a struct variant with <code>Element</code>’s fields describe the same bytes and get the same fingerprint, as a struct’s own name already does not matter.
+And holding <em>always</em> one value, rather than at most one, keeps every variant the same shape: a valueless variant, a C++ alternative that is an empty struct and Rust’s <code>()</code> all hold the empty Struct, and need no rule to say they agree.</p>
+<p>An <code>Option&lt;T></code> is an enum, <code>None</code> with discriminant 0 holding the empty Struct, and <code>Some</code> with discriminant 1 holding a <code>T</code>.</p>
+<h3 id="array">Array<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#array" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>len</code> values of one element type, back to back, with no count.</p>
+<p>Carries <code>element</code> (a reference) and <code>len</code>.
+An Array is deliberately <em>not</em> interchangeable with a Struct of <code>len</code> identically-typed positional fields: the encodings coincide, but the kind tags differ and therefore so do the fingerprints.
+The kind exists to avoid spelling out a large <code>len</code> as that many fields.</p>
+<h3 id="sequence">Sequence<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sequence" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Any number of values of one element type: their count, then the values.</p>
+<p>Carries <code>element</code> (a reference).
+A vector is a Sequence; a map is a <a href="#map" class="internal internal-link alias">Map</a>.</p>
+<h3 id="map">Map<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#map" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Any number of entries, each a key and a value: their count, then each entry’s key and value.</p>
+<p>Carries <code>key</code> and <code>value</code> (references).
+The entries are in the order the writing library keeps them; the format neither sorts them nor checks that keys are distinct, which is the library’s business, as is how it finds a key in memory.</p>
+<p><em>Why a kind of its own.</em>
+A Map encodes exactly as a Sequence of two-field Structs would, but every language has a native map that a reader can decode one into, and a tool can render one as a JSON object rather than as an array of pairs.
+It also leaves nothing to agree on: a Sequence of Structs would need every implementation to name the two fields alike, or the same map would get two fingerprints.</p>
+<h3 id="text">Text<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#text" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>UTF-8 text, ended by the byte <code>0xFF</code>.
+Carries nothing.</p>
+<p><em>Why a terminator rather than a count.</em>
+UTF-8 never contains <code>0xFF</code>, so no byte of text needs escaping, and an edit of text is then one splice, where a count would add a second record — and a second place where the chain of spans is cut — to every keystroke.
+A decoder finds the end by scanning for the terminator, which it does while it checks the UTF-8 anyway; text below 128 bytes takes the byte a count would have taken, and longer text saves the count’s further bytes.
+Only text can have a terminator, since a terminator must be a byte the content cannot hold, so bytes and sequences of any other type keep their count.</p>
+<h3 id="opaque">Opaque<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#opaque" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>A type whose internal structure the format does <strong>not</strong> decompose — a black box identified nominally.</p>
+<p>Used for types with hand-written encodings that no structural descriptor fits: externally serialized payloads, say.</p>
+<p>Carries:</p>
+<ul>
+<li><code>library_name</code>: the package, module, or crate defining the type.
+Language-neutral: not necessarily a Rust crate.</li>
+<li><code>type_name</code>: UTF-8.</li>
+<li><code>version</code>: a <code>(major, minor, patch)</code> triple.</li>
+<li><code>fixed_size</code>: the number of bytes every value takes, or none, in which case each value is prefixed with its length.</li>
+<li><code>parameters</code>: an ordered list of type references, for generic parameters.</li>
+</ul>
+<p>Only the <strong>compatibility component</strong> of <code>version</code> is fingerprinted, and it has two parts, both of which are necessary:</p>
+<ul>
+<li>a <strong>stability flag</strong> — true when <code>major > 0</code>, false when <code>major == 0</code>;</li>
+<li>the <strong>leading nonzero component</strong> — <code>major</code> if <code>major > 0</code>, otherwise <code>minor</code>.</li>
+</ul>
+<p>Without the stability flag, <code>0.1.z</code> and <code>1.y.z</code> would both reduce to <code>1</code> and collide, even though crossing <code>0.x → 1.x</code> is a breaking change.
+Patch-level changes, and minor-level changes above <code>0.x</code>, are thereby treated as encoding-compatible.</p>
+<p>This tuple is the same identity that semantic versioning already relies on, and it carries the same risk: it trusts the author to bump the major version whenever the encoding changes.
+A structural descriptor needs no such trust, which is a standing argument for preferring structural descriptors wherever a type admits one, and reserving Opaque for encodings that genuinely are not decomposable.
+Whether a fixed size or a length prefix per type is enough, or whether some opaque types want both modes, is open.</p>
+<h3 id="fixed">Fixed<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#fixed" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The values of a wrapped type, each encoded at the same size: its <strong>fixed form</strong>.</p>
+<p>Carries <code>target</code> (a reference).
+<code>Fixed(T)</code> is a type of its own, with the values of <code>T</code>: it lays out everything inside <code>T</code> at its largest, so every field lies at a constant offset whatever the value, and a container of them finds its <code>i</code>th element by multiplication.
+It applies to all of <code>T</code> and not to what wraps it: <code>Fixed(Option&lt;u32>)</code> takes five bytes for every value, while <code>Option&lt;Fixed&lt;u32>></code> takes one for <code>None</code> and five for <code>Some</code>.</p>
+<h2 id="encodings">Encodings<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#encodings" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>kind</th><th>encoding</th></tr></thead><tbody><tr><td>Primitive</td><td>as <a href="#primitive" class="internal internal-link alias">its code</a> gives</td></tr><tr><td>Struct</td><td>its fields’ encodings, concatenated, in declaration order</td></tr><tr><td>Enum</td><td>the discriminant as unsigned LEB128, then the selected variant’s payload’s encoding</td></tr><tr><td>Array</td><td><code>len</code> element encodings</td></tr><tr><td>Sequence</td><td>the number of elements as unsigned LEB128, then the element encodings</td></tr><tr><td>Map</td><td>the number of entries as unsigned LEB128, then each entry’s key’s encoding and its value’s</td></tr><tr><td>Text</td><td>the UTF-8 bytes, then <code>0xFF</code></td></tr><tr><td>Opaque</td><td><code>fixed_size</code> bytes, or, without a fixed size, the number of bytes as unsigned LEB128 and then the bytes</td></tr><tr><td>Fixed</td><td>the target’s fixed form, below</td></tr></tbody></table></div>
+<p><strong>The fixed form</strong> of a type is:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>kind</th><th>fixed form</th></tr></thead><tbody><tr><td>Primitive</td><td>the fixed form of <a href="#primitive" class="internal internal-link alias">its code</a></td></tr><tr><td>Struct</td><td>its fields’ fixed forms, concatenated</td></tr><tr><td>Enum</td><td>the discriminant in <code>discriminant_width</code> bytes, little-endian, then the variant’s payload’s fixed form, then zeros up to the size of the largest payload’s</td></tr><tr><td>Array</td><td><code>len</code> element fixed forms</td></tr><tr><td>Opaque</td><td>its encoding, if it has a fixed size</td></tr><tr><td>Fixed</td><td>the target’s fixed form</td></tr></tbody></table></div>
+<p>Sequence, Map, Text, and an Opaque without a fixed size have <strong>no</strong> fixed form, and neither has any type that holds one of them, or itself.</p>
+<p><strong>The canonical encoding</strong> is the only one a writer may produce, and a reader refuses any other: varints are minimal, text is valid UTF-8, discriminants name variants, integers lie in range of their type — a <code>u16</code>’s varint at most <code>2^16 − 1</code>, an <code>i16</code>’s zigzag likewise — <code>bool</code>s are 0 or 1, a <code>char</code>’s fixed form is a Unicode scalar value, and an enum’s padding in the fixed form is zeros.
+So a value has exactly one encoding, and the <a href="../sequence#what-a-valid-sequence-is" class="internal internal-link alias" data-slug="spec/sequence">sequence</a> is a function of the root value.</p>
+<h3 id="a-worked-example">A worked example<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#a-worked-example" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>With <code>struct Point { x: f32, label: Text, n: u32 }</code>, the point <code>(1.5, &quot;ab&quot;, 300)</code> encodes as</p>
+<pre><code>00 00 C0 3F      x: 1.5
+61 62 FF         label: &quot;ab&quot;, and its terminator
+AC 02            n: 300 as LEB128
+</code></pre>
+<p>and <code>Fixed(Option&lt;u32>)</code> holding <code>Some(300)</code> as <code>01 2C 01 00 00</code>: the discriminant in one byte, then 300 in four, little-endian; <code>None</code> is <code>00 00 00 00 00</code>.</p>
+<h2 id="fixed-size-types">Fixed-size types<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#fixed-size-types" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>A type whose every value encodes to the same number of bytes is fixed-size</strong>, and the descriptors say which types are, so a reader computes it as a writer does:</p>
+<ul>
+<li><code>u8</code>, <code>i8</code>, <code>bool</code>, <code>f32</code> and <code>f64</code> are, with sizes 1, 1, 1, 4 and 8; the other primitives are varints or UTF-8, and are not;</li>
+<li>a Struct is if all its fields are, with the sum of their sizes;</li>
+<li>an Enum is if every discriminant is below 128, so that its varint takes one byte, and every variant’s payload is fixed-size with the same size: its size is 1 plus that size;</li>
+<li>an Array is if its element is, with <code>len</code> times the element’s size;</li>
+<li>an Opaque is if it declares a fixed size;</li>
+<li>a <code>Fixed</code> always is, with the size of its target’s fixed form;</li>
+<li>Sequence, Map and Text never are, nor is a type that holds itself.</li>
+</ul>
+<p>A fixed-size type’s fixed form is its encoding byte for byte, except where an enum’s <code>discriminant_width</code> exceeds the one byte its encoding spends on the discriminant: a writer may set a wider width so that the fixed form keeps its size when variants are added.</p>
+<h2 id="rules-of-nesting">Rules of nesting<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#rules-of-nesting" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A table must keep two rules, which a reader checks when it decodes one:</p>
+<ul>
+<li><strong>A <code>Fixed</code> holds a type that has a fixed form.</strong></li>
+<li><strong>A type reaches itself only through an Enum, a Sequence or a Map</strong>, whose discriminant or count can end the recursion, and never through Structs, Arrays and <code>Fixed</code> alone, whose values would be infinite.
+A tree whose nodes hold their children inline is a Struct holding a Sequence of itself; a list is an Enum one of whose variants holds itself.
+An Opaque’s parameters are not containment: an Opaque says nothing of how its value holds them, so a type may reach itself through one.
+The rule asks only that recursion <em>can</em> end; an Enum whose every variant holds itself has no finite value, and is legal but useless.</li>
+</ul>
+<p>A decoder of a recursive type nests as deeply as the file says, so it limits its depth, or does not recurse, and refuses a file beyond its limit rather than overflow its stack.</p>
+<h2 id="references-and-the-root">References and the root<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#references-and-the-root" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A <strong>reference</strong> is an index into the descriptor table.
+Every field type, payload, <code>element</code>, <code>key</code>, <code>value</code>, <code>target</code>, and parameter is a reference.</p>
+<p>By convention the descriptor at <strong>index 0 is the root</strong> — the type actually stored in the file.</p>
+<p><em>Why the model is enough for evolution.</em>
+Every encoding is decodable from the descriptors alone, so a reader can skip, or read, a writer’s values by the <strong>writer’s</strong> graph, even when its own types differ.
+See <a href="./evolution" class="internal internal-link alias" data-slug="spec/schema/evolution">Evolution</a>.</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-50" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#terminology" data-for="terminology">Terminology</a></li><li class="depth-0"><a href="#the-kinds" data-for="the-kinds">The kinds</a></li><li class="depth-1"><a href="#primitive" data-for="primitive">Primitive</a></li><li class="depth-1"><a href="#struct" data-for="struct">Struct</a></li><li class="depth-1"><a href="#enum" data-for="enum">Enum</a></li><li class="depth-1"><a href="#array" data-for="array">Array</a></li><li class="depth-1"><a href="#sequence" data-for="sequence">Sequence</a></li><li class="depth-1"><a href="#map" data-for="map">Map</a></li><li class="depth-1"><a href="#text" data-for="text">Text</a></li><li class="depth-1"><a href="#opaque" data-for="opaque">Opaque</a></li><li class="depth-1"><a href="#fixed" data-for="fixed">Fixed</a></li><li class="depth-0"><a href="#encodings" data-for="encodings">Encodings</a></li><li class="depth-1"><a href="#a-worked-example" data-for="a-worked-example">A worked example</a></li><li class="depth-0"><a href="#fixed-size-types" data-for="fixed-size-types">Fixed-size types</a></li><li class="depth-0"><a href="#rules-of-nesting" data-for="rules-of-nesting">Rules of nesting</a></li><li class="depth-0"><a href="#references-and-the-root" data-for="references-and-the-root">References and the root</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-0" class="overflow"><li><a href="../../drafts/cpp" class="internal">A C++ implementation</a></li><li><a href="../../drafts/splices" class="internal">Splices without restating the tail</a></li><li><a href="../../evaluation/cpp-port" class="internal">Porting kladde to C++ and into Inkscape</a></li><li><a href="../../impl/opening" class="internal">Opening a file</a></li><li><a href="../../impl/values" class="internal">Values and their positions</a></li><li><a href="../../rust/containers" class="internal">Containers</a></li><li><a href="../../rust/derive-macro" class="internal">The derive macro</a></li><li><a href="../../rust/durable-and-mut" class="internal">Durable and Mut</a></li><li><a href="../../rust/tutorial/custom-durable" class="internal">Implementing Durable by hand</a></li><li><a href="../../rust/tutorial/deriving" class="internal">Deriving your own types</a></li><li><a href="../../spec/conformance" class="internal">Conformance</a></li><li><a href="../../spec/file-format" class="internal">File format</a></li><li><a href="../../spec/schema/canonical-encoding" class="internal">Canonical encoding</a></li><li><a href="../../spec/schema/fingerprints" class="internal">Fingerprints</a></li><li><a href="../../spec/schema/" class="internal">Schema</a></li><li><a href="../../spec/sequence" class="internal">The sequence</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/kladde-dev">GitHub</a></li><li><a href="https://kladde-dev.github.io/kladde.pdf">PDF</a></li><li><a href="https://robamler.github.io/">Robert Bamler</a></li></ul></footer></div></div></body><script src="../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../postscript-9114441b.js" type="module" data-persist="true"></script></html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>kladde</title>
+      <link>https://kladde-dev.github.io</link>
+      <description>Last 10 notes on kladde</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>Tag Index</title>
+    <link>https://kladde-dev.github.io/tags/</link>
+    <guid>https://kladde-dev.github.io/tags/</guid>
+    <description><![CDATA[  ]]></description>
+    <pubDate>Thu, 15 Oct 2026 21:16:31 GMT</pubDate>
+  </item><item>
+    <title>kladde-cpp</title>
+    <link>https://kladde-dev.github.io/cpp/</link>
+    <guid>https://kladde-dev.github.io/cpp/</guid>
+    <description><![CDATA[ The C++ implementation of kladde: one of the two reference implementations of the specification, independent of kladde-rs in Rust, and the library behind the Inkscape demo. ]]></description>
+    <pubDate>Thu, 15 Oct 2026 21:16:06 GMT</pubDate>
+  </item><item>
+    <title>Evaluation</title>
+    <link>https://kladde-dev.github.io/evaluation/</link>
+    <guid>https://kladde-dev.github.io/evaluation/</guid>
+    <description><![CDATA[ Measurements of kladde-rs and, in the Inkscape demo, kladde-cpp under realistic workloads, and what they say about the design. ]]></description>
+    <pubDate>Thu, 15 Oct 2026 21:16:06 GMT</pubDate>
+  </item><item>
+    <title>Consolidation</title>
+    <link>https://kladde-dev.github.io/impl/consolidation</link>
+    <guid>https://kladde-dev.github.io/impl/consolidation</guid>
+    <description><![CDATA[ Reclaiming garbage: which pages to rewrite, in what order, and how much per flush. ]]></description>
+    <pubDate>Thu, 15 Oct 2026 21:16:06 GMT</pubDate>
+  </item><item>
+    <title>Implementation</title>
+    <link>https://kladde-dev.github.io/impl/</link>
+    <guid>https://kladde-dev.github.io/impl/</guid>
+    <description><![CDATA[ The reference algorithms and data structures: what an implementation must maintain in memory to satisfy the specification, and how it maintains it. ]]></description>
+    <pubDate>Thu, 15 Oct 2026 21:16:06 GMT</pubDate>
+  </item><item>
+    <title>Transactions and batches</title>
+    <link>https://kladde-dev.github.io/impl/transactions-and-batches</link>
+    <guid>https://kladde-dev.github.io/impl/transactions-and-batches</guid>
+    <description><![CDATA[ How application operations are grouped into the transactions the journal records, how they wait in memory, and when they are appended to the journal pages and folded. ]]></description>
+    <pubDate>Thu, 15 Oct 2026 21:16:06 GMT</pubDate>
+  </item><item>
+    <title>kladde</title>
+    <link>https://kladde-dev.github.io/</link>
+    <guid>https://kladde-dev.github.io/</guid>
+    <description><![CDATA[ Durable data structures: mutate in memory, and it’s on disk. ]]></description>
+    <pubDate>Thu, 15 Oct 2026 21:16:06 GMT</pubDate>
+  </item><item>
+    <title>kladde-rs</title>
+    <link>https://kladde-dev.github.io/rust/</link>
+    <guid>https://kladde-dev.github.io/rust/</guid>
+    <description><![CDATA[ The Rust implementation of kladde: one of the two reference implementations of the specification, with kladde-cpp in C++. ]]></description>
+    <pubDate>Thu, 15 Oct 2026 21:16:06 GMT</pubDate>
+  </item><item>
+    <title>Durability</title>
+    <link>https://kladde-dev.github.io/spec/durability</link>
+    <guid>https://kladde-dev.github.io/spec/durability</guid>
+    <description><![CDATA[ Which pages a write may touch, the protocol that commits a flush, and exactly what survives a crash. ]]></description>
+    <pubDate>Thu, 15 Oct 2026 21:16:06 GMT</pubDate>
+  </item><item>
+    <title>File format</title>
+    <link>https://kladde-dev.github.io/spec/file-format</link>
+    <guid>https://kladde-dev.github.io/spec/file-format</guid>
+    <description><![CDATA[ The page layer: how a kladde file is divided, what every page carries, how a file is identified, and how versions are negotiated. Status: draft. ]]></description>
+    <pubDate>Thu, 15 Oct 2026 21:16:06 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>

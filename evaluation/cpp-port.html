@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>Porting kladde to C++ and into Inkscape</title><meta charset="utf-8"/><link rel="preload" href="../index-2c86d77d.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="kladde"/><meta property="og:title" content="Porting kladde to C++ and into Inkscape"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Porting kladde to C++ and into Inkscape"/><meta name="twitter:description" content="What a second implementation, kladde-cpp, and its first application, the Inkscape fork inkscape-kladde, found out about kladde: where the specification left a second implementer guessing, where C++ made the design harder than Rust does, and what it took to make an existing application durable."/><meta property="og:description" content="What a second implementation, kladde-cpp, and its first application, the Inkscape fork inkscape-kladde, found out about kladde: where the specification left a second implementer guessing, where C++ made the design harder than Rust does, and what it took to make an existing application durable."/><meta property="og:image:alt" content="What a second implementation, kladde-cpp, and its first application, the Inkscape fork inkscape-kladde, found out about kladde: where the specification left a second implementer guessing, where C++ made the design harder than Rust does, and what it took to make an existing application durable."/><meta property="twitter:domain" content="kladde-dev.github.io"/><meta property="og:url" content="https://kladde-dev.github.io/evaluation/cpp-port"/><meta property="twitter:url" content="https://kladde-dev.github.io/evaluation/cpp-port"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="What a second implementation, kladde-cpp, and its first application, the Inkscape fork inkscape-kladde, found out about kladde: where the specification left a second implementer guessing, where C++ made the design harder than Rust does, and what it took to make an existing application durable."/><meta name="generator" content="Quartz"/><link href="../index-2c86d77d.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://kladde-dev.github.io/evaluation/cpp-port-og-image.webp"/><meta property="og:image:url" content="https://kladde-dev.github.io/evaluation/cpp-port-og-image.webp"/><meta name="twitter:image" content="https://kladde-dev.github.io/evaluation/cpp-port-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="evaluation/cpp-port" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">kladde</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="Search" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something..." placeholder="Search for something..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="Dark mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="Reader mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-15" aria-label="Explorer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-15" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../evaluation/">Evaluation</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Porting kladde to C++ and into Inkscape</a></div></nav><h1 class="article-title">Porting kladde to C++ and into Inkscape</h1><p show-comma="true" class="content-meta"><time datetime="2026-10-15T20:43:47.000Z">Oct 15, 2026</time><span>24 min read</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p>What a second implementation, <a href="../cpp/" class="internal internal-link alias" data-slug="cpp/index">kladde-cpp</a>, and its first application, the Inkscape fork inkscape-kladde, found out about kladde: where the specification left a second implementer guessing, where C++ made the design harder than Rust does, and what it took to make an existing application durable.</p>
+<p><strong>The format held up: kladde-cpp, written from the specification and kladde-rs’s store, reads and writes files that kladde-rs reads and writes, in both directions, and the typed layers agree on fingerprints once both name an enum’s variants alike.</strong>
+The obstacles were elsewhere.
+The specification was silent on a dozen points where two implementers could each be right and disagree, which the port turned into rules; C++ cannot enforce the exclusive access that Rust’s handles rely on, so the C++ handles carry rules the compiler does not check; and Inkscape needed long-lived handles and a way to observe its document rather than replace it, both of which kladde-cpp now has.</p>
+<p>The port’s findings are of kladde-rs <code>5d9ff9f</code> on its branch <code>cpp</code>, kladde-cpp <code>e8a3e61</code> and inkscape-kladde <code>f81602b406</code>; <a href="#measurements" class="internal internal-link alias">the measurements</a> are of kladde-cpp <code>c40ff8f</code> and inkscape-kladde <code>6452817ae3</code> (branch <code>main</code>, the typed schema) and <code>04e6ea0d31</code> (branch <code>untyped</code>, attribute values as text), with kladde-rs <code>f2f29a7</code> for the canonical SVG; the commands are at the end.</p>
+<h2 id="what-was-built">What was built<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-was-built" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>The schema layer</strong>, from <a href="../spec/schema/" class="internal internal-link alias" data-slug="spec/schema/index">the specification</a>, checked against the <a href="../spec/schema/fingerprints#vectors" class="internal internal-link alias" data-slug="spec/schema/fingerprints">fingerprint vectors</a>.</li>
+<li><strong>The store</strong>, ported from kladde-rs’s <code>kladde-store</code> module by module, consolidation included, and tested as kladde-rs tests it: against a plain byte vector after every operation (<a href="../impl/flush#correctness-the-differential-oracle" class="internal internal-link alias" data-slug="impl/flush">the differential oracle</a>), with simulated power cuts at every write since the last <code>fsync</code>, and with kladde-rs’s consolidation thresholds.</li>
+<li><strong>The typed layer</strong>, header-only, as <a href="../drafts/cpp" class="internal internal-link alias" data-slug="drafts/cpp">the draft</a> designed it, with the departures that <a href="../cpp/#where-kladde-cpp-departs-from-the-draft" class="internal internal-link alias" data-slug="cpp/index">kladde-cpp’s page</a> lists.</li>
+<li><strong>The Inkscape demo</strong>: documents backed by a kladde file in an XML schema, with no save button.</li>
+</ul>
+<h2 id="two-implementations-one-format">Two implementations, one format<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#two-implementations-one-format" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Files are format-compatible in both directions, but not byte-identical.</strong>
+Fifty seeds of a random workload with many flushes, consolidation, cuts and pastes, and an unflushed journal, written by one implementation, read the same in the other, which then edits them and hands them back.
+The bytes differ because kladde-rs iterates hash sets where the order picks consolidation’s victims, and kladde-cpp sorts there instead; <a href="../spec/journal#folding" class="internal internal-link alias" data-slug="spec/journal">the fold</a> and consolidation are free to choose, so both files are right.</p>
+<p><strong>The typed layers agree on a document only once the C++ type names an enum’s variants as the Rust type does.</strong>
+The cross-implementation test writes a drawing — a struct holding text, a vector of shapes, a map, an option and an integer — from each language and reads it in the other.
+The shapes are a Rust enum <code>Shape { Circle { r }, Poly(Vec&lt;Point>), Label(String), Empty }</code>, and the C++ type <code>std::variant&lt;Circle, std::vector&lt;Point>, std::string, kladde::Unit></code>; thanks to <a href="../spec/schema/type-descriptors#enum" class="internal internal-link alias" data-slug="spec/schema/type-descriptors">variants that hold one value</a>, the two have the same structure, descriptor for descriptor, and the encodings agree byte for byte.
+But the fingerprints differed: a variant’s name is part of the fingerprint, and a <code>std::variant</code> names its alternatives after their types — <code>Value</code>, <code>Text</code> — where Rust names them <code>Poly</code> and <code>Label</code>.
+<code>KLADDE_VARIANT_NAMED</code> now gives the C++ type the names the file uses, and with it each implementation opens the other’s file.</p>
+<p><em>What it means for the design.</em>
+Names in the fingerprint are deliberate: <a href="../spec/schema/evolution" class="internal internal-link alias" data-slug="spec/schema/evolution">evolution</a> reconciles by names, so two types that differ only in names are different types.
+The cost shows in a language whose sum type has no names of its own, which C++‘s <code>std::variant</code> is, and will be in Python’s unions and TypeScript’s too: a program that shares files with another must spell out the other’s names.
+That is a fair price, and kladde-cpp asks it only where a program shares files across languages; within one, the names it derives are stable.</p>
+<h2 id="what-the-specification-left-open">What the specification left open<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-the-specification-left-open" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Each point below is one where kladde-rs and kladde-cpp, both following the documents, could have disagreed</strong>, and most were settled while this was written.</p>
+<p><strong>Settled in the specification:</strong></p>
+<ul>
+<li><strong>A schema table must be canonical to be read.</strong>
+kladde-rs accepted a varint longer than it needed to be, enum variants in any order (re-sorting them, so that re-encoding changed the bytes) and two variants with one discriminant; kladde-cpp refused all three.
+<a href="../spec/schema/canonical-encoding#descriptor-encoding" class="internal internal-link alias" data-slug="spec/schema/canonical-encoding">Canonical encoding</a> now requires the refusal, so that a table that decodes re-encodes to its own bytes, and kladde-rs refuses them too.</li>
+<li><strong>An Opaque’s parameters are not containment</strong>, so a type may reach itself through one; and <strong>an enum whose every variant holds itself is legal</strong>, if useless (<a href="../spec/schema/type-descriptors#rules-of-nesting" class="internal internal-link alias" data-slug="spec/schema/type-descriptors">rules of nesting</a>).</li>
+<li><strong>A <code>Move</code> makes no cut</strong> that a <code>Paste</code> could name (<a href="../spec/journal#cuts" class="internal internal-link alias" data-slug="spec/journal">cuts</a>).</li>
+</ul>
+<p><strong>Still open</strong>, for <a href="../spec/conformance" class="internal internal-link alias" data-slug="spec/conformance">the conformance suite</a> to decide:</p>
+<ul>
+<li>whether page 1 of a file that has only ever had one header must be a header page, as <a href="../spec/file-format#header-pages" class="internal internal-link alias" data-slug="spec/file-format">the file format</a> says “if present”, or may be zeros, as both implementations leave it at creation;</li>
+<li>whether a header whose epoch has the wrong parity for its slot, or whose <code>journal_pointer</code> is below 2, makes the file invalid or is ignored, as both implementations ignore it;</li>
+<li>whether varints in journal records and table pages may be longer than they need to be, as both implementations accept;</li>
+<li>whether a trailer that matches its CRC but names page 0, page 1 or a page already in the journal ends the journal, as both implementations treat it, silently dropping what follows, or makes the file invalid;</li>
+<li>whether a transaction of no records is valid, and whether a file with a <code>format_version</code> other than 0 is refused.</li>
+</ul>
+<p><strong>Where kladde-rs and the reference algorithms disagree</strong>, kladde-cpp followed kladde-rs, and the disagreements are now in <a href="../impl/implementation-notes" class="internal internal-link alias" data-slug="impl/implementation-notes">the implementation notes</a>: the seed of the rotating walk, what the header evicts, who takes the cut’s fillers, the order in which the budget loop applies its floors, the depth of the span table, the fold’s length check, and the bound on a <code>Ref</code>.</p>
+<h2 id="what-c-made-harder">What C++ made harder<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-c-made-harder" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>The store ported line by line; the typed layer did not.</strong>
+The store is positions and bytes, and <a href="../impl/" class="internal internal-link alias" data-slug="impl/index">the reference algorithms</a> describe it closely enough that a port follows kladde-rs’s structure, with one mechanical change: every fallible function returns <code>kladde::expected&lt;T></code>, and <code>KLADDE_TRY</code> does what Rust’s <code>?</code> does.
+The typed layer is where the languages part.</p>
+<h3 id="handles-that-nothing-checks">Handles that nothing checks<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#handles-that-nothing-checks" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Rust’s borrow checker enforces two rules that C++ handles can only document.</strong></p>
+<ul>
+<li><em>A handle is valid until something is written through a handle that is not itself or made from it.</em>
+In Rust a <code>Mut</code> borrows its parent exclusively, so a stale one does not compile; in C++ a stale <code>kladde::Mut</code> writes at the wrong position.
+This is the iterator-invalidation rule C++ programmers already keep, and the debug checking the draft proposed — a stack of live handles in the store — is not built yet.</li>
+<li><em>A handle must not move while a handle made from it lives</em>, since the child refers to its parent’s place.
+Rust’s borrows pin the parent for free; in C++, <code>auto [a, b] = c.parts();</code> is fine and returning a handle by value is fine, by guaranteed copy elision, but moving a handle into a container while its children are in use is not.</li>
+<li><em>A cut is pasted at most once.</em>
+kladde-rs’s <code>CutId</code> is neither <code>Copy</code> nor <code>Clone</code>, so the type system enforces it; kladde-cpp’s is a plain struct, and the store’s check of it holds only while the cut’s journal lasts.</li>
+</ul>
+<h3 id="describing-types-without-a-derive">Describing types without a derive<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#describing-types-without-a-derive" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>One description per type, written by a macro today and by reflection later, drives everything else, as the draft proposed, and it works.</strong>
+<code>KLADDE_STRUCT(Contact, email, phones, starred)</code> expands to a <code>constexpr</code> description found by argument-dependent lookup, and to a mixin that gives <code>Mut&lt;Contact></code> the methods <code>email()</code>, <code>phones()</code> and <code>starred()</code>.
+Two compiler problems cost time, both now in the code as comments:</p>
+<ul>
+<li>a <code>static constexpr auto</code> member initialized through argument-dependent lookup inside a constrained partial specialization crashes GCC 13 with an internal error, the compiler that Inkscape builds with on Ubuntu 24.04; a <code>static constexpr</code> function avoids it;</li>
+<li>a static member of <code>durable&lt;T></code> cannot be computed by calling <code>durable&lt;T></code>’s own functions, which are not defined until the class is complete, so the sizes and flags that follow from a struct’s fields are computed in a helper class of their own.</li>
+</ul>
+<p><strong>Recursive types need care that Rust’s lazy constant evaluation does not.</strong>
+<code>kladde::Box&lt;T></code> cannot report <code>T</code>’s fixed size, since a recursive type reaches itself through a box and asking would instantiate the type inside itself; it reports none, which costs nothing on file and refuses only a <code>std::vector</code> of boxes.</p>
+<h3 id="long-lived-handles">Long-lived handles<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#long-lived-handles" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Inkscape needs handles that live as long as the node they point to, and kladde-cpp’s <code>kladde::List</code> and <code>kladde::Ref</code> give them</strong>, as <a href="../impl/values#handles-that-outlive-edits-elsewhere" class="internal internal-link alias" data-slug="impl/values">Values and their positions</a> describes.
+Each element of a list is an <em>anchor</em> that knows its list and its index; a list knows the anchor of the value that holds it, and finds its own offset inside that value by walking the value’s fields up to itself, each of which knows its encoded size in constant time.
+So a write through a <code>Ref</code> finds its place in <code>O(depth · log m)</code>, and its change of size climbs the same path, updating each list’s Fenwick tree.</p>
+<p>One restriction falls out: <strong>a <code>List</code> may sit inside structs, variants, options, boxes and other lists, but not inside a <code>kladde::Vector</code>, a <code>std::vector</code> or a <code>kladde::Map</code></strong>, whose indexes would not hear of a change made through a <code>Ref</code>; the compiler refuses it.
+A document tree, whose children are lists all the way down, never needs it.</p>
+<h2 id="what-inkscape-needed">What Inkscape needed<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-inkscape-needed" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>inkscape-kladde observes Inkscape’s XML tree and mirrors every change into the kladde file, rather than replacing the tree’s nodes with durable ones, as the draft proposed.</strong>
+The draft’s <code>KladdeNode</code> would have implemented <code>Inkscape::XML::Node</code> over the durable tree, so that the document lives in memory once.
+But Inkscape’s nodes are garbage-collected objects of the class <code>SimpleNode</code> and its subclasses, created through the document’s factory methods and copied, compared and merged by code that assumes them; replacing them touches the XML layer’s every user.
+A subtree observer on the document node, by contrast, hears every change — attributes, content, insertions, removals, reorderings and renamings — and needs nothing else of Inkscape.</p>
+<p><em>What the observer costs.</em>
+The document is held twice in memory, once as Inkscape’s tree and once as kladde values, and a change is applied twice; <a href="#measurements" class="internal internal-link alias">the measurements below</a> put a number on it.
+<em>What it does not cost:</em> durability is the same, since each change is recorded before the call that made it returns, and the file is the same, since it holds the same schema either way.
+The <a href="#what-the-typed-schema-took" class="internal internal-link alias">typed SVG schema</a> faces the same choice, and would face it harder: Inkscape’s objects (<code>SPObject</code> and its subclasses) are built from the XML tree and keep their own state, so a typed schema would be a third copy, or a rewrite of the object layer.</p>
+<p><strong>Three details needed care:</strong></p>
+<ul>
+<li><strong>Inkscape changes a document’s tree while building it</strong>, before anything can observe it: it adds a named view and version attributes as it creates a document from a file.
+So attaching the observer first compares Inkscape’s tree with the file’s and writes the difference, and any later event for a node the file does not know rewrites the file from the tree, a fallback that the tests never reach.</li>
+<li><strong>Saving must not overwrite the kladde file with SVG.</strong>
+A backed document’s filename is its kladde file, so the title bar names it; the commands bar and the File menu offer no <em>Save</em>, and Ctrl+S only flushes the file, while <em>Save As</em> still writes SVG wherever the user chooses, and an imported <code>.svg</code> is left as it was.</li>
+<li><strong>Only the GUI imports.</strong>
+Opening an <code>.svg</code> in the GUI creates <code>foo.kladde</code> next to it, asking first if that file exists; the command line, which Inkscape uses for conversions and exports, opens files as before, so that <code>inkscape --export-type=png foo.svg</code> leaves no <code>foo.kladde</code> behind.</li>
+</ul>
+<p><strong>The idle flush fits Inkscape’s main loop</strong>: after each recorded change, a low-priority idle callback calls <code>flush_if_journal_exceeds(0.5)</code>, at the same priority Inkscape gives its own deferred work, so that a flush, and its <code>fsync</code>, falls between gestures rather than in one.
+<a href="../spec/journal#seals" class="internal internal-link alias" data-slug="spec/journal">The seal</a> and the commit on a worker thread are in kladde-rs and kladde-cpp, off by default, until the demo shows whether the idle flush suffices.</p>
+<h2 id="measurements">Measurements<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#measurements" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>inkscape-kladde costs Inkscape about 5 µs and 19 bytes of journal per edit, and a sixth more memory; it keeps a drawing in a file of 1.2 to 2.2 times its encoding while the drawing is edited, which for the coat of arms and the world map is no larger than the drawing’s canonical SVG, and right after the import in a file of 1.03 to 1.4 times its encoding.</strong></p>
+<p><code>test_kladde-backing-bench</code> imports three drawings of <a href="./tools" class="internal internal-link alias" data-slug="evaluation/tools">kladde-rs’s corpus</a> — the tiger (67 KB of SVG), the coat of arms of Spain (193 KB) and the world map (1.1 MB) — and makes a drawing program’s edits through Inkscape’s XML tree: drags of twenty moves of one element (eight in ten), style changes, reorders, duplicates and deletions.
+It runs the same edits on the same drawing without a backing, for what Inkscape spends on them itself, and checks that the closed file reopens as the document was.
+The fork stores a drawing in a typed schema, on its branch <code>main</code>: each element’s attributes are one ordered list of entries, each a typed value — lengths, paints, colors with their written form, transform lists, path data with its layout, points, style declarations, decimal numbers, embedded data as its bytes — or the attribute’s text, where formatting the typed value would not reproduce Inkscape’s text byte for byte; 98.4 to 99.8% of the drawings’ attributes end up typed.
+The numbers are the typed schema’s, at the journal budget sized to the file that kladde uses by default, unless they say otherwise; <a href="#ablation-attribute-values-as-text" class="internal internal-link alias">the XML schema</a> of the branch <code>untyped</code>, which keeps every attribute value as text, serves as an ablation.
+Each number is one run on a shared machine of four cores, and a range spans a run of 10,000 edits and one of 50,000; the heap is <code>mallinfo2</code>’s, before and after.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>drawing</th><th>SVG</th><th>document’s heap</th><th>backing’s heap</th><th>edit, plain</th><th>edit, backed</th><th>journal per edit</th><th>file after the import (encoding)</th><th>closed after 10,000 / 50,000 edits (encoding)</th></tr></thead><tbody><tr><td>tiger</td><td>67 KB</td><td>4.2 MB</td><td>0.64 MB</td><td>2.0–3.0 µs</td><td>7.4–7.6 µs</td><td>19 B</td><td>60 KB (42 KB)</td><td>112 / 136 KB (52 / 65 KB)</td></tr><tr><td>coat of arms</td><td>193 KB</td><td>5.9 MB</td><td>1.12 MB</td><td>2.1–2.2 µs</td><td>7.8–7.9 µs</td><td>20 B</td><td>112 KB (96 KB)</td><td>196 / 284 KB (113 / 149 KB)</td></tr><tr><td>world map</td><td>1.1 MB</td><td>29 MB</td><td>4.4 MB</td><td>2.1 µs</td><td>8.0–10.5 µs</td><td>19 B</td><td>612 KB (594 KB)</td><td>712 / 900 KB (604 / 642 KB)</td></tr></tbody></table></div>
+<p><strong>An edit costs about 5 µs more, and stays that cheap however long the journal grows.</strong>
+The journal is appended without an <code>fsync</code>, and the flush that folds it, once every 400 to 500 edits, is amortized over them; the world map’s 10.5 µs came from a run of 10,000 edits whose slowest move took 23 ms, an outlier its run of 50,000 did not repeat.
+An early version spent time quadratic in the journal’s length, since each append copied the journal’s list of cuts, which every attribute change extends; both implementations now append in constant time.
+Saving the whole drawing as SVG, which an application without kladde does on every save, takes 1.2 to 12.7 ms here, and writes the whole file.</p>
+<p><strong>The second copy of the document costs a sixth of what Inkscape holds for it</strong>: 0.64 MB beside the tiger’s 4.2 MB, and 4.4 MB beside the world map’s 29 MB, since Inkscape’s tree, its objects, their styles and their rendering structures dwarf an encoding that holds each node’s name, attributes and children once.</p>
+<p><strong>Payload pages halve the file right after the import.</strong>
+Importing is one splice of the whole encoding, whose bytes <a href="../impl/transactions-and-batches#payload-pages" class="internal internal-link alias" data-slug="impl/transactions-and-batches">payload pages</a> write once, into pages that the flush adopts as data pages.
+Without them, the bytes went into the journal first and then into data pages, and the journal’s pages became holes below them: kladde-cpp <code>c4ebcb2</code> left 100 KB, 204 KB and 1204 KB for the same three imports, where <code>c40ff8f</code> leaves 60 KB, 112 KB and 612 KB.
+After thousands of edits the difference is gone: closed after 10,000 edits, the files were 112 KB, 200 KB and 696 KB without payload pages, since consolidation drains the import’s holes along the way.</p>
+<p><strong>While a drawing is edited, its file stays within 1.2 to 2.2 times its encoding</strong>, which holds the journal, the pages a flush keeps for the header before it, and those a flush frees but can reuse only after the next one; closing flushes and truncates, so a closed file is about as large as the open one was.
+The drawing’s canonical SVG is the drawing as the edits leave it, saved by Inkscape and written again by <a href="./tools" class="internal internal-link alias" data-slug="evaluation/tools">kladde-svg</a> with less whitespace, shortest decimals and shortened path data; it takes 89 / 115 KB, 212 / 286 KB and 1107 / 1192 KB after 10,000 / 50,000 edits.
+Next to it, the kladde file is 1.2 to 1.3 times as large for the tiger, whose fixed overhead weighs most beside its small content, 0.9 to 1.0 times for the coat of arms, and 0.6 to 0.8 times for the world map, whose numbers and path data the typed schema stores more compactly than their text.</p>
+<p><strong>Opening a kladde file takes 1.3 to 2.3 times as long as parsing the SVG</strong>: 17 to 21 ms for the tiger against 11 to 12 ms to parse it, 31 to 46 ms for the coat of arms against 19 to 20 ms, and 127 to 147 ms for the world map against 93 to 99 ms.
+Most of the time goes to building Inkscape’s document from the tree, as from a parsed SVG; formatting the typed values back into Inkscape’s text adds a little, since with values kept as text a file opens in 0.9 to 1.8 times the parsing time.</p>
+<h3 id="what-the-typed-schema-took">What the typed schema took<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-the-typed-schema-took" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>What the typed schema needed, beyond keeping attribute values as text, says more than its numbers</strong>:</p>
+<ul>
+<li><strong>An existing application’s formatting must be stored as data.</strong>
+kladde-svg normalizes what it parses, and would have lost nearly everything Inkscape writes; reproducing it took decimal numbers rather than floats, a color’s written form, a transform’s optional arguments, and how a path’s text separates its numbers — and Inkscape’s own <code>10e-4</code> and <code>-0</code> still fall back to text.</li>
+<li><strong>A <code>Mut</code>’s whole-value <code>set</code> records the whole encoding</strong>, where <code>std::string</code>’s records only the changed middle, so changing one number of a long path rewrote the path; the branch diffs the encodings itself, and kladde-cpp should offer it for every type, as <a href="../spec/" class="internal internal-link alias" data-slug="spec/index">the specification guarantees</a> for Text and Opaque.</li>
+<li><strong>A <code>std::variant</code> with many alternatives of one type</strong> — <code>x</code>, <code>y</code>, <code>width</code> and twenty more are all lengths — cannot be reached through <code>if_holds&lt;A></code>, which needs an index-based form, and its names must be written out alike.</li>
+<li><strong>A <code>std::vector</code> of varint numbers is refused</strong>, since they are not fixed-size, so short lists that are only ever replaced whole carry a <code>kladde::Vector</code>’s index.</li>
+<li><strong>Adding a typed attribute changes the root fingerprint</strong>, so that files written before no longer open; growing a typed schema over time needs <a href="../spec/schema/evolution" class="internal internal-link alias" data-slug="spec/schema/evolution">evolution</a>, which neither implementation has yet.</li>
+<li><strong>Embedded data is held as its bytes</strong>: a <code>data:</code> URI with base64 keeps its media type and decoded bytes, three quarters of its text, and only the line breaks inside the base64 do not read back; none of the three drawings embeds data.</li>
+<li><strong>Under the observer, a typed copy is a third copy of the document</strong>, beside Inkscape’s XML strings and its objects; a typed schema pays off fully only where it replaces the application’s own model, which in Inkscape would mean rewriting its object layer.</li>
+</ul>
+<h3 id="the-journals-budget">The journal’s budget<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-journals-budget" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>kladde sizes the journal’s budget to the file, which keeps these files within 1.2 to 2.2 times their encoding at a flush of about a millisecond every 400 to 500 edits; a fixed budget of 256 pages, which almost never flushes, lets the tiger’s file grow to 16 times its encoding.</strong>
+The budget is 2% of the sequence in whole pages, at least 2 and at most 10 (<code>Options::journal_budget_pages</code> left empty, in both implementations), which gives the tiger and the coat of arms 2 pages and the world map 3.
+The runs below are the benchmark above, with <code>KLADDE_JOURNAL_BUDGET_PAGES</code> set for the fixed budgets; the ratios are to the encoding after the edits, and the latencies are those of each single move of a drag, which in the benchmark includes any flush the move triggers, since nothing flushes at idle there.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>budget</th><th>drawing</th><th>closed after 10,000 / 50,000 edits</th><th>flushes per 10,000 edits</th><th>mean edit</th><th>drag move, 99.9th percentile</th><th>slowest move</th></tr></thead><tbody><tr><td>sized to the file (2 pages)</td><td>tiger</td><td>112 KB (2.2×) / 136 KB (2.1×)</td><td>23</td><td>7.4–7.6 µs</td><td>1.0–1.1 ms</td><td>3.2 ms</td></tr><tr><td>sized to the file (2 pages)</td><td>coat of arms</td><td>196 KB (1.7×) / 284 KB (1.9×)</td><td>25</td><td>7.8–7.9 µs</td><td>1.1 ms</td><td>4.3 ms</td></tr><tr><td>sized to the file (3 pages)</td><td>world map</td><td>712 KB (1.2×) / 900 KB (1.4×)</td><td>20</td><td>8.0–10.5 µs</td><td>1.3–1.7 ms</td><td>23 ms</td></tr><tr><td>1 page</td><td>tiger</td><td>108 KB (2.1×) / 140 KB (2.2×)</td><td>47</td><td>9.1–10.5 µs</td><td>0.9–1.1 ms</td><td>3.9 ms</td></tr><tr><td>1 page</td><td>coat of arms</td><td>220 KB (1.9×) / 268 KB (1.8×)</td><td>50</td><td>10.9–12.1 µs</td><td>1.1–1.2 ms</td><td>4.2 ms</td></tr><tr><td>1 page</td><td>world map</td><td>744 KB (1.2×) / 896 KB (1.4×)</td><td>48</td><td>9.9–10.7 µs</td><td>1.0–1.2 ms</td><td>4.3 ms</td></tr><tr><td>4 pages</td><td>tiger</td><td>128 KB (2.5×) / 156 KB (2.4×)</td><td>11</td><td>7.4–9.8 µs</td><td>1.5–1.6 ms</td><td>4.0 ms</td></tr><tr><td>4 pages</td><td>coat of arms</td><td>188 KB (1.7×) / 288 KB (1.9×)</td><td>12</td><td>7.5–8.1 µs</td><td>0.4–1.6 ms</td><td>4.1 ms</td></tr><tr><td>4 pages</td><td>world map</td><td>692 KB (1.1×) / 888 KB (1.4×)</td><td>11</td><td>7.2–7.7 µs</td><td>0.1–1.9 ms</td><td>8.8 ms</td></tr><tr><td>256 pages</td><td>tiger</td><td>272 KB (5.2×) / 1040 KB (16×)</td><td>0</td><td>5.2–6.2 µs</td><td>46–54 µs</td><td>0.9 ms</td></tr><tr><td>256 pages</td><td>coat of arms</td><td>340 KB (3.0×) / 1144 KB (7.7×)</td><td>0</td><td>5.0–5.2 µs</td><td>35–36 µs</td><td>4.2 ms</td></tr><tr><td>256 pages</td><td>world map</td><td>836 KB (1.4×) / 1660 KB (2.6×)</td><td>0</td><td>5.1–6.4 µs</td><td>42–49 µs</td><td>3.5 ms</td></tr></tbody></table></div>
+<p>The world map’s slowest move of 23 ms at the budget sized to the file came from its run of 10,000 edits, whose run of 50,000 peaked at 3.0 ms.
+At 256 pages, the 50,000 edits never filled the journal, which is why no move stalled for long there; the next edit would have folded a journal of a megabyte, as <a href="#ablation-attribute-values-as-text" class="internal internal-link alias">the ablation</a> shows, whose larger records fill it once in 50,000 edits.</p>
+<p><strong>The budget trades a few long stalls for many short ones, and the short ones are the better deal for an editor.</strong>
+A median move costs 3.1 µs at every budget: the move itself, recorded in the journal.
+With 256 pages, a move almost never meets a flush, but the one that does folds a journal of a megabyte and stalls for 46 to 77 ms, three to five frames; with 4 pages, one move in seven hundred meets a flush of a few pages, which takes one to two milliseconds and fits within a frame.
+The flushes here run inside the moves because the benchmark has no idle time; in the GUI, the idle flush moves most of them between gestures, and does so better the smaller the journal it has to fold.
+The times come from a disk whose <code>fsync</code> is fast; on a slow disk, every flush costs more, and the small budget’s frequent flushes cost proportionally more than its few large ones save, which is the case for <a href="../impl/transactions-and-batches#a-flush-off-the-callers-thread" class="internal internal-link alias" data-slug="impl/transactions-and-batches">the commit on a worker thread</a>.</p>
+<p><strong>Hence a budget that follows the file, between a floor and a ceiling, rather than a fixed one.</strong>
+A budget of 1 page gains nothing in size over 2 to 4 here, and flushes two to four times as often; above a few pages, the files grow with the journal and its fallback while the flushes saved bring little, since each flush is also a chance to consolidate.
+<a href="../impl/transactions-and-batches#the-journals-budget" class="internal internal-link alias" data-slug="impl/transactions-and-batches">Transactions and batches</a> gives the rule and its reasons.</p>
+<h3 id="ablation-attribute-values-as-text">Ablation: attribute values as text<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ablation-attribute-values-as-text" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Keeping every attribute value as text, as the branch <code>untyped</code> does, makes the encoding 1.5 to 1.8 times larger, the files 1.5 to 1.7 times larger and an edit’s journal a fifth larger; in exchange it takes two thirds of the typed schema’s memory and a third to a half of its import time, and opens a little faster.</strong>
+The branch is <code>main</code> with the XML schema in place of the typed one, and the runs are the same.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th></th><th>tiger</th><th>coat of arms</th><th>world map</th></tr></thead><tbody><tr><td>encoding, typed / text</td><td>42 / 64 KB</td><td>96 / 172 KB</td><td>594 / 1071 KB</td></tr><tr><td>backing’s heap, typed / text</td><td>0.64 / 0.41 MB</td><td>1.12 / 0.77 MB</td><td>4.4 / 2.7 MB</td></tr><tr><td>import, typed / text</td><td>6.7 / 3.1 ms</td><td>8.8–8.9 / 3.4–4.5 ms</td><td>44–49 / 15–19 ms</td></tr><tr><td>opening, typed / text (parsing the SVG)</td><td>17–21 / 15–20 ms (11–17 ms)</td><td>31–46 / 28–31 ms (18–20 ms)</td><td>127–147 / 112–125 ms (93–122 ms)</td></tr><tr><td>journal per edit, typed / text</td><td>19 / 23–24 B</td><td>20 / 23–24 B</td><td>19 / 23–24 B</td></tr><tr><td>mean edit, typed / text</td><td>7.4–7.6 / 7.1 µs</td><td>7.8–7.9 / 7.2–7.4 µs</td><td>8.0–10.5 / 6.4–7.2 µs</td></tr><tr><td>file after the import, typed / text</td><td>60 / 80 KB</td><td>112 / 188 KB</td><td>612 / 1092 KB</td></tr><tr><td>closed after 10,000 / 50,000 edits, typed</td><td>112 / 136 KB</td><td>196 / 284 KB</td><td>712 / 900 KB</td></tr><tr><td>closed after 10,000 / 50,000 edits, text</td><td>164 / 232 KB</td><td>300 / 460 KB</td><td>1192 / 1544 KB</td></tr><tr><td>canonical SVG after 10,000 / 50,000 edits</td><td>89 / 115 KB</td><td>212 / 286 KB</td><td>1107 / 1192 KB</td></tr></tbody></table></div>
+<p><strong>With values as text, a kladde file is 1.1 to 2.0 times the canonical SVG, where the typed schema’s is 0.6 to 1.3 times it</strong>: both hold the drawing’s numbers, but as text they keep Inkscape’s whitespace and digits, which the canonical SVG drops and the typed schema never stores.
+Per edit, the two cost the same within the noise of the machine, though a median move costs 3.1 µs typed against 2.6 µs as text, which is parsing and formatting the attribute’s value.
+The journal budget behaves as with the typed schema, the world map getting 5 pages for its larger encoding: at the budget sized to the file the files stay within 1.1 to 2.1 times their encoding, at a flush every 300 to 900 edits.
+At 256 pages its larger records fill the journal once in 50,000 edits, and the move that meets that flush stalls for 46 to 77 ms while it folds a megabyte of journal, where no move at the budget sized to the file took longer than 4.1 ms.</p>
+<h3 id="in-the-gui">In the GUI<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#in-the-gui" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>In the GUI, under a virtual display</strong> (inkscape-kladde <code>f81602b406</code>, with the XML schema), opening <code>tiger.svg</code> created <code>tiger.kladde</code> beside it and left the SVG as it was; flipping and rotating the whole drawing through Inkscape’s actions, then killing Inkscape without saving, left a file that the command line exports with the flip and the rotation in place.
+The <em>File ▸ New</em> dialog, which asks where the new document’s file goes, was not exercised, since no test drives a file chooser.</p>
+<h2 id="bugs-the-port-found-in-kladde-rs">Bugs the port found in kladde-rs<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#bugs-the-port-found-in-kladde-rs" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The port read kladde-rs’s store line by line, and found five things that are wrong rather than different; <a href="../impl/implementation-notes#where-the-implementation-falls-short" class="internal internal-link alias" data-slug="impl/implementation-notes">the implementation notes</a> record each.</p>
+<ul>
+<li>⚠️ <strong>A single write of 4 GiB or more corrupts the journal</strong>, since a record’s length is kept as a <code>u32</code>.</li>
+<li><strong>Arithmetic on values read from the file is unchecked</strong>, so a file whose CRCs match but whose numbers do not panics or wraps rather than being refused.</li>
+<li><strong><code>FileStorage</code> takes no lock</strong>, so two processes can open one file.</li>
+<li><strong>A cut that escapes a transaction rolled back by <code>Store::atomically</code> can paste another record’s bytes.</strong></li>
+<li><strong><code>TypeTable::fixed_size</code> shared one memo between plain sizes and fixed forms</strong>, so a type met inside a <code>Fixed</code> and outside one got one size for both; fixed in <code>d19a613</code>.</li>
+<li><strong>The first version of <a href="../spec/journal#seals" class="internal internal-link alias" data-slug="spec/journal">the seal</a> could replay a lost journal after a power cut</strong>, since the page it named was cleared without an <code>fsync</code> before the seal was appended; porting it found this, and both implementations and the specification now sync first.</li>
+<li><strong>An append copied the journal’s list of cuts</strong>, making a journal quadratic in its length, as <a href="#measurements" class="internal internal-link alias">the measurements</a> found; fixing it took kladde-rs’s <code>svg-bench</code> from 136,000 to 330,000 edits a second on the tiger, and from 90,000 to 238,000 on the coat of arms.</li>
+</ul>
+<p>And it confirmed one already known: ⚠️ a file whose span table outgrows the header’s references to leaves, at some two million spans, no longer opens, in kladde-rs and in kladde-cpp alike.</p>
+<h2 id="reproducing">Reproducing<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reproducing" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># kladde-cpp: the three test suites, under AddressSanitizer and UBSan</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cmake</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -S</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-cpp</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -B</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-cpp/build</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -G</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> Ninja</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -DCMAKE_BUILD_TYPE=Debug</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -DKLADDE_SANITIZE=ON</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cmake</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --build</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-cpp/build</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">kladde-cpp/build/kladde-schema-tests</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> &amp;&amp; </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">kladde-cpp/build/kladde-store-tests</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> &amp;&amp; </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">kladde-cpp/build/kladde-typed-tests</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># The typed cross-implementation test, in both directions</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-types</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --example</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> cross_impl</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> write</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> rs.kladde</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">kladde-cpp/build/kladde-cross</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> write</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> cpp.kladde</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">kladde-cpp/build/kladde-cross</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> check</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> rs.kladde</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-types</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --example</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> cross_impl</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> check</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> cpp.kladde</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># The Inkscape demo's tests and measurements, in inkscape-kladde's build directory</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">ninja</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> test_kladde-backing</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> test_kladde-backing-bench</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">./bin/test_kladde-backing</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># (created_KB is the file right after the import, file_KB and closed_KB the file before and after closing, edited_KB the encoding after the edits)</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">KLADDE_BENCH_STEPS</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">50000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> KLADDE_SVG_CORPUS</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">…/kladde-rs/crates/kladde-svg/corpus/drawings</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> ./bin/test_kladde-backing-bench</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># … with a fixed budget, and keeping the edited drawings for their canonical SVG's size (kladde-rs's svg-roundtrip, column canon_bytes)</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">KLADDE_JOURNAL_BUDGET_PAGES</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> KLADDE_BENCH_SAVE_DIR</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">edited</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> KLADDE_SVG_CORPUS</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">…</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> ./bin/test_kladde-backing-bench</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cargo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --release</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -p</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> kladde-svg</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --bin</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> svg-roundtrip</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --csv</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> canon.csv</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> edited</span></span></code></pre></figure></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-13" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#what-was-built" data-for="what-was-built">What was built</a></li><li class="depth-0"><a href="#two-implementations-one-format" data-for="two-implementations-one-format">Two implementations, one format</a></li><li class="depth-0"><a href="#what-the-specification-left-open" data-for="what-the-specification-left-open">What the specification left open</a></li><li class="depth-0"><a href="#what-c-made-harder" data-for="what-c-made-harder">What C++ made harder</a></li><li class="depth-1"><a href="#handles-that-nothing-checks" data-for="handles-that-nothing-checks">Handles that nothing checks</a></li><li class="depth-1"><a href="#describing-types-without-a-derive" data-for="describing-types-without-a-derive">Describing types without a derive</a></li><li class="depth-1"><a href="#long-lived-handles" data-for="long-lived-handles">Long-lived handles</a></li><li class="depth-0"><a href="#what-inkscape-needed" data-for="what-inkscape-needed">What Inkscape needed</a></li><li class="depth-0"><a href="#measurements" data-for="measurements">Measurements</a></li><li class="depth-1"><a href="#what-the-typed-schema-took" data-for="what-the-typed-schema-took">What the typed schema took</a></li><li class="depth-1"><a href="#the-journals-budget" data-for="the-journals-budget">The journal’s budget</a></li><li class="depth-1"><a href="#ablation-attribute-values-as-text" data-for="ablation-attribute-values-as-text">Ablation: attribute values as text</a></li><li class="depth-1"><a href="#in-the-gui" data-for="in-the-gui">In the GUI</a></li><li class="depth-0"><a href="#bugs-the-port-found-in-kladde-rs" data-for="bugs-the-port-found-in-kladde-rs">Bugs the port found in kladde-rs</a></li><li class="depth-0"><a href="#reproducing" data-for="reproducing">Reproducing</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-0" class="overflow"><li><a href="../cpp/" class="internal">kladde-cpp</a></li><li><a href="../drafts/cpp" class="internal">A C++ implementation</a></li><li><a href="../evaluation/" class="internal">Evaluation</a></li><li><a href="../impl/transactions-and-batches" class="internal">Transactions and batches</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/kladde-dev">GitHub</a></li><li><a href="https://kladde-dev.github.io/kladde.pdf">PDF</a></li><li><a href="https://robamler.github.io/">Robert Bamler</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-9114441b.js" type="module" data-persist="true"></script></html>
